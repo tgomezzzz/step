@@ -1,7 +1,6 @@
 #content {
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
   width: 650px;
 }
 
@@ -16,12 +15,15 @@ body {
 }
 
 h1 {
+    size: 40px;
     color: darkolivegreen;
 }
 
 p {
     color: cadetblue;
 }
+
+/*
 
 .images {
   display: flex;
@@ -38,3 +40,4 @@ p {
 .images img:hover {
   border: thick solid darkslateblue;
 }
+*/
