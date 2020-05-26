@@ -2,6 +2,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  width: 650px;
 }
 
 #greeting-container {
@@ -22,15 +23,18 @@ p {
     color: cadetblue;
 }
 
-.col {
-    float: left;
-    width: 25%;
-    padding: 5px;
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.row::after {
-    content: "";
-    clear: both;
-    display: block;
+.images img {
+  margin: 10px;
+  max-width: 300px;
+  max-height: 300px;
+}
 
+.images img:hover {
+  border: thick solid darkslateblue;
 }
