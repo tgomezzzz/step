@@ -9,14 +9,13 @@
 </head>
 
 <body>
+
 	<div id="content">
 		<h1>Tommy's Webpage</h1>
-		<h2>Welcome to my webpage!</h2>
-
+		<h3>Welcome to my webpage! Click the tabs to learn more about me.</h3>
     </div>
 
     <div id="tabcontent">
-
 		<div class="tabs">
 			<button class="tabbutton" onclick="openTab(event, 'About Me')">About Me</button>
 			<button class="tabbutton" onclick="openTab(event, 'Interests')">My Interests</button>
@@ -26,12 +25,26 @@
 
 		<div id="About Me" class="tabinfo">
 			<h3>About Me</h3>
-			<p>I'm a person</p>
+			<p><img src="/images/beta-headshot.jpg" align="right" width=20% margin-left=5x margin-right=5px/>
+                My full name is Thomas Joaquin Kaufman-Gomez, but I usually just go by Tommy Gomez. I'm a rising junior at Columbia University
+                in New York City, and I'm studying computer science. Born and raised in Sunnyvale, California, I've lived on both coasts and
+                can confidently confirm that the West Coast is superior, although the East Coast is not to be undervalued (in fact, I 
+                would argue that both coasts are equal if it weren't for the East's weather).</p>
+            
+            <p>For as long as I can remember, I've developed strong, unpredictable, and often unusual passions (check out the Interests tab
+                for specifics). These passions are sort of like intellectual rabbit holes, because I dedicate most of my time to learning as
+                much about them as I can. This made declaring a major difficult, as I was stuck in multiple rabbit holes and had to focus on
+                one. I found that computer science was like the ultimate rabbit hole; it's a subject so versatile that it has applications
+                in every field imaginable. To me, computer science is the culmination of my passions, because it gives me the limitless ability
+                to build, model, and analyze anything that interests me. There's nothing I'd rather do for the rest of my life.</p>
 		</div>
 
 		<div id="Interests" class="tabinfo">
 			<h3>My Interests</h3>
-			<p>Here are some of the things that I love learning about:</p>
+			<p>astronomy geography crayfish tornadoes photography architecture computer science</p>
+            <div id="timeline-container">
+                <div id="timeline"></div>
+            </div>
 		</div>
 
 		<div id="Bucket List" class="tabinfo">

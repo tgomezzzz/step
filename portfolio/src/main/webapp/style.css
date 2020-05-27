@@ -12,10 +12,8 @@
     margin-top: 20px;
     margin-left: 30px;
     margin-right: auto;
-    border: 1px solid #000;
-    background-color: #6c8696;
-    width: 1000px;
-    font-family: "EB Garamond";
+    width: 65%;
+    font-family: "Oxygen";
 }
 
 body {
@@ -28,67 +26,65 @@ h1 {
     color: #e6ffe6;
 }
 
-h2 {
-    font-size: 40px;
-    color: inherit;
-}
-
-p {
-    color: #a6ddff;
+h3 {
+    font-size: 30px;
+    color: #fff;
 }
 
 .tabs {
-  overflow: hidden;
-  border: 1px solid #fff;
-  background-color: #054f7d;
+    overflow: hidden;
+    border: 1px solid #000;
+    background-color: #054f7d;
+    display: flex;
+    justify-content: space-between;
 }
 
 .tabs button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer; 
-  padding: 14px 16px;
-  transition: 0.3s;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer; 
+    padding: 14px 16px;
+    transition: 0.3s;
 }
 
 .tabs button:hover {
-  background-color: #64a7f5;
+    background-color: #64a7f5;
 }
 
 .tabs button.active {
-  color: #64a7f5
+    color: #64a7f5
+}
+
+.tabs button.active:hover {
+    color: #fff
 }
 
 .tabinfo {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    border: 2px solid #000;
+    background-color: #e4f5ff;
+}
+
+.tabinfo h3 {
+    font-size: 30px;
+    color: #64a7f5;
+    padding: 0 0;
+}
+
+.tabinfo p {
+    font-size: 23px;
+    color: #054f7d;
 }
 
 .tabbutton {
-    font-size: 20px;
+    font-size: 30px;
     color: #fff;
     font-family: "EB Garamond";
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
-/*
-
-.images {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.images img {
-  margin: 10px;
-  max-width: 300px;
-  max-height: 300px;
-}
-
-.images img:hover {
-  border: thick solid darkslateblue;
-}
-*/
