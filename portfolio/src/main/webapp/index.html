@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Tommy's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>Tommy's Webpage</h1>
-      <p>Welcome to my webpage!</p>
-      <p>I'm a 3rd year computer science student studying at Columbia University.</p>
-      <p>My greatest interests are urbanism, architecture, extreme weather, and of course, computer science!</p>
-<!--
+
+<head>
+	<meta charset="UTF-8">
+	<title>Tommy's Portfolio</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js"></script>
+</head>
+
+<body>
+	<div id="content">
+		<h1>Tommy's Webpage</h1>
+		<p>Welcome to my webpage!</p>
+		<p>I'm a 3rd year computer science student studying at Columbia University.</p>
+		<p>My greatest interests are urbanism, architecture, extreme weather, and of course, computer science!</p>
+		<!--
 
       <div class="images">
         <img src="/images/salesforce-tower.jpg"/>
@@ -23,38 +25,43 @@
 
 -->
 
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Click me!</button>
-      <div id="greeting-container"></div>
+		<p>Click here to get a random message:</p>
+		<button onclick="addRandomGreeting()">Click me!</button>
+		<div id="greeting-container"></div>
     </div>
 
-    <div class="tabs">
-        <button class="tabbutton" onclick=openTab(event, 'About Me')>About Me</button>
-        <button class="tabbutton" onclick=openTab(event, 'Interests')>My Interests</button>
-        <button class="tabbutton" onclick=openTab(event, 'Bucket List')>My Bucket List</button>
-        <button class="tabbutton" onclick=openTab(event, 'Gallery')>Gallery</button>
-    </div>
+    <div id="tabcontent">
 
-    <div id="About Me" class="tabinfo">
-        <h3>About Me</h3>
-        <p>I'm a person</p>
-    </div>
+		<div class="tabs">
+			<button class="tabbutton" onclick="openTab(event, 'About Me')">About Me</button>
+			<button class="tabbutton" onclick="openTab(event, 'Interests')">My Interests</button>
+			<button class="tabbutton" onclick="openTab(event, 'Bucket List')">My Bucket List</button>
+			<button class="tabbutton" onclick="openTab(event, 'Gallery')">Gallery</button>
+		</div>
 
-    <div id="Interests" class="tabinfo">
-        <h3>My Interests</h3>
-        <p>Here are some of the things that I love learning about:</p>
-    </div>
+		<div id="About Me" class="tabinfo">
+			<h3>About Me</h3>
+			<p>I'm a person</p>
+		</div>
 
-    <div id="Bucket List" class="tabinfo">
-        <h3>My Bucket List</h3>
-        <p>One day, I will...</p>
-    </div>
+		<div id="Interests" class="tabinfo">
+			<h3>My Interests</h3>
+			<p>Here are some of the things that I love learning about:</p>
+		</div>
 
-    <div id="Gallery" class="tabinfo">
-        <h3>Gallery</h3>
-        <p>Here are some of my favorite photos:</p>
-    </div>
+		<div id="Bucket List" class="tabinfo">
+			<h3>My Bucket List</h3>
+			<p>One day, I will...</p>
+		</div>
+
+		<div id="Gallery" class="tabinfo">
+			<h3>Gallery</h3>
+			<p>Here are some of my favorite photos:</p>
+		</div>
+
+	</div>
 
 
-  </body>
+</body>
+
 </html>

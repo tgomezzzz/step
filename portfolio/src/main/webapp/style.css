@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Oxygen");
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -9,8 +11,17 @@
   color: lightcoral;
 }
 
+#tabcontent {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #000;
+    background-color: #ffedd6;
+    width: 800px;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Oxygen";
     background-color: wheat;
 }
 
@@ -21,6 +32,37 @@ h1 {
 
 p {
     color: cadetblue;
+}
+
+.tabs {
+  overflow: hidden;
+  border: 1px solid #116469;
+  background-color: #c7e1ff;
+}
+
+.tabs button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer; 
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tabs button:hover {
+  background-color: #64a7f5;
+}
+
+.tabs button.active {
+  background-color: #ccc;
+}
+
+.tabinfo {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
 
 /*

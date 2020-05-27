@@ -27,3 +27,19 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function openTab(event, tabName) {
+    var tabInfo = document.getElementsByClassName("tabinfo");
+    for (var i = 0; i < tabInfo.length; i++) {
+        tabInfo[i].style.display = "none";
+    }
+
+    var tabButtons = document.getElementsByClassName("tabbutton");
+    for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+    console.log(event.currentTarget.className);
+}
