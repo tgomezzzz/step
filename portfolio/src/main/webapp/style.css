@@ -1,43 +1,46 @@
 @import url("https://fonts.googleapis.com/css?family=Oxygen");
+@import url("https://fonts.googleapis.com/css?family=EB Garamond");
 
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
-}
-
-#greeting-container {
-  margin-top: 20px;
-  color: lightcoral;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 1000px;
+    font-family: "Oxygen";
 }
 
 #tabcontent {
     margin-top: 20px;
-    margin-left: auto;
+    margin-left: 30px;
     margin-right: auto;
     border: 1px solid #000;
-    background-color: #ffedd6;
-    width: 800px;
+    background-color: #6c8696;
+    width: 1000px;
+    font-family: "EB Garamond";
 }
 
 body {
-    font-family: "Oxygen";
-    background-color: wheat;
+    background-image: url("/images/nyc_night.jpg");
+    background-size: 100%;
 }
 
 h1 {
-    size: 40px;
-    color: darkolivegreen;
+    font-size: 60px;
+    color: #e6ffe6;
+}
+
+h2 {
+    font-size: 40px;
+    color: inherit;
 }
 
 p {
-    color: cadetblue;
+    color: #a6ddff;
 }
 
 .tabs {
   overflow: hidden;
-  border: 1px solid #116469;
-  background-color: #c7e1ff;
+  border: 1px solid #fff;
+  background-color: #054f7d;
 }
 
 .tabs button {
@@ -55,7 +58,7 @@ p {
 }
 
 .tabs button.active {
-  background-color: #ccc;
+  color: #64a7f5
 }
 
 .tabinfo {
@@ -63,6 +66,12 @@ p {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+.tabbutton {
+    font-size: 20px;
+    color: #fff;
+    font-family: "EB Garamond";
 }
 
 /*
