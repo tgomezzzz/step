@@ -2,10 +2,10 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Tommy's Portfolio</title>
-	<link rel="stylesheet" href="style.css">
-	<script src="script.js"></script>
+  <meta charset="UTF-8">
+  <title>Tommy's Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 
 <body>
@@ -17,15 +17,15 @@
 
     <div id="tabcontent">
 		<div class="tabs">
-			<button class="tabbutton" onclick="openTab(event, 'About Me')">About Me</button>
-			<button class="tabbutton" onclick="openTab(event, 'Interests')">My Interests</button>
-			<button class="tabbutton" onclick="openTab(event, 'Bucket List')">My Bucket List</button>
-			<button class="tabbutton" onclick="openTab(event, 'Gallery')">Gallery</button>
+			<button class="tabbutton" onclick="displayTab(event, 'About Me')">About Me</button>
+			<button class="tabbutton" onclick="displayTab(event, 'Interests')">My Interests</button>
+			<button class="tabbutton" onclick="displayTab(event, 'Bucket List')">My Bucket List</button>
+			<button class="tabbutton" onclick="displayTab(event, 'Gallery')">Gallery</button>
 		</div>
 
 		<div id="About Me" class="tabinfo">
 			<h3>About Me</h3>
-			<p><img src="/images/beta-headshot.jpg" align="right" width=20% margin-left=5x margin-right=5px/>
+			<p><img src="/images/beta-headshot.jpg" align="right" style="width: 20%; padding-left: 20px"/>
                 My full name is Thomas Joaquin Kaufman-Gomez, but I usually just go by Tommy Gomez. I'm a rising junior at Columbia University
                 in New York City, and I'm studying computer science. Born and raised in Sunnyvale, California, I've lived on both coasts and
                 can confidently confirm that the West Coast is superior, although the East Coast is not to be undervalued (in fact, I 
@@ -41,25 +41,68 @@
 
 		<div id="Interests" class="tabinfo">
 			<h3>My Interests</h3>
-			<p>astronomy geography crayfish tornadoes photography architecture computer science</p>
+			<p>Click the photos on the timeline for more details!</p>
             <div id="timeline-container">
                 <div id="timeline"></div>
+                <div id="static-dot" class="main-dot"><p>1999</p></div>
+                <div id="moving-dot" class="main-dot"><p>Present</p></div>
+
+                <div class="timeline-branch" id="astronomy">
+                    <img src="/images/jupiter.png" alt="Astronomy" style="left: 6%; bottom: 60%">
+                </div>
+
+                <div class="timeline-branch" id="geography">
+                    <img src="/images/geography.png" alt="Geography" style="left: 22%; top: 60%">
+                </div>
+
+                <div class="timeline-branch" id="tornadoes">
+                    <img src="/images/tornado.jpg" alt="Tornadoes" style="left: 38%; bottom: 60%">
+                </div>
+
+                <div class="timeline-branch" id="architecture">
+                    <img src="/images/salesforce-tower.jpg" alt="Architecture" style="left: 54%; top: 60%">
+                </div>
+
+                <div class="timeline-branch" id="photography">
+                    <img src="/images/nyc.jpg" alt="Photography" style="left: 70%; bottom: 60%">
+                </div>
+
+                <div class="timeline-branch" id="compsci">
+                    <img src="/images/comp-sci.jpg" alt="Computer Science" style="left: 86%; top: 60%">
+                </div>
+
             </div>
 		</div>
 
 		<div id="Bucket List" class="tabinfo">
 			<h3>My Bucket List</h3>
 			<p>One day, I will...</p>
+            <ul>
+                <li>See the northern lights</li>
+                <li>Travel across Europe</li>
+                <li>Live in San Francisco</li>
+                <li>See a tornado with my own eyes</li>
+                <li>Learn how to blow a bubble with gum</li>
+                <li>Get over my fear of boats</li>
 		</div>
 
 		<div id="Gallery" class="tabinfo">
 			<h3>Gallery</h3>
 			<p>Here are some of my favorite photos:</p>
+            <div class="image-thumbnails">
+                <a href="images/305.jpg"><img src="images/305.jpg"/></a>
+                <a href="images/bella.jpg"><img src="images/bella.jpg"/></a>
+                <a href="images/cowboy.jpg"><img src="images/cowboy.jpg"/></a>
+                <a href="images/gomez.jpg"><img src="images/gomez.jpg"/></a>
+                <a href="images/manhattan.jpg"><img src="images/manhattan.jpg"/></a>
+                <a href="images/oso.jpg"><img src="images/oso.jpg"/></a>
+                <a href="images/patrick.jpg"><img src="images/patrick.jpg"/></a>
+                <a href="images/tampa.jpg"><img src="images/tampa.jpg"/></a>
+                <a href="images/lucas.jpg"><img src="images/lucas.jpg"/></a>
+            </div>
 		</div>
 
 	</div>
 
-
 </body>
-
 </html>
