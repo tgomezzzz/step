@@ -17,6 +17,11 @@
  */
 function displayTab(event, tabName) {
     hideMoreInfo();
+    
+    var buttonContainer = document.getElementsByClassName("tabs")[0];
+    buttonContainer.style.borderBottomLeftRadius = "0";
+    buttonContainer.style.borderBottomRightRadius = "0";
+
     var tabInfo = document.getElementsByClassName("tabinfo");
     for (var i = 0; i < tabInfo.length; i++) {
         tabInfo[i].style.display = "none";
@@ -90,7 +95,9 @@ function displayImage(imageID) {
     pic.style.display = "block";
 }
 
-
+/*
+ * Displays the specified interest in the More Info window.
+ */
 function displayMoreInfo(event, interestName) {
     hideMoreInfo();
     var interestToDisplay = document.getElementById(interestName);
@@ -98,6 +105,9 @@ function displayMoreInfo(event, interestName) {
 
 }
 
+/**
+ * Hides the More Info window.
+ */
 function hideMoreInfo() {
     var moreInfo = document.getElementsByClassName("moreinfo");
     for (var i = 0; i < moreInfo.length; i++) {
