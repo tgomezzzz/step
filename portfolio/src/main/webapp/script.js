@@ -16,6 +16,7 @@
  * Displays the selected tab on the homepage.
  */
 function displayTab(event, tabName) {
+    hideMoreInfo();
     var tabInfo = document.getElementsByClassName("tabinfo");
     for (var i = 0; i < tabInfo.length; i++) {
         tabInfo[i].style.display = "none";
@@ -87,4 +88,19 @@ function displayImage(imageID) {
     picDiv = document.getElementById(imageID);
     pic = picDiv.getElementsByTagName("IMG")[0];
     pic.style.display = "block";
+}
+
+
+function displayMoreInfo(event, interestName) {
+    hideMoreInfo();
+    var interestToDisplay = document.getElementById(interestName);
+    interestToDisplay.style.display = "block";
+
+}
+
+function hideMoreInfo() {
+    var moreInfo = document.getElementsByClassName("moreinfo");
+    for (var i = 0; i < moreInfo.length; i++) {
+        moreInfo[i].style.display = "none";
+    }
 }

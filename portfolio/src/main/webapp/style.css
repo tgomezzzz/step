@@ -1,19 +1,33 @@
 @import url("https://fonts.googleapis.com/css?family=Oxygen");
-@import url("https://fonts.googleapis.com/css?family=EB Garamond");
 
-#content {
-    margin-left: 30px;
-    margin-right: auto;
-    width: 1000px;
+body {
     font-family: "Oxygen";
 }
 
-#tabcontent {
-    margin-top: 20px;
+#headercontent {
     margin-left: 30px;
     margin-right: auto;
+    width: 100%;
+}
+
+#bodycontent {
+    display: flex;
+    justify-content: left;
+}
+
+#tabcontent {
+    margin-left: 30px;
     width: 60%;
-    font-family: "Oxygen";
+}
+
+#moreinfocontent {
+    display: block;
+    float: right;
+    margin-left: 40px;
+    margin-right: auto;
+    width: 30%;
+    height: inherit;
+    position: relative;
 }
 
 body {
@@ -23,12 +37,12 @@ body {
 
 h1 {
     font-size: 60px;
-    color: #e6ffe6;
+    color: #64a7f5;
 }
 
-h3 {
+h2 {
     font-size: 30px;
-    color: #fff;
+    color: #64a7f5;
 }
 
 ul {
@@ -36,9 +50,21 @@ ul {
     color: #054f7d;
 }
 
+.aboutme-header {
+    float: left;
+    padding: 5px 5px;
+    align-content: center;
+    vertical-align: center;
+}
+
+.aboutme-header img:hover {
+    border: thick solid #e4f5ff
+}
+
 .tabs {
     overflow: hidden;
-    border: 1px solid #000;
+    border: thick solid #64a7f5;
+    border-radius: 6px;
     background-color: #054f7d;
     display: flex;
     justify-content: space-between;
@@ -52,6 +78,7 @@ ul {
     cursor: pointer; 
     padding: 14px 16px;
     transition: 0.3s;
+    font-family: "Oxygen";
 }
 
 .tabs button:hover {
@@ -70,14 +97,14 @@ ul {
     display: none;
     padding: 6px 12px;
     border-top: none;
-    border: 2px solid #000;
+    border: thick solid #64a7f5;
+    border-radius: 6px;
     background-color: #e4f5ff;
 }
 
 .tabinfo h3 {
     font-size: 30px;
     color: #64a7f5;
-    padding: 0 0;
 }
 
 .tabinfo p {
@@ -88,9 +115,20 @@ ul {
 .tabbutton {
     font-size: 30px;
     color: #fff;
-    font-family: "EB Garamond";
     margin-left: 50px;
     margin-right: 50px;
+}
+
+.moreinfo {
+    display: none;
+    text-align: center;
+    background-color: #e4f5ff;
+    border: thick solid #64a7f5;
+    border-radius: 6px;
+}
+
+.moreinfo h2 h3 {
+    color: #64a7f5;
 }
 
 #timeline-container {
@@ -130,6 +168,11 @@ ul {
     position: absolute;
     display: none;
     width: 20%;
+    border: thick solid #054f7d;
+}
+
+.timeline-branch img:hover {
+  border: thick solid #64a7f5;   
 }
 
 .image-thumbnails {
@@ -142,9 +185,10 @@ ul {
   margin: 10px;
   max-height: 250px;
   max-width: 250px;
+  border: thick solid #054f7d;
 }
 
 .image-thumbnails img:hover {
-  border: thick solid #054f7d;
+  border: thick solid #64a7f5;
 }
 
