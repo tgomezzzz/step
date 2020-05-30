@@ -45,6 +45,7 @@ function displayTab(event, tabName) {
  */
 function drawTimeline() {
     hideImages();
+    hideBranches();
     var timeline = document.getElementById("timeline");
     var movingDot = document.getElementById("moving-dot")
     var rightEnd = 95;
@@ -117,6 +118,17 @@ function displayTimelineBranch(branchName, positionToExtend) {
                 branch.style.bottom = pos + "%";
             }
         }
+    }
+}
+
+/*
+ * Hides each branch of the timeline.
+ */
+function hideBranches() {
+    var branches = document.getElementsByClassName("timeline-branch");
+    for (var i = 0; i < branches.length; i++) {
+        branches[i].style.top = "50%";
+        branches[i].style.bottom = "50%";
     }
 }
 
