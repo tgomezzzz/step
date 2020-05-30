@@ -47,15 +47,15 @@ ul {
     color: #054f7d;
 }
 
-.aboutme-header {
-    float: left;
-    padding: 5px 5px;
-    align-content: center;
-    vertical-align: center;
+#aboutme-header img {
+    width: 3%;
+    height: 3%;
+    vertical-align: middle;
+    margin: 5px;
 }
 
-.aboutme-header img:hover {
-    border: thick solid #e4f5ff
+#aboutme-header img:hover {
+    border: 2px solid #64a7f5
 }
 
 .tabs {
