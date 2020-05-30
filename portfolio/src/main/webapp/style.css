@@ -175,6 +175,14 @@ ul {
     font-size: 13px;
 }
 
+.timeline-branch {
+    top: 50%;
+    bottom: 50%;
+    background-color: #ffab7a;
+    position: absolute;
+    width: 15px;
+}
+
 .timeline-branch img {
     position: absolute;
     display: none;
