@@ -17,6 +17,7 @@
  */
 function displayTab(event, tabName) {
     hideMoreInfo();
+    resetEasterEgg();
     
     var buttonContainer = document.getElementsByClassName("tabs")[0];
     buttonContainer.style.borderBottomLeftRadius = "0";
@@ -150,4 +151,20 @@ function hideMoreInfo() {
     for (var i = 0; i < moreInfo.length; i++) {
         moreInfo[i].style.display = "none";
     }
+}
+
+/*
+ * Changes my head into a bear's head.
+ */
+function easterEgg() {
+    var headshot = document.getElementById("headshot");
+    headshot.src = "/images/easteregg.png";
+}
+
+/* 
+ * Changes my head back to normal. :(
+ */
+function resetEasterEgg() {
+    var headshot = document.getElementById("headshot");
+    headshot.src = "/images/beta-headshot.jpg";
 }
