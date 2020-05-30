@@ -58,6 +58,16 @@ ul {
     border: 2px solid #64a7f5
 }
 
+#headshot {
+    width: 20%;
+    margin: 13px;
+    border: 2px solid #e4f5ff
+}
+
+#headshot:hover {
+    border: 2px solid #64a7f5
+}
+
 .tabs {
     overflow: hidden;
     border: thick solid #64a7f5;
