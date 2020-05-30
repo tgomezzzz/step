@@ -87,7 +87,7 @@ ul {
 }
 
 .tabs button.active:hover {
-    color: #fff
+    color: #e4f5ff
 }
 
 .tabinfo {
@@ -112,7 +112,7 @@ ul {
 
 .tabbutton {
     font-size: 30px;
-    color: #fff;
+    color: #e4f5ff;
     margin-left: 50px;
     margin-right: 50px;
 }
@@ -152,26 +152,27 @@ ul {
 
 #timeline {
     left: 5%;
-    height: 10px;
+    height: 20px;
     top: 50%;
-    background: #ffab7a;
+    background: #64a7f5;
     position: absolute;
 }
 
-.main-dot {
+.endpoint {
+    display: flex;
     left: 2%;
-    top: 47%;
-    background-color: #ffab7a;
+    top: 47.5%;
+    background-color: #64a7f5;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    text-align: center;
-    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
     position: absolute;
 }
 
-.main-dot p {
-    color: #ce4b00;
+.endpoint p {
+    color: #e4f5ff;
     font-size: 13px;
 }
 
@@ -179,9 +180,9 @@ ul {
     display: flex;
     top: 50%;
     bottom: 50%;
-    background-color: #ffab7a;
+    background-color: #64a7f5;
     position: absolute;
-    width: 15px;
+    width: 10px;
     justify-content: center;
 }
 
@@ -189,12 +190,22 @@ ul {
     position: absolute;
     display: none;
     border: thick solid #054f7d;
-    animation: fadeIn ease 1.5s;
+    height: 60%;
+    width: auto;
 }
 
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;} 
+#astronomy,
+#tornadoes,
+#photography {
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px;
+}
+
+#geography,
+#architecture,
+#compsci {
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px;
 }
 
 .timeline-branch img:hover {
