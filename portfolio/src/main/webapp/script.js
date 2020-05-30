@@ -49,6 +49,7 @@ function drawTimeline() {
     var movingDot = document.getElementById("moving-dot")
     var rightEnd = 95;
     var dotLeftPos = 97 - rightEnd;
+    var branchPosToExtend = 0;
 
     var branchTriggers = {
         6: "astronomy",
@@ -71,6 +72,8 @@ function drawTimeline() {
 
             if (dotLeftPos in branchTriggers) {
                 displayImage(branchTriggers[dotLeftPos]);
+                displayTimelineBranch(branchTriggers[dotLeftPos], branchPosToExtend)
+                branchPosToExtend = 1 - branchPosToExtend;
             }
         }
     }
@@ -86,13 +89,35 @@ function hideImages() {
     }
 }
 
-/**
+/*
  * Sets display for a given image to "block".
  */
 function displayImage(imageID) {
     picDiv = document.getElementById(imageID);
     pic = picDiv.getElementsByTagName("IMG")[0];
     pic.style.display = "block";
+}
+
+/*
+ * Handles branching animation off of the timeline.
+ */
+function displayTimelineBranch(branchName, positionToExtend) {
+    var branch = document.getElementById(branchName);
+    var pos = 50;
+
+    var id = setInterval(extendTimelineBranch, 20);
+    function extendTimelineBranch() {
+        if (pos <= 10) {
+            clearInterval(id);
+        } else {
+            pos -= 0.5;
+            if (positionToExtend == 0) {
+                branch.style.top = pos + "%";
+            } else if (positionToExtend == 1) {
+                branch.style.bottom = pos + "%";
+            }
+        }
+    }
 }
 
 /*
