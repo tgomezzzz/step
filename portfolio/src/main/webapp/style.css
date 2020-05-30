@@ -176,17 +176,18 @@ ul {
 }
 
 .timeline-branch {
+    display: flex;
     top: 50%;
     bottom: 50%;
     background-color: #ffab7a;
     position: absolute;
     width: 15px;
+    justify-content: center;
 }
 
 .timeline-branch img {
     position: absolute;
     display: none;
-    width: 30%;
     border: thick solid #054f7d;
     animation: fadeIn ease 1.5s;
 }

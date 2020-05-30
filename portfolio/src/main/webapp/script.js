@@ -72,7 +72,7 @@ function drawTimeline() {
 
             if (dotLeftPos in branchTriggers) {
                 displayImage(branchTriggers[dotLeftPos]);
-                displayTimelineBranch(branchTriggers[dotLeftPos], branchPosToExtend)
+                displayTimelineBranch(branchTriggers[dotLeftPos], branchPosToExtend);
                 branchPosToExtend = 1 - branchPosToExtend;
             }
         }
@@ -107,7 +107,7 @@ function displayTimelineBranch(branchName, positionToExtend) {
 
     var id = setInterval(extendTimelineBranch, 20);
     function extendTimelineBranch() {
-        if (pos <= 10) {
+        if (pos <= 5) {
             clearInterval(id);
         } else {
             pos -= 0.5;
