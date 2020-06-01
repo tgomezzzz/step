@@ -191,5 +191,5 @@ function fetchMessages() {
 function createParagraph(message) {
     const pElement = document.createElement('p');
     pElement.innerText = message;
-    return pElementl
+    return pElement;
 }
