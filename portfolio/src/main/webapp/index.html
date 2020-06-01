@@ -11,22 +11,22 @@
 
 <body>
 
-  <div id="headercontent">
+  <div id="header-content">
     <h1>Tommy's Portfolio</h1>
     <h2 style="font-size: 30px; color: #e4f5ff;">Welcome to my webpage! Click the tabs to learn more about me.</h2>
   </div>
 
-  <div id="bodycontent">
-    <div id="tabcontent">
+  <div id="body-content">
+    <div id="tab-content">
       <div class="tabs">
-        <button class="tabbutton" onclick="displayTab(event, 'About Me')">About Me</button>
-        <button class="tabbutton" onclick="displayTab(event, 'Interests')">My Interests</button>
-        <button class="tabbutton" onclick="displayTab(event, 'Bucket List')">My Bucket List</button>
-        <button class="tabbutton" onclick="displayTab(event, 'Gallery')">Gallery</button>
+        <button class="tab-button" onclick="displayTab(event, 'About Me')">About Me</button>
+        <button class="tab-button" onclick="displayTab(event, 'Interests')">My Interests</button>
+        <button class="tab-button" onclick="displayTab(event, 'Bucket List')">My Bucket List</button>
+        <button class="tab-button" onclick="displayTab(event, 'Gallery')">Gallery</button>
       </div>
       
-      <div id="About Me" class="tabinfo">
-        <h3 id="aboutme-header">About Me
+      <div id="About Me" class="tab-info">
+        <h3 id="about-me-header">About Me
           <a href="http://www.linkedin.com/in/tomgom"><img src="images/linkedin-logo.png" style="border-radius: 10%;"/></a>
           <a href="http://www.github.com/tgomezzzz"><img src="images/github-logo.jpg" style="border-radius: 50%;"/></a>
         </h3>
@@ -45,7 +45,7 @@
         </p>
       </div>
       
-      <div id="Interests" class="tabinfo">
+      <div id="Interests" class="tab-info">
         <h3>My Interests</h3>
         <p>Click the photos on the timeline for more details!</p>
       
@@ -55,33 +55,33 @@
           <div id="moving-dot" class="endpoint"><p>Present</p></div>
       
           <div class="timeline-branch" id="astronomy" style="left: 11%;">
-            <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo(event, 'astronomyinfo')">
+            <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo(event, 'astronomy-info')">
           </div>
       
           <div class="timeline-branch" id="geography" style="left: 20%;">
-            <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo(event, 'geographyinfo')">
+            <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo(event, 'geography-info')">
           </div>
       
           <div class="timeline-branch" id="tornadoes" style="left: 41%;">
-            <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo(event, 'tornadoesinfo')">
+            <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo(event, 'tornadoes-info')">
           </div>
       
           <div class="timeline-branch" id="architecture" style="left: 50%;">
-            <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo(event, 'architectureinfo')">
+            <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo(event, 'architecture-info')">
           </div>
       
           <div class="timeline-branch" id="photography" style="left: 77%;">
-            <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo(event, 'photographyinfo')">
+            <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo(event, 'photography-info')">
           </div>
       
           <div class="timeline-branch" id="compsci" style="left: 81%;">
-            <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo(event, 'compsciinfo')">
+            <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo(event, 'compsci-info')">
           </div>
   
         </div>
       </div>
       
-      <div id="Bucket List" class="tabinfo">
+      <div id="Bucket List" class="tab-info">
         <h3>My Bucket List</h3>
         <p>One day, I will...</p>
         <ul>
@@ -94,7 +94,7 @@
         </ul>
       </div>
   
-      <div id="Gallery" class="tabinfo">
+      <div id="Gallery" class="tab-info">
         <h3>Gallery</h3>
         <p>Here are some of my favorite photos:</p>
         <div class="image-thumbnails">
@@ -112,8 +112,8 @@
       
     </div>
   
-    <div id="moreinfocontent">
-      <div id="astronomyinfo" class="moreinfo">
+    <div id="more-info-content">
+      <div id="astronomy-info" class="more-info">
         <h2>Astronomy</h2>
         <h3>Early childhood</h3>
         <img src="/images/jupiter.png" alt="Astronomy" style="width: 40%; border-radius: 50%;">
@@ -126,7 +126,7 @@
         </p>
       </div>
               
-      <div id="geographyinfo" class="moreinfo">
+      <div id="geography-info" class="more-info">
         <h2>Geography</h2>
         <h3>Elementary school</h3>
         <img src="/images/geography.png" alt="Geography" style="width: 80%;">
@@ -139,7 +139,7 @@
         </p>
       </div>
   
-      <div id="tornadoesinfo" class="moreinfo">
+      <div id="tornadoes-info" class="more-info">
         <h2>Tornadoes</h2>
         <h3>Middle school</h3>
         <img src="/images/tornado.jpg" alt="Tornadoes" style="width: 80%">
@@ -151,7 +151,7 @@
         </p>
       </div>
   
-      <div id="architectureinfo" class="moreinfo">
+      <div id="architecture-info" class="more-info">
         <h2>Architecture</h2>
         <h3>Early high school</h3>
         <img src="/images/salesforce-tower.jpg" alt="Architecture" style="width: 30%">
@@ -164,7 +164,7 @@
         </p>
       </div>
   
-      <div id="photographyinfo" class="moreinfo">
+      <div id="photography-info" class="more-info">
         <h2>Photography</h2>
         <h3>Late high school</h2>
         <img src="/images/nyc.jpg" alt="Photography" style="width: 80%">
@@ -177,7 +177,7 @@
         </p> 
       </div>
  
-      <div id="compsciinfo" class="moreinfo">
+      <div id="compsci-info" class="more-info">
         <h2>Computer Science</h2>
         <h3>College - present</h3>
         <img src="/images/comp-sci.jpg" alt="Computer Science" style="width: 70%">

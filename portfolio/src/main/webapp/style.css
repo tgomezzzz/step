@@ -4,23 +4,23 @@ body {
   font-family: "Oxygen";
 }
 
-#headercontent {
+#header-content {
   margin-left: 30px;
   margin-right: auto;
   width: 100%;
 }
 
-#bodycontent {
+#body-content {
   display: flex;
   justify-content: left;
 }
 
-#tabcontent {
+#tab-content {
   margin-left: 30px;
   width: 60%;
 }
 
-#moreinfocontent {
+#more-info-content {
   display: block;
   float: right;
   margin-left: 40px;
@@ -47,14 +47,14 @@ ul {
   color: #054f7d;
 }
 
-#aboutme-header img {
+#about-me-header img {
   width: 3%;
   height: 3%;
   vertical-align: middle;
   margin: 5px;
 }
 
-#aboutme-header img:hover {
+#about-me-header img:hover {
   border: 2px solid #64a7f5
 }
 
@@ -100,7 +100,7 @@ ul {
   color: #e4f5ff
 }
 
-.tabinfo {
+.tab-info {
   display: none;
   padding: 6px 12px;
   border: thick solid #64a7f5;
@@ -110,24 +110,24 @@ ul {
   background-color: #e4f5ff;
 }
 
-.tabinfo h3 {
+.tab-info h3 {
   font-size: 30px;
   color: #64a7f5;
 }
 
-.tabinfo p {
+.tab-info p {
   font-size: 23px;
   color: #054f7d;
 }
 
-.tabbutton {
+.tab-button {
   font-size: 30px;
   color: #e4f5ff;
   margin-left: 50px;
   margin-right: 50px;
 }
 
-.moreinfo {
+.more-info {
   display: none;
   text-align: center;
   background-color: #e4f5ff;
@@ -136,18 +136,18 @@ ul {
   color: #64a7f5
 }
 
-.moreinfo h2 {
+.more-info h2 {
   font-size: 40px;
   color: #054f7d;
   margin-bottom: 0;
   padding-bottom: 0;
 }
 
-.moreinfo img {
+.more-info img {
   border: thick solid #64a7f5;
 }
 
-.moreinfo p {
+.more-info p {
   font-size: 22px;
   padding: 5px 10px;
 }
