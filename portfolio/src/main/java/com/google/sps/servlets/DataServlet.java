@@ -24,6 +24,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private List<String> messages;
+
+  @Override
+  public void init() {
+      messages = new ArrayList<>();
+      messages.add("Bears in my hair");
+      messages.add("I got tha");
+      messages.add("NYC -> HR, OR");
+  }
+
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
