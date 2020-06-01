@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Oxygen");
+@import url(https://fonts.googleapis.com/css?family=Oxygen);
 
 body {
-  font-family: "Oxygen";
+  font-family: 'Oxygen';
 }
 
 #header-content {
@@ -23,35 +23,35 @@ body {
 #more-info-content {
   display: block;
   float: right;
+  height: inherit;
   margin-left: 40px;
   margin-right: auto;
-  width: 30%;
-  height: inherit;
   position: relative;
+  width: 30%;
 }
 
 body {
-  background-image: url("/images/nyc_night.jpg");
+  background-image: url(/images/nyc_night.jpg);
   background-size: 100%;
 }
 
 h1 {
-  font-size: 60px;
   color: #64a7f5;
+  font-size: 60px;
+  padding-bottom: 0; 
   margin-bottom: 0;
-  padding-bottom: 0;
 }
 
-ul {
-  font-size: 23px;
+ul {  
   color: #054f7d;
+  font-size: 23px;
 }
 
 #about-me-header img {
-  width: 3%;
-  height: 3%;
-  vertical-align: middle;
+  height: 3%; 
   margin: 5px;
+  vertical-align: middle;
+  width: 3%;
 }
 
 #about-me-header img:hover {
@@ -59,9 +59,9 @@ ul {
 }
 
 #headshot {
-  width: 20%;
+  border: 2px solid #e4f5ff;
   margin: 13px;
-  border: 2px solid #e4f5ff
+  width: 20%;
 }
 
 #headshot:hover {
@@ -69,23 +69,23 @@ ul {
 }
 
 .tabs {
-  overflow: hidden;
+  background-color: #054f7d;
   border: thick solid #64a7f5;
   border-radius: 10px;
-  background-color: #054f7d;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .tabs button {
   background-color: inherit;
-  float: left;
   border: none;
-  outline: none;
   cursor: pointer; 
+  float: left;
+  font-family: 'Oxygen';
+  outline: none;
   padding: 14px 16px;
-  transition: 0.3s;
-  font-family: "Oxygen";
+  transition: .3s;
 }
 
 .tabs button:hover {
@@ -101,44 +101,44 @@ ul {
 }
 
 .tab-info {
-  display: none;
-  padding: 6px 12px;
+  background-color: #e4f5ff;
   border: thick solid #64a7f5;
-  border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: #e4f5ff;
+  border-top: none;
+  display: none;
+  padding: 6px 12px;
 }
 
 .tab-info h3 {
-  font-size: 30px;
   color: #64a7f5;
+  font-size: 30px;
 }
 
 .tab-info p {
-  font-size: 23px;
   color: #054f7d;
+  font-size: 23px;
 }
 
 .tab-button {
-  font-size: 30px;
   color: #e4f5ff;
+  font-size: 30px;
   margin-left: 50px;
   margin-right: 50px;
 }
 
 .more-info {
-  display: none;
-  text-align: center;
   background-color: #e4f5ff;
   border: thick solid #64a7f5;
   border-radius: 10px;
-  color: #64a7f5
+  color: #64a7f5;
+  display: none;
+  text-align: center;
 }
 
 .more-info h2 {
-  font-size: 40px;
   color: #054f7d;
+  font-size: 40px;
   margin-bottom: 0;
   padding-bottom: 0;
 }
@@ -153,32 +153,32 @@ ul {
 }
 
 #timeline-container {
-  width: 100%;
+  display: inline-block;
   height: 700px;
   position: relative;
-  display: inline-block;
   vertical-align: middle;
+  width: 100%;
 }
 
 #timeline {
-  left: 5%;
-  height: 20px;
-  top: 50%;
   background: #64a7f5;
+  height: 20px;
+  left: 5%;
   position: absolute;
+  top: 50%;
 }
 
 .endpoint {
-  display: flex;
-  left: 2%;
-  top: 47.5%;
+  align-items: center;
   background-color: #64a7f5;
   border-radius: 50%;
-  width: 50px;
+  display: flex;
   height: 50px;
   justify-content: center;
-  align-items: center;
+  left: 2%;
   position: absolute;
+  top: 47.5%;
+  width: 50px;
 }
 
 .endpoint p {
@@ -187,20 +187,20 @@ ul {
 }
 
 .timeline-branch {
-  display: flex;
-  top: 50%;
-  bottom: 50%;
   background-color: #64a7f5;
+  bottom: 50%;
+  display: flex;
   position: absolute;
-  width: 10px;
   justify-content: center;
+  top: 50%;
+  width: 10px;
 }
 
 .timeline-branch img {
-  position: absolute;
-  display: none;
   border: thick solid #054f7d;
+  display: none;
   height: 60%;
+  position: absolute;
   width: auto;
 }
 
@@ -229,10 +229,10 @@ ul {
 }
 
 .image-thumbnails img {
+  border: thick solid #054f7d;
   margin: 10px;
   max-height: 250px;
   max-width: 250px;
-  border: thick solid #054f7d;
 }
 
 .image-thumbnails img:hover {
