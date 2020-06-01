@@ -200,8 +200,11 @@ function resetEasterEgg() {
 /**
  * Fetches a comment using DataServlet.java.
  */
-function fetchComment() {
-  fetch('/data').then(response => response.text()).then((comment) => {
-    document.getElementById('comment-placeholder').innerText = comment;
+function fetchMessages() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+    const commentTab = document.getElementById('Comments');
+    for (var i = 0; i < messages.length; i++) {
+      commentTab.appendChild(createParagraph(messages[i]));
+    }
   });
 }
