@@ -12,17 +12,105 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
+/*
+ * Displays the selected tab on the homepage.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function displayTab(event, tabName) {
+    hideMoreInfo();
+    
+    var buttonContainer = document.getElementsByClassName("tabs")[0];
+    buttonContainer.style.borderBottomLeftRadius = "0";
+    buttonContainer.style.borderBottomRightRadius = "0";
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+    var tabInfo = document.getElementsByClassName("tabinfo");
+    for (var i = 0; i < tabInfo.length; i++) {
+        tabInfo[i].style.display = "none";
+    }
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+    var tabButtons = document.getElementsByClassName("tabbutton");
+    for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+
+    if (tabName == "Interests"){
+        drawTimeline();
+    }
+}
+
+/*
+ * Displays the timeline animation on the Interests tab.
+ */
+function drawTimeline() {
+    hideImages();
+    var timeline = document.getElementById("timeline");
+    var movingDot = document.getElementById("moving-dot")
+    var rightEnd = 95;
+    var dotLeftPos = 97 - rightEnd;
+
+    var branchTriggers = {
+        6: "astronomy",
+        22: "geography",
+        38: "tornadoes",
+        54: "architecture",
+        70: "photography",
+        86: "compsci"
+    }
+
+    var id = setInterval(extendTimeline, 20);
+    function extendTimeline() {
+        if (rightEnd <= 5) {
+            clearInterval(id);
+        } else {
+            rightEnd -= 0.5;
+            dotLeftPos = 97 - rightEnd;
+            timeline.style.right = rightEnd + "%";
+            movingDot.style.left = dotLeftPos + "%";
+
+            if (dotLeftPos in branchTriggers) {
+                displayImage(branchTriggers[dotLeftPos]);
+            }
+        }
+    }
+}
+
+/*
+ * Sets display for the images on the Interests tab to "none".
+*/
+function hideImages() {
+    var interestImages = document.getElementsByClassName("timeline-branch")
+    for (var i = 0; i < interestImages.length; i++) {
+        interestImages[i].getElementsByTagName("IMG")[0].style.display = "none";
+    }
+}
+
+/**
+ * Sets display for a given image to "block".
+ */
+function displayImage(imageID) {
+    picDiv = document.getElementById(imageID);
+    pic = picDiv.getElementsByTagName("IMG")[0];
+    pic.style.display = "block";
+}
+
+/*
+ * Displays the specified interest in the More Info window.
+ */
+function displayMoreInfo(event, interestName) {
+    hideMoreInfo();
+    var interestToDisplay = document.getElementById(interestName);
+    interestToDisplay.style.display = "block";
+
+}
+
+/**
+ * Hides the More Info window.
+ */
+function hideMoreInfo() {
+    var moreInfo = document.getElementsByClassName("moreinfo");
+    for (var i = 0; i < moreInfo.length; i++) {
+        moreInfo[i].style.display = "none";
+    }
 }
