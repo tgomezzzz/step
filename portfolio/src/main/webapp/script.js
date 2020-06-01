@@ -54,12 +54,12 @@ function drawTimeline() {
     var branchPosToExtend = 0;
 
     var branchTriggers = {
-        6: "astronomy",
-        22: "geography",
-        38: "tornadoes",
-        54: "architecture",
-        70: "photography",
-        86: "compsci"
+        11: "astronomy",
+        20: "geography",
+        41: "tornadoes",
+        50: "architecture",
+        77: "photography",
+        81: "compsci"
     }
 
     var id = setInterval(extendTimeline, 20);
