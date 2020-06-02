@@ -193,15 +193,15 @@ function createComment(entry) {
     const commentDiv = document.createElement('div');
     const author = document.createElement('p');
     const message = document.createElement('p')
-    const date = document.createElement('p');
 
-    author.innerText = entry[0];
+    author.innerText = entry[0] + " (" + entry[2] + ")";
+    author.id = "author";
+
     message.innerText = entry[1];
-    date.innerText = entry[2];
+    message.id = "message";
     
     commentDiv.appendChild(author);
     commentDiv.appendChild(message);
-    commentDiv.appendChild(date);
     commentDiv.className = "comment";
     return commentDiv;
 }

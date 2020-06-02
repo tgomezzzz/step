@@ -86,7 +86,6 @@ ul {
   outline: none;
   padding: 14px 16px;
   transition: .3s;
-  width: 20%;
 }
 
 .tabs button:hover {
@@ -238,5 +237,24 @@ ul {
 
 .image-thumbnails img:hover {
   border: thick solid #64a7f5;
+}
+
+.comment {
+  margin: 15px 15px 15px 15px;
+  background-color: #c4e9ff;
+  border: thick solid #054f7d;
+  border-radius: 10px;
+}
+
+#author {
+  margin: 10px 10px 5px 10px;
+  color: #054f7d;
+  font-size: 20px;
+}
+
+#message {
+  margin: 0px 10px 10px 10px;
+  color: #64a7f5;
+  font-size: 30px;
 }
 
