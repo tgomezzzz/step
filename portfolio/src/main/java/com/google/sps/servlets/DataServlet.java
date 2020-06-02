@@ -17,6 +17,8 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -31,42 +33,46 @@ import java.text.SimpleDateFormat;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<List<String>> comments;
   private DateFormat df;
   private DatastoreService datastore;
 
   @Override
   public void init() {
-      // comments = new ArrayList<>();
       df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
       datastore = DatastoreServiceFactory.getDatastoreService();
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJsonUsingGson(comments);
+    PreparedQuery comments = datastore.prepare(new Query("Comment"));
+
+    List<List<String>> commentsList = new ArrayList<>();
+    for (Entity entity : comments.asIterable()) {
+      List<String> comment = new ArrayList<>();
+      comment.add((String) entity.getProperty("author"));
+      comment.add((String) entity.getProperty("message"));
+      comment.add((String) entity.getProperty("date"));
+      commentsList.add(comment);
+    }
 
     response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.getWriter().println(convertToJsonUsingGson(commentsList));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // List<String> entry = new ArrayList<>();
-
     String author = getParameter(request, "name", "Anonymous");
-    String message = getParameter(request, "message", "[Empty Message]");
+    String message = request.getParameter("message");
     String date = df.format(new Date());
-    // entry.add(name);
-    // entry.add(comment);
-    // entry.add(df.format(entryDate));
 
-    Entity comment = new Entity("Comment");
-    comment.setProperty("author", author);
-    comment.setProperty("message", message);
-    comment.setProperty("date", date);
+    if (!message.equals("")) {
+      Entity comment = new Entity("Comment");
+      comment.setProperty("author", author);
+      comment.setProperty("message", message);
+      comment.setProperty("date", date);
+      datastore.put(comment);
+    }
 
-    datastore.put(comment);
     response.sendRedirect("/index.html");
   }
 
