@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -29,12 +32,14 @@ import java.text.SimpleDateFormat;
 public class DataServlet extends HttpServlet {
 
   private List<List<String>> comments;
-  DateFormat df;
+  private DateFormat df;
+  private DatastoreService datastore;
 
   @Override
   public void init() {
-      comments = new ArrayList<>();
+      // comments = new ArrayList<>();
       df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+      datastore = DatastoreServiceFactory.getDatastoreService();
   }
 
   @Override
@@ -47,16 +52,21 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    List<String> entry = new ArrayList<>();
+    // List<String> entry = new ArrayList<>();
 
-    String name = getParameter(request, "name", "Anonymous");
-    String comment = getParameter(request, "comment", "[Empty Message]");
-    Date entryDate = new Date();
-    entry.add(name);
-    entry.add(comment);
-    entry.add(df.format(entryDate));
+    String author = getParameter(request, "name", "Anonymous");
+    String message = getParameter(request, "message", "[Empty Message]");
+    String date = df.format(new Date());
+    // entry.add(name);
+    // entry.add(comment);
+    // entry.add(df.format(entryDate));
 
-    comments.add(entry);
+    Entity comment = new Entity("Comment");
+    comment.setProperty("author", author);
+    comment.setProperty("message", message);
+    comment.setProperty("date", date);
+
+    datastore.put(comment);
     response.sendRedirect("/index.html");
   }
 
