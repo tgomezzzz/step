@@ -17,5 +17,6 @@ Image Sources:
     Comp Sci: https://www.google.com/url?sa=i&url=https%3A%2F%2Fal.nd.edu%2Fnews%2Flatest-news%2Fnotre-dame-launches-new-ba-in-computer-science-major%2F&psig=AOvVaw2efsdqPWie-ulixXFEEZsk&ust=1590769580447000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPiGktL81ukCFQAAAAAdAAAAABAD
     Patrick being yeeted: Gracie Dement (Twitter)
     Bear in hot tub: https://revelstokecurrent.com/hot-tub-poacher-in-revelstoke/
+    Bear Icon: https://lh3.googleusercontent.com/proxy/5vM4XEamw9xc3aV5kW9TXH6GKQGGUpJJmbnA7FS-nTb6HqET2xgvgYM6XlcVyx3P4JV51U72cTSZyYJmc9nBv-3fdfxJRJbBN7p_TzBqB5CiO1hUFi_X
     
     All other images are my own.

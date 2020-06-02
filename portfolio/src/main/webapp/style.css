@@ -38,6 +38,8 @@ body {
 h1 {
   font-size: 60px;
   color: #64a7f5;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 ul {
@@ -125,11 +127,19 @@ ul {
 }
 
 .moreinfo h2 {
-  font-size: 30px;
+    font-size: 40px;
+    color: #054f7d;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .moreinfo img {
-  background: thick solid #054f7d;
+    border: thick solid #64a7f5;
+}
+
+.moreinfo p {
+    font-size: 22px;
+    padding: 5px 10px;
 }
 
 #timeline-container {
@@ -166,11 +176,11 @@ ul {
 }
 
 .timeline-branch img {
-  position: absolute;
-  display: none;
-  width: 30%;
-  border: thick solid #054f7d;
-  animation: fadeIn ease 2s;
+    position: absolute;
+    display: none;
+    width: 30%;
+    border: thick solid #054f7d;
+    animation: fadeIn ease 1.5s;
 }
 
 @keyframes fadeIn {
