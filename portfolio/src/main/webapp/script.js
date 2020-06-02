@@ -179,6 +179,7 @@ function resetEasterEgg() {
 function fetchMessages() {
     fetch('/data').then(response => response.json()).then((messages) => {
         const commentTab = document.getElementById('Comments');
+        console.log(messages);
         for (var i = 0; i < messages.length; i++) {
             commentTab.appendChild(createParagraph(messages[i]));
         }

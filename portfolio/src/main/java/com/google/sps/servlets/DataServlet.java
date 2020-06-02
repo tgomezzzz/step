@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> comments;
+  private List<List<String>> comments;
 
   @Override
   public void init() {
@@ -43,22 +43,24 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    List<String> entry = new ArrayList<>();
     String name = getParameter(request, "name", "Anonymous");
     String comment = getParameter(request, "comment", "[Empty Message]");
-    comments.add(name);
-    comments.add(comment);
+    entry.add(name);
+    entry.add(comment);
+    comments.add(entry);
     response.sendRedirect("/index.html");
   }
 
   private String getParameter(HttpServletRequest request, String paramName, String defaultValue) {
     String value = request.getParameter(paramName);
-    if (value == null) {
+    if (value.equals("")) {
       return defaultValue;
     }
     return value;
   }
 
-  private String convertToJsonUsingGson(List<String> comments) {
+  private String convertToJsonUsingGson(List<List<String>> comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     System.out.println(json);
