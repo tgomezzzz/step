@@ -44,14 +44,15 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    PreparedQuery comments = datastore.prepare(new Query("Comment"));
+    PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp"));
 
     List<List<String>> commentsList = new ArrayList<>();
     for (Entity entity : comments.asIterable()) {
       List<String> comment = new ArrayList<>();
       comment.add((String) entity.getProperty("author"));
       comment.add((String) entity.getProperty("message"));
-      comment.add((String) entity.getProperty("date"));
+      long timeInMillis = (long) entity.getProperty("timestamp");
+      comment.add(df.format(new Date(timeInMillis)));
       commentsList.add(comment);
     }
 
@@ -63,13 +64,13 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String author = getParameter(request, "name", "Anonymous");
     String message = request.getParameter("message");
-    String date = df.format(new Date());
+    long timestamp = System.currentTimeMillis();
 
     if (!message.equals("")) {
       Entity comment = new Entity("Comment");
       comment.setProperty("author", author);
       comment.setProperty("message", message);
-      comment.setProperty("date", date);
+      comment.setProperty("timestamp", timestamp);
       datastore.put(comment);
     }
 
@@ -87,7 +88,6 @@ public class DataServlet extends HttpServlet {
   private String convertToJsonUsingGson(List<List<String>> comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
-    System.out.println(json);
     return json;
   }
 }
