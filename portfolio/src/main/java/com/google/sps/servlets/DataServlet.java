@@ -21,16 +21,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   private List<List<String>> comments;
+  DateFormat df;
 
   @Override
   public void init() {
       comments = new ArrayList<>();
+      df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
   }
 
   @Override
@@ -44,10 +48,14 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     List<String> entry = new ArrayList<>();
+
     String name = getParameter(request, "name", "Anonymous");
     String comment = getParameter(request, "comment", "[Empty Message]");
+    Date entryDate = new Date();
     entry.add(name);
     entry.add(comment);
+    entry.add(df.format(entryDate));
+
     comments.add(entry);
     response.sendRedirect("/index.html");
   }

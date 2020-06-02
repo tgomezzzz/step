@@ -177,11 +177,11 @@ function resetEasterEgg() {
  * Fetches a comment using DataServlet.java.
  */
 function fetchMessages() {
-    fetch('/data').then(response => response.json()).then((messages) => {
+    fetch('/data').then(response => response.json()).then((entries) => {
         const commentTab = document.getElementById('Comments');
-        console.log(messages);
-        for (var i = 0; i < messages.length; i++) {
-            commentTab.appendChild(createParagraph(messages[i]));
+        const numComments = commentTab.getElementsByClassName("comment").length;
+        for (var i = numComments; i < entries.length; i++) {
+            commentTab.appendChild(createComment(entries[i]));
         }
     });
 }
@@ -189,8 +189,19 @@ function fetchMessages() {
 /**
  * Creates a <p> element with the given message.
  */
-function createParagraph(message) {
-    const pElement = document.createElement('p');
-    pElement.innerText = message;
-    return pElement;
+function createComment(entry) {
+    const commentDiv = document.createElement('div');
+    const author = document.createElement('p');
+    const message = document.createElement('p')
+    const date = document.createElement('p');
+
+    author.innerText = entry[0];
+    message.innerText = entry[1];
+    date.innerText = entry[2];
+    
+    commentDiv.appendChild(author);
+    commentDiv.appendChild(message);
+    commentDiv.appendChild(date);
+    commentDiv.className = "comment";
+    return commentDiv;
 }
