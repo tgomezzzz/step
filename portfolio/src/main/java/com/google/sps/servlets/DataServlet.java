@@ -26,28 +26,41 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> messages;
+  private List<String> comments;
 
   @Override
   public void init() {
-      messages = new ArrayList<>();
-      messages.add("Bears in my hair");
-      messages.add("I got tha");
-      messages.add("NYC -> HR, OR");
+      comments = new ArrayList<>();
   }
-
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJsonUsingGson(messages);
+    String json = convertToJsonUsingGson(comments);
 
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-  private String convertToJsonUsingGson(List<String> messages) {
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String name = getParameter(request, "name", "Anonymous");
+    String comment = getParameter(request, "comment", "[Empty Message]");
+    comments.add(name);
+    comments.add(comment);
+    response.sendRedirect("/index.html");
+  }
+
+  private String getParameter(HttpServletRequest request, String paramName, String defaultValue) {
+    String value = request.getParameter(paramName);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  private String convertToJsonUsingGson(List<String> comments) {
     Gson gson = new Gson();
-    String json = gson.toJson(messages);
+    String json = gson.toJson(comments);
     System.out.println(json);
     return json;
   }
