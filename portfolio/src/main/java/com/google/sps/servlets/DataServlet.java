@@ -40,7 +40,8 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void init() {
-      df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+      df = new SimpleDateFormat("MMMMM d, yyyy h:mm a z");
+      df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
       datastore = DatastoreServiceFactory.getDatastoreService();
   }
 

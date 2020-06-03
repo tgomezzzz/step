@@ -119,9 +119,10 @@
           <input type="text" id="author" name="author"><br></br>
           <label for="message">Message:</label><br>
           <input type="text" id="message" name="message"></br></br>
-          <input type="number" id="max-comments" name="max-comments" min="0" value="5"></br></br>
+          <input type="number" id="max-comments" name="max-comments" min="0" value="5" onchange="fetchMessages(value)"></br></br>
           <input type="submit" id="submit"/>
         </form>
+        <div id="comments-container"></div>
       </div>
       
     </div>
