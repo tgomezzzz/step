@@ -41,7 +41,7 @@ function displayTab(event, tabName) {
     }
 
     if (tabName === "Comments") {
-        fetchMessages(document.getElementById("max-comments").value);
+        fetchComments(document.getElementById("max-comments").value);
     }
 }
 
@@ -176,7 +176,7 @@ function resetEasterEgg() {
 /**
  * Fetches a comment using DataServlet.java.
  */
-function fetchMessages(maxComments) {
+function fetchComments(maxComments) {
     fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
         var commentsContainer = document.getElementById('comments-container');
         commentsContainer.innerHTML = '';
