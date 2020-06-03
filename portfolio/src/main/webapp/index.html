@@ -115,10 +115,11 @@
         <h3>Comments</h3>
         <p>Submit your own comment below!</p>
         <form action="/data" method="POST">
-          <label for="name">Name:</label><br> 
-          <input type="text" id="name" name="name"><br></br>
-          <label for="comment">Message:</label><br>
+          <label for="author">Name:</label><br> 
+          <input type="text" id="author" name="author"><br></br>
+          <label for="message">Message:</label><br>
           <input type="text" id="message" name="message"></br></br>
+          <input type="number" id="max-comments" name="max-comments" min="0" value="5"></br></br>
           <input type="submit" id="submit"/>
         </form>
       </div>

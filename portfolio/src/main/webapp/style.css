@@ -241,7 +241,6 @@ ul {
 
 label {
   color: #054f7d;
-  margin-bottom: 4px;
   margin-left: 10px;
   font-size: 20px;
 }
@@ -253,6 +252,7 @@ input {
   color: #64a7f5;
   font-family: 'Oxygen';
   font-size: 20px;
+  margin-left: 10px;
   width: 30%;
 }
 

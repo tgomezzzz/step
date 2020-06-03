@@ -177,7 +177,7 @@ function resetEasterEgg() {
  * Fetches a comment using DataServlet.java.
  */
 function fetchMessages() {
-    fetch('/data').then(response => response.json()).then((entries) => {
+    fetch('/data?max-comments=5').then(response => response.json()).then((entries) => {
         const commentTab = document.getElementById('Comments');
         const numComments = commentTab.getElementsByClassName("comment").length;
         for (var i = numComments; i < entries.length; i++) {

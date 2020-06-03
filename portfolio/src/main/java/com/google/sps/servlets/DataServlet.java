@@ -19,6 +19,8 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -44,10 +46,11 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp"));
+    PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp", SortDirection.DESCENDING));
+    int maxComments = Integer.parseInt(request.getParameter("max-comments"));
 
     List<List<String>> commentsList = new ArrayList<>();
-    for (Entity entity : comments.asIterable()) {
+    for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
       List<String> comment = new ArrayList<>();
       comment.add((String) entity.getProperty("author"));
       comment.add((String) entity.getProperty("message"));
@@ -62,7 +65,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String author = getParameter(request, "name", "Anonymous");
+    String author = getParameter(request, "author", "Anonymous");
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
 
