@@ -44,54 +44,72 @@
       in every field imaginable. To me, computer science is the culmination of my passions, because it gives me the limitless ability
       to build, model, and analyze anything that interests me. There's nothing I'd rather do for the rest of my life.</p>
     </div>
-    
+      
     <div id="Interests" class="tabinfo">
-    <h3>My Interests</h3>
-    <p>Click the photos on the timeline for more details!</p>
+      <h3>My Interests</h3>
+      <p>Click the photos on the timeline for more details!</p>
+      
+      <div id="timeline-container">
+        <div id="timeline"></div>
+        <div id="static-endpoint" class="endpoint"><p>1999</p></div>
+        <div id="moving-endpoint" class="endpoint"><p>Present</p></div>
     
-    <div id="timeline-container">
-      <div id="timeline"></div>
-      <div id="static-dot" class="main-dot"><p>1999</p></div>
-      <div id="moving-dot" class="main-dot"><p>Present</p></div>
+        <div class="timeline-branch" id="astronomy" style="left: 11%;">
+          <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo('astronomyinfo')">
+        </div>
     
-      <div class="timeline-branch" id="astronomy">
-      <img src="/images/jupiter.png" alt="Astronomy" style="left: 1%; top: 3%; border-radius: 50%; width: 20%" onclick="displayMoreInfo(event, 'astronomyinfo')">
+        <div class="timeline-branch" id="geography" style="left: 20%;">
+          <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo('geographyinfo')">
+        </div>
+    
+        <div class="timeline-branch" id="tornadoes" style="left: 41%;">
+          <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo('tornadoesinfo')">
+        </div>
+    
+        <div class="timeline-branch" id="architecture" style="left: 50%;">
+          <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo('architectureinfo')">
+        </div>
+    
+        <div class="timeline-branch" id="photography" style="left: 77%;">
+          <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo('photographyinfo')">
+        </div>
+    
+        <div class="timeline-branch" id="compsci" style="left: 81%;">
+          <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo('compsciinfo')">
+        </div>
       </div>
-    
-      <div class="timeline-branch" id="geography">
-      <img src="/images/geography.png" alt="Geography" style="left: 5%; bottom: 5%" onclick="displayMoreInfo(event, 'geographyinfo')">
-      </div>
-    
-      <div class="timeline-branch" id="tornadoes">
-      <img src="/images/tornado.jpg" alt="Tornadoes" style="left: 30%; top: 5%;" onclick="displayMoreInfo(event, 'tornadoesinfo')">
-      </div>
-    
-      <div class="timeline-branch" id="architecture">
-      <img src="/images/salesforce-tower.jpg" alt="Architecture" style="left: 45%; bottom: 5%; height: 35%; width: auto;" onclick="displayMoreInfo(event, 'architectureinfo')">
-      </div>
-    
-      <div class="timeline-branch" id="photography">
-      <img src="/images/nyc.jpg" alt="Photography" style="left: 65%; top: 5%;" onclick="displayMoreInfo(event, 'photographyinfo')">
-      </div>
-    
-      <div class="timeline-branch" id="compsci">
-      <img src="/images/comp-sci.jpg" alt="Computer Science" style="left: 65%; bottom: 5%" onclick="displayMoreInfo(event, 'compsciinfo')">
-      </div>
-  
-    </div>
+
     </div>
     
     <div id="Bucket List" class="tabinfo">
-    <h3>My Bucket List</h3>
-    <p>One day, I will...</p>
-    <ul>
-      <li>See the northern lights</li>
-      <li>Travel across Europe</li>
-      <li>Live in San Francisco</li>
-      <li>See a tornado with my own eyes</li>
-      <li>Learn how to blow a bubble with gum</li>
-      <li>Get over my fear of boats</li>
-    </ul>
+      <h3>My Bucket List</h3>
+      <p>One day, I will...</p>
+      <ul>
+        <li>See the northern lights</li>
+        <li>Travel across Europe</li>
+        <li>Live in San Francisco</li>
+        <li>See a tornado with my own eyes</li>
+        <li>Learn how to blow a bubble with gum</li>
+        <li>Get over my fear of boats</li>
+      </ul>
+    </div>
+
+    <div id="Gallery" class="tabinfo">
+      <h3>Gallery</h3>
+      <p>Here are some of my favorite photos:</p>
+      <div class="image-thumbnails">
+        <a href="images/305.jpg"><img src="images/305.jpg"/></a>
+        <a href="images/bella.jpg"><img src="images/bella.jpg"/></a>
+        <a href="images/cowboy.jpg"><img src="images/cowboy.jpg"/></a>
+        <a href="images/gomez.jpg"><img src="images/gomez.jpg"/></a>
+        <a href="images/manhattan.jpg"><img src="images/manhattan.jpg"/></a>
+        <a href="images/oso.jpg"><img src="images/oso.jpg"/></a>
+        <a href="images/patrick.jpg"><img src="images/patrick.jpg"/></a>
+        <a href="images/tampa.jpg"><img src="images/tampa.jpg"/></a>
+        <a href="images/lucas.jpg"><img src="images/lucas.jpg"/></a>
+      </div>
+  
+    </div>
     </div>
   
     <div id="moreinfocontent">
@@ -171,25 +189,7 @@
         </p>
       </div>
     </div>
- 
-    <div id="Gallery" class="tabinfo">
-    <h3>Gallery</h3>
-    <p>Here are some of my favorite photos:</p>
-    <div class="image-thumbnails">
-      <a href="images/305.jpg"><img src="images/305.jpg"/></a>
-      <a href="images/bella.jpg"><img src="images/bella.jpg"/></a>
-      <a href="images/cowboy.jpg"><img src="images/cowboy.jpg"/></a>
-      <a href="images/gomez.jpg"><img src="images/gomez.jpg"/></a>
-      <a href="images/manhattan.jpg"><img src="images/manhattan.jpg"/></a>
-      <a href="images/oso.jpg"><img src="images/oso.jpg"/></a>
-      <a href="images/patrick.jpg"><img src="images/patrick.jpg"/></a>
-      <a href="images/tampa.jpg"><img src="images/tampa.jpg"/></a>
-      <a href="images/lucas.jpg"><img src="images/lucas.jpg"/></a>
-    </div>
   
-    </div>
-  
-  </div>
   </div>
 </body>
 </html>
