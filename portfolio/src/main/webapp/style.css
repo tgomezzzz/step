@@ -239,6 +239,22 @@ ul {
   border: thick solid #64a7f5;
 }
 
+#input-container {
+  overflow: auto;
+}
+
+#comment-input,
+#comment-options {
+  float: left;
+  width: 50%;
+  margin: 15px auto 15px auto;
+}
+
+#comments-container {
+  display: block;
+  margin: 15px 15px 15px 15px;
+}
+
 label {
   color: #054f7d;
   margin-left: 10px;
@@ -260,7 +276,8 @@ input:hover {
   border-color: #64a7f5;
 }
 
-#submit {
+#submit,
+#delete-comments {
   background-color: #054f7d;
   border-color: #64a7f5;
   color: #e4f5ff;
@@ -277,21 +294,40 @@ input:hover {
 }
 
 .comment {
-  margin: 15px 15px 15px 15px;
   background-color: #f1faff;
   border: thick solid #054f7d;
   border-radius: 10px;
+  margin: 15px 0 15px 0;
 }
 
 #author {
-  margin: 10px 10px 5px 10px;
+  margin: 4px 10px 5px 10px;
   color: #054f7d;
   font-size: 20px;
 }
 
 #message {
-  margin: 0px 10px 10px 10px;
+  margin: 4px 10px 10px 10px;
   color: #64a7f5;
   font-size: 30px;
+}
+
+#max-comments {
+  width: 10%;
+}
+
+#delete-comments {
+  border-color: #054f7d;
+  border-radius: 5px;
+  font-family: 'Oxygen';
+  font-size: 15px;
+  outline: none;
+  width: 180px;
+}
+
+#delete-comments:hover {
+  background-color: #d30023;
+  border-color: #fff;
+  color: #fff;
 }
 

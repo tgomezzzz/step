@@ -77,7 +77,7 @@ public class DataServlet extends HttpServlet {
       datastore.put(comment);
     }
 
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/");
   }
 
   private String getParameter(HttpServletRequest request, String paramName, String defaultValue) {
