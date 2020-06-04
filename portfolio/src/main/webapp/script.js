@@ -180,7 +180,6 @@ function fetchComments(maxComments) {
     fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
         var commentsContainer = document.getElementById('comments-container');
         commentsContainer.innerHTML = '';
-        const numComments = commentsContainer.getElementsByClassName('comment').length;
         for (var i = 0; i < entries.length; i++) {
             commentsContainer.appendChild(createComment(entries[i]));
         }
@@ -205,4 +204,14 @@ function createComment(entry) {
     commentDiv.appendChild(message);
     commentDiv.className = "comment";
     return commentDiv;
+}
+
+/**
+ * Deletes all the comments from the Datastore.
+ */
+function deleteComments() {
+  const request = new Request("/delete-data", {method: 'POST'});
+  fetch(request).then(
+    fetchComments(0)
+  );
 }
