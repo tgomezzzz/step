@@ -27,7 +27,7 @@ public class DeleteDataServlet extends HttpServlet {
     for (Entity entity : comments.asIterable()) {
       datastore.delete(entity.getKey());
     }
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/");
   }
 
 }
