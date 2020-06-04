@@ -171,7 +171,7 @@ function displayMoreInfo(interestName) {
  * Hides the More Info window.
  */
 function hideMoreInfo() {
-  var moreInfo = document.getElementsByClassName("moreinfo");
+  var moreInfo = document.getElementsByClassName("more-info");
   for (var i = 0; i < moreInfo.length; i++) {
     moreInfo[i].style.display = "none";
   }
