@@ -10,110 +10,108 @@
 </head>
 
 <body>
-
-  <div id="headercontent">
-  <h1>Tommy's Portfolio</h1>
-  <h2 style="font-size: 30px; color: #e4f5ff;">Welcome to my webpage! Click the tabs to learn more about me.</h2>
+  <div id="header-content">
+    <h1>Tommy's Portfolio</h1>
+    <h2 style="font-size: 30px; color: #e4f5ff;">Welcome to my webpage! Click the tabs to learn more about me.</h2>
   </div>
 
-  <div id="bodycontent">
-  <div id="tabcontent">
-    <div class="tabs">
-    <button class="tabbutton" onclick="displayTab(event, 'About Me')">About Me</button>
-    <button class="tabbutton" onclick="displayTab(event, 'Interests')">My Interests</button>
-    <button class="tabbutton" onclick="displayTab(event, 'Bucket List')">My Bucket List</button>
-    <button class="tabbutton" onclick="displayTab(event, 'Gallery')">Gallery</button>
-    </div>
-    
-    <div id="About Me" class="tabinfo">
-    <div class="aboutme-header">
-      <h3> About Me
-      <a href="http://www.linkedin.com/in/tomgom"><img src="images/linkedin-logo.png" style="width: 3%; height: 3%; padding-left: 10px;"/></a>
-      <a href="http://www.github.com/tgomezzzz"><img src="images/github-logo.jpg" style="width: 3%; height: 3%; padding-left: 10px;"/></a>
-      </h3>
-    </div>
-    <p><img src="/images/beta-headshot.jpg" align="right" style="width: 20%; padding-left: 20px"/>
-      My full name is Thomas Joaquin Kaufman-Gomez, but I usually just go by Tommy Gomez. I'm a rising junior at Columbia University
-      in New York City, and I'm studying computer science. Born and raised in Sunnyvale, California, I've lived on both coasts and
-      can confidently confirm that the West Coast is superior, although the East Coast is not to be undervalued (in fact, I 
-      would argue that both coasts are equal if it weren't for the East's weather).</p>
-    <p>For as long as I can remember, I've developed strong, unpredictable, and often unusual passions (check out the Interests tab
-      for specifics). These passions are sort of like intellectual rabbit holes, because I dedicate most of my time to learning as
-      much about them as I can. This made declaring a major difficult, as I was stuck in multiple rabbit holes and had to focus on
-      one. I found that computer science was like the ultimate rabbit hole; it's a subject so versatile that it has applications
-      in every field imaginable. To me, computer science is the culmination of my passions, because it gives me the limitless ability
-      to build, model, and analyze anything that interests me. There's nothing I'd rather do for the rest of my life.</p>
-    </div>
+  <div id="body-content">
+    <div id="tab-content">
+      <div class="tabs">
+        <button class="tab-button" onclick="displayTab(event, 'About Me')">About Me</button>
+        <button class="tab-button" onclick="displayTab(event, 'Interests')">My Interests</button>
+        <button class="tab-button" onclick="displayTab(event, 'Bucket List')">My Bucket List</button>
+        <button class="tab-button" onclick="displayTab(event, 'Gallery')">Gallery</button>
+      </div>
       
-    <div id="Interests" class="tabinfo">
-      <h3>My Interests</h3>
-      <p>Click the photos on the timeline for more details!</p>
-      
-      <div id="timeline-container">
-        <div id="timeline"></div>
-        <div id="static-endpoint" class="endpoint"><p>1999</p></div>
-        <div id="moving-endpoint" class="endpoint"><p>Present</p></div>
-    
-        <div class="timeline-branch" id="astronomy" style="left: 11%;">
-          <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo('astronomyinfo')">
-        </div>
-    
-        <div class="timeline-branch" id="geography" style="left: 20%;">
-          <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo('geographyinfo')">
-        </div>
-    
-        <div class="timeline-branch" id="tornadoes" style="left: 41%;">
-          <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo('tornadoesinfo')">
-        </div>
-    
-        <div class="timeline-branch" id="architecture" style="left: 50%;">
-          <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo('architectureinfo')">
-        </div>
-    
-        <div class="timeline-branch" id="photography" style="left: 77%;">
-          <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo('photographyinfo')">
-        </div>
-    
-        <div class="timeline-branch" id="compsci" style="left: 81%;">
-          <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo('compsciinfo')">
+      <div id="About Me" class="tab-info">
+        <h3 id="about-me-header">About Me
+          <a href="http://www.linkedin.com/in/tomgom"><img src="images/linkedin-logo.png" style="border-radius: 10%;"/></a>
+          <a href="http://www.github.com/tgomezzzz"><img src="images/github-logo.jpg" style="border-radius: 50%;"/></a>
+        </h3>
+        <p><img src="/images/beta-headshot.jpg" align="right" id="headshot" onclick="easterEgg()"/>
+            My full name is Thomas Joaquin Kaufman-Gomez, but I usually just go by Tommy Gomez. I'm a rising junior at Columbia University
+            in New York City, and I'm studying computer science. Born and raised in Sunnyvale, California, I've lived on both coasts and
+            can confidently confirm that the West Coast is superior, although the East Coast is not to be undervalued (in fact, I 
+            would argue that both coasts are equal if it weren't for the East's weather).
+        </p>
+        <p>For as long as I can remember, I've developed strong, unpredictable, and often unusual passions (check out the Interests tab
+            for specifics). These passions are sort of like intellectual rabbit holes, because I dedicate most of my time to learning as
+            much about them as I can. This made declaring a major difficult, as I was stuck in multiple rabbit holes and had to focus on
+            one. I found that computer science was like the ultimate rabbit hole; it's a subject so versatile that it has applications
+            in every field imaginable. To me, computer science is the culmination of my passions, because it gives me the limitless ability
+            to build, model, and analyze anything that interests me. There's nothing I'd rather do for the rest of my life.</p>
         </div>
       </div>
+      
+      <div id="Interests" class="tab-info">
+        <h3>My Interests</h3>
+        <p>Click the photos on the timeline for more details!</p>
+        
+        <div id="timeline-container">
+          <div id="timeline"></div>
+          <div id="static-endpoint" class="endpoint"><p>1999</p></div>
+          <div id="moving-endpoint" class="endpoint"><p>Present</p></div>
+      
+          <div class="timeline-branch" id="astronomy" style="left: 11%;">
+            <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo(event, 'astronomy-info')">
+          </div>
+      
+          <div class="timeline-branch" id="geography" style="left: 20%;">
+            <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo(event, 'geography-info')">
+          </div>
+      
+          <div class="timeline-branch" id="tornadoes" style="left: 41%;">
+            <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo(event, 'tornadoes-info')">
+          </div>
+      
+          <div class="timeline-branch" id="architecture" style="left: 50%;">
+            <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo(event, 'architecture-info')">
+          </div>
+      
+          <div class="timeline-branch" id="photography" style="left: 77%;">
+            <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo(event, 'photography-info')">
+          </div>
+      
+          <div class="timeline-branch" id="compsci" style="left: 81%;">
+            <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo(event, 'compsci-info')">
+          </div>
+        </div>
 
-    </div>
-    
-    <div id="Bucket List" class="tabinfo">
-      <h3>My Bucket List</h3>
-      <p>One day, I will...</p>
-      <ul>
-        <li>See the northern lights</li>
-        <li>Travel across Europe</li>
-        <li>Live in San Francisco</li>
-        <li>See a tornado with my own eyes</li>
-        <li>Learn how to blow a bubble with gum</li>
-        <li>Get over my fear of boats</li>
-      </ul>
-    </div>
-
-    <div id="Gallery" class="tabinfo">
-      <h3>Gallery</h3>
-      <p>Here are some of my favorite photos:</p>
-      <div class="image-thumbnails">
-        <a href="images/305.jpg"><img src="images/305.jpg"/></a>
-        <a href="images/bella.jpg"><img src="images/bella.jpg"/></a>
-        <a href="images/cowboy.jpg"><img src="images/cowboy.jpg"/></a>
-        <a href="images/gomez.jpg"><img src="images/gomez.jpg"/></a>
-        <a href="images/manhattan.jpg"><img src="images/manhattan.jpg"/></a>
-        <a href="images/oso.jpg"><img src="images/oso.jpg"/></a>
-        <a href="images/patrick.jpg"><img src="images/patrick.jpg"/></a>
-        <a href="images/tampa.jpg"><img src="images/tampa.jpg"/></a>
-        <a href="images/lucas.jpg"><img src="images/lucas.jpg"/></a>
+      </div>
+      
+      <div id="Bucket List" class="tab-info">
+        <h3>My Bucket List</h3>
+        <p>One day, I will...</p>
+        <ul>
+          <li>See the northern lights</li>
+          <li>Travel across Europe</li>
+          <li>Live in San Francisco</li>
+          <li>See a tornado with my own eyes</li>
+          <li>Learn how to blow a bubble with gum</li>
+          <li>Get over my fear of boats</li>
+        </ul>
       </div>
   
-    </div>
+      <div id="Gallery" class="tab-info">
+        <h3>Gallery</h3>
+        <p>Here are some of my favorite photos:</p>
+        <div class="image-thumbnails">
+          <a href="images/305.jpg"><img src="images/305.jpg"/></a>
+          <a href="images/bella.jpg"><img src="images/bella.jpg"/></a>
+          <a href="images/cowboy.jpg"><img src="images/cowboy.jpg"/></a>
+          <a href="images/gomez.jpg"><img src="images/gomez.jpg"/></a>
+          <a href="images/manhattan.jpg"><img src="images/manhattan.jpg"/></a>
+          <a href="images/oso.jpg"><img src="images/oso.jpg"/></a>
+          <a href="images/patrick.jpg"><img src="images/patrick.jpg"/></a>
+          <a href="images/tampa.jpg"><img src="images/tampa.jpg"/></a>
+          <a href="images/lucas.jpg"><img src="images/lucas.jpg"/></a>
+        </div>
+      </div>
     </div>
   
-    <div id="moreinfocontent">
-      <div id="astronomyinfo" class="moreinfo">
+    <div id="more-info-content">
+      <div id="astronomy-info" class="more-info">
         <h2>Astronomy</h2>
         <h3>Early childhood</h3>
         <img src="/images/jupiter.png" alt="Astronomy" style="width: 40%; border-radius: 50%;">
@@ -122,10 +120,11 @@
             that a day on Venus is longer than a year (that one still baffles me), or that the hottest stars burn blue. What I found most appealing about astronomy,
             however, was how little we know. To this day, I wonder about how the universe began, what storms are like on other planets, what happens when galaxies
             collide, and of course whether or not aliens exist (I think they do 👽). There's so much to learn about the universe, which is 
-            why this interest has never quite left me.</p>
+            why this interest has never quite left me.
+        </p>
       </div>
               
-      <div id="geographyinfo" class="moreinfo">
+      <div id="geography-info" class="more-info">
         <h2>Geography</h2>
         <h3>Elementary school</h3>
         <img src="/images/geography.png" alt="Geography" style="width: 80%;">
@@ -134,10 +133,11 @@
             in the geographical layout of roads. Not only was I curious about where each road went, but I wanted to see what the drive looked like. Google Maps became
             one of my favorite websites. Not only did it allow me to see how roads connect to bring you to your destination, but I could use street view to see
             what the drive there would look like. Ever since then, I've always looked forward to exploring places I've never been. In fact, my favorite pastime during
-            the pandemic has been driving around aimlessly, taking roads I've never been on.</p>
+            the pandemic has been driving around aimlessly, taking roads I've never been on.
+        </p>
       </div>
   
-      <div id="tornadoesinfo" class="moreinfo">
+      <div id="tornadoes-info" class="more-info">
         <h2>Tornadoes</h2>
         <h3>Middle school</h3>
         <img src="/images/tornado.jpg" alt="Tornadoes" style="width: 80%">
@@ -149,7 +149,7 @@
         </p>
       </div>
   
-      <div id="architectureinfo" class="moreinfo">
+      <div id="architecture-info" class="more-info">
         <h2>Architecture</h2>
         <h3>Early high school</h3>
         <img src="/images/salesforce-tower.jpg" alt="Architecture" style="width: 30%">
@@ -162,7 +162,7 @@
         </p>
       </div>
   
-      <div id="photographyinfo" class="moreinfo">
+      <div id="photography-info" class="more-info">
         <h2>Photography</h2>
         <h3>Late high school</h2>
         <img src="/images/nyc.jpg" alt="Photography" style="width: 80%">
@@ -175,7 +175,7 @@
         </p> 
       </div>
  
-      <div id="compsciinfo" class="moreinfo">
+      <div id="compsci-info" class="more-info">
         <h2>Computer Science</h2>
         <h3>College - present</h3>
         <img src="/images/comp-sci.jpg" alt="Computer Science" style="width: 70%">
