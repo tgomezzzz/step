@@ -23,12 +23,12 @@ function displayTab(event, tabName) {
   buttonContainer.style.borderBottomLeftRadius = "0";
   buttonContainer.style.borderBottomRightRadius = "0";
 
-  var tabInfo = document.getElementsByClassName("tabinfo");
+  var tabInfo = document.getElementsByClassName("tab-info");
   for (var i = 0; i < tabInfo.length; i++) {
     tabInfo[i].style.display = "none";
   }
 
-  var tabButtons = document.getElementsByClassName("tabbutton");
+  var tabButtons = document.getElementsByClassName("tab-button");
   for (var i = 0; i < tabButtons.length; i++) {
     tabButtons[i].className = tabButtons[i].className.replace(" active", "");
   }
