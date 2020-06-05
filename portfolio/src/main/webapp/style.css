@@ -304,40 +304,74 @@ input:hover {
   border-radius: 10px;
   display: flex;
   margin: 15px 0 15px 0;
-  overflow: auto;
 }
 
 #comment-content {
   float: left;
-  width: 95%;
+  width: 93%;
 }
 
 #comment-likes-content {
   align-items: center;
   display: flex;
   float: right;
-  width: 5%;
+  flex-direction: column;
+  margin: auto;
+  width: 7%;
 }
 
-#author {
+.author {
   margin: 10px 10px 5px 10px;
   color: #054f7d;
   font-size: 20px;
 }
 
-#message {
+.message {
   margin: 0px 10px 10px 10px;
   color: #64a7f5;
   float: left;
   font-size: 30px;
 }
 
-#likes {
-  color: #ff0000;
+.likes {
+  color: #ffa2a2;
   font-family: 'Oxygen';
   font-size: 20px;
-  margin: auto;
+  margin: 4px auto 10px auto;
   text-align: center;
+}
+
+.heart {
+  background-color: #ffa2a2;
+  height: 26px;
+  margin: 23px auto 8px auto;
+  transform: rotate(-45deg);
+  transition: .3s;
+  width: 26px;
+}
+
+.heart:hover {
+  transform: scale(1.3) rotate(-45deg);
+}
+
+.heart:before,
+.heart:after {
+  background-color: #ffa2a2;
+  border-radius: 50%;
+  content: "";
+  height: 26px;
+  position: absolute;
+  width: 26px;
+}
+
+.heart:before {
+  left: 0;
+  top: -13px;
+}
+
+.heart:after {
+  right: -13px;
+  top: 0;
 }
 
 #max-comments {
