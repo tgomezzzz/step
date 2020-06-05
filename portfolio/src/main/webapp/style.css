@@ -246,6 +246,7 @@ ul {
 #comment-input,
 #comment-options {
   float: left;
+  display: block;
   width: 50%;
   margin: 15px auto 15px auto;
 }
@@ -257,7 +258,7 @@ ul {
 
 label {
   color: #054f7d;
-  margin-left: 10px;
+  margin: 0px 0px 4px 10px;
   font-size: 20px;
 }
 
@@ -274,6 +275,10 @@ input {
 
 input:hover {
   border-color: #64a7f5;
+}
+
+#message-input {
+  width: 80%;
 }
 
 #submit,
@@ -297,19 +302,42 @@ input:hover {
   background-color: #f1faff;
   border: thick solid #054f7d;
   border-radius: 10px;
+  display: flex;
   margin: 15px 0 15px 0;
+  overflow: auto;
+}
+
+#comment-content {
+  float: left;
+  width: 95%;
+}
+
+#comment-likes-content {
+  align-items: center;
+  display: flex;
+  float: right;
+  width: 5%;
 }
 
 #author {
-  margin: 4px 10px 5px 10px;
+  margin: 10px 10px 5px 10px;
   color: #054f7d;
   font-size: 20px;
 }
 
 #message {
-  margin: 4px 10px 10px 10px;
+  margin: 0px 10px 10px 10px;
   color: #64a7f5;
+  float: left;
   font-size: 30px;
+}
+
+#likes {
+  color: #ff0000;
+  font-family: 'Oxygen';
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
 }
 
 #max-comments {

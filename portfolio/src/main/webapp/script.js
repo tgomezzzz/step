@@ -201,33 +201,42 @@ function resetEasterEgg() {
  * Fetches a comment using DataServlet.java.
  */
 function fetchComments(maxComments) {
-    fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
-        var commentsContainer = document.getElementById('comments-container');
-        commentsContainer.innerHTML = '';
-        for (var i = 0; i < entries.length; i++) {
-            commentsContainer.appendChild(createComment(entries[i]));
-        }
-    });
+  fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
+  var commentsContainer = document.getElementById('comments-container');
+  commentsContainer.innerHTML = '';
+  for (var i = 0; i < entries.length; i++) {
+    commentsContainer.appendChild(createComment(entries[i]));
+  }
+  });
 }
 
 /**
  * Creates a <p> element with the given message.
  */
 function createComment(entry) {
-    const commentDiv = document.createElement('div');
-    const author = document.createElement('p');
-    const message = document.createElement('p')
+  const comment = document.createElement('div');
+  const commentContent = document.createElement('div');
+  const commentLikesContent = document.createElement('div');
+  comment.className = "comment";
+  commentContent.id = "comment-content";
+  commentLikesContent.id = "comment-likes-content";
 
-    author.innerText = entry[0] + " (" + entry[2] + ")";
-    author.id = "author";
-
-    message.innerText = entry[1];
-    message.id = "message";
-    
-    commentDiv.appendChild(author);
-    commentDiv.appendChild(message);
-    commentDiv.className = "comment";
-    return commentDiv;
+  const author = document.createElement('p');
+  const message = document.createElement('p')
+  const likes = document.createElement('div');
+  author.innerText = entry[0] + " (" + entry[2] + ")";
+  author.id = "author";
+  message.innerText = entry[1];
+  message.id = "message";
+  likes.innerText = entry[3];
+  likes.id = "likes";
+  
+  commentContent.appendChild(author);
+  commentContent.appendChild(message);
+  commentLikesContent.appendChild(likes);
+  comment.appendChild(commentContent);
+  comment.append(commentLikesContent);
+  return comment;
 }
 
 /**
