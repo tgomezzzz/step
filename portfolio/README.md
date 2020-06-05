@@ -28,3 +28,5 @@ Coding Sources:
 * These two sources helped with formatting the timestamp of each comment:
     * https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
     * https://dzone.com/articles/java-simpledateformat-guide
+* This source showed me how to draw an animated heart:
+    * https://css-tricks.com/hearts-in-html-and-css/

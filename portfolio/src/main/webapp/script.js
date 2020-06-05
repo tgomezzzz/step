@@ -197,18 +197,21 @@ function createComment(entry) {
   commentContent.id = "comment-content";
   commentLikesContent.id = "comment-likes-content";
 
-  const author = document.createElement('p');
-  const message = document.createElement('p')
+  const author = document.createElement('div');
+  const message = document.createElement('div')
+  const heartButton = document.createElement('div');
   const likes = document.createElement('div');
   author.innerText = entry[0] + " (" + entry[2] + ")";
-  author.id = "author";
+  author.className = "author";
   message.innerText = entry[1];
-  message.id = "message";
+  message.className = "message";
+  heartButton.className = "heart";
   likes.innerText = entry[3];
-  likes.id = "likes";
+  likes.className = "likes";
   
   commentContent.appendChild(author);
   commentContent.appendChild(message);
+  commentLikesContent.appendChild(heartButton);
   commentLikesContent.appendChild(likes);
   comment.appendChild(commentContent);
   comment.append(commentLikesContent);
