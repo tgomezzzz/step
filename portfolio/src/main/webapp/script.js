@@ -225,12 +225,14 @@ function createComment(entry) {
   const message = document.createElement('div')
   const heartButton = document.createElement('div');
   const likes = document.createElement('div');
-  author.innerText = entry[0] + " (" + entry[2] + ")";
+  author.innerText = entry[1] + " (" + entry[3] + ")";
   author.className = "author";
   message.innerText = entry[1];
   message.className = "message";
   heartButton.className = "heart";
-  likes.innerText = entry[3];
+  heartButton.id = entry[0];
+  heartButton.onclick = function() { likeComment(event) };
+  likes.innerText = entry[4];
   likes.className = "likes";
   
   commentContent.appendChild(author);
@@ -250,4 +252,11 @@ function deleteComments() {
   fetch(request).then(
     fetchComments(0)
   );
+}
+
+/**
+ *
+ */
+function likeComment(event) {
+  console.log(event.target.id);
 }
