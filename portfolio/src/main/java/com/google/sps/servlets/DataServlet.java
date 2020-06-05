@@ -21,6 +21,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -52,6 +54,7 @@ public class DataServlet extends HttpServlet {
     List<List<String>> commentsList = new ArrayList<>();
     for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
       List<String> comment = new ArrayList<>();
+      comment.add((String) entity.getProperty("key"));
       comment.add((String) entity.getProperty("author"));
       comment.add((String) entity.getProperty("message"));
       long timeInMillis = (long) entity.getProperty("timestamp");
@@ -72,6 +75,7 @@ public class DataServlet extends HttpServlet {
 
     if (!message.equals("")) {
       Entity comment = new Entity("Comment");
+      comment.setProperty("key", KeyFactory.createKeyString("Comment", timestamp));
       comment.setProperty("author", author);
       comment.setProperty("message", message);
       comment.setProperty("timestamp", timestamp);
