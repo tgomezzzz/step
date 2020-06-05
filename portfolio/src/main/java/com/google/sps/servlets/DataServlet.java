@@ -56,6 +56,7 @@ public class DataServlet extends HttpServlet {
       comment.add((String) entity.getProperty("message"));
       long timeInMillis = (long) entity.getProperty("timestamp");
       comment.add(df.format(new Date(timeInMillis)));
+      comment.add(Long.toString((Long) entity.getProperty("likes")));
       commentsList.add(comment);
     }
 
@@ -65,8 +66,8 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String author = getParameter(request, "author", "Anonymous");
-    String message = request.getParameter("message");
+    String author = getParameter(request, "author-input", "Anonymous");
+    String message = request.getParameter("message-input");
     long timestamp = System.currentTimeMillis();
 
     if (!message.equals("")) {
@@ -74,6 +75,7 @@ public class DataServlet extends HttpServlet {
       comment.setProperty("author", author);
       comment.setProperty("message", message);
       comment.setProperty("timestamp", timestamp);
+      comment.setProperty("likes", 0);
       datastore.put(comment);
     }
 
