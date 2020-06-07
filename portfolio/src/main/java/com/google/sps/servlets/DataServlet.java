@@ -66,6 +66,8 @@ public class DataServlet extends HttpServlet {
       comment.add((String) entity.getProperty("message"));
       comment.add(df.format(new Date(timeInMillis)));
       comment.add(Long.toString((Long) entity.getProperty("likes")));
+
+      System.out.println((List<String>) entity.getProperty("likedBy"));
       commentsList.add(comment);
     }
 
