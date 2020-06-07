@@ -40,15 +40,37 @@ public class LikeCommentServlet extends HttpServlet {
 
     String clientIp = request.getRemoteAddr();
     Set<String> likedByIpSet;
+
+    // If the comment has already been liked at least once, add or remove this client's IP to the set of IPs that have liked it.
     if (comment.hasProperty("likedBy")) {
-      likedByIpSet = (HashSet<String>) comment.getProperty("likedBy");
-      System.out.println("updated existing HashSet");
+      likedByIpSet = new HashSet<String>((List<String>) comment.getProperty("likedBy"));
+
+      // If the client's IP address is already in the set, then the comment is already liked, and needs to be unliked. 
+      if (likedByIpSet.contains(clientIp)) {
+        likedByIpSet.remove(clientIp);
+
+        // If the comment now has no likes, remove the "likedBy" property.
+        // This is to avoid NullPointerExceptions, because Datastore internally stores empty Collections as null.
+        if (likedByIpSet.isEmpty()) {
+          comment.removeProperty("likedBy");
+
+        // If the comment still has likes, update the "likedBy" property.
+        } else {
+          comment.setProperty("likedBy", likedByIpSet);
+        }
+
+      // Otherwise, like the comment.
+      } else {
+        likedByIpSet.add(clientIp);
+      }
+    
+    // If the comment has no likes, add this client's IP
     } else {
       likedByIpSet = new HashSet<>();
       likedByIpSet.add(clientIp);
       comment.setProperty("likedBy", likedByIpSet);
-      System.out.println("created new HashSet");
     }
+    datastore.put(comment);
   }
 
 }
