@@ -237,7 +237,9 @@ function deleteComments() {
 function toggleLike(event) {
   const commentId = event.target.id;
   const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
-  fetch(request);
+  fetch(request).then(
+    fetchComments(5)
+  );
   if (event.target.dataset.liked === 'false') {
     event.target.dataset.liked = 'true';
   } else {

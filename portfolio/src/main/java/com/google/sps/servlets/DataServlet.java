@@ -65,9 +65,14 @@ public class DataServlet extends HttpServlet {
       comment.add((String) entity.getProperty("author"));
       comment.add((String) entity.getProperty("message"));
       comment.add(df.format(new Date(timeInMillis)));
-      comment.add(Long.toString((Long) entity.getProperty("likes")));
 
-      System.out.println((List<String>) entity.getProperty("likedBy"));
+      List<String> likedByIpSet = (List<String>) entity.getProperty("likedBy");
+      if (likedByIpSet != null) {
+        comment.add(Integer.toString(likedByIpSet.size()));
+      } else {
+        comment.add("0");
+      }
+
       commentsList.add(comment);
     }
 
