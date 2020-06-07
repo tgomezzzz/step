@@ -334,7 +334,7 @@ input:hover {
 }
 
 .likes {
-  color: #ffa2a2;
+  color: #054f7d;
   font-family: 'Oxygen';
   font-size: 20px;
   margin: 4px auto 10px auto;
@@ -350,13 +350,21 @@ input:hover {
   width: 26px;
 }
 
+.heart[data-liked='false'] {
+  background-color: #ffa2a2;
+}
+
+.heart[data-liked='true'] {
+  background-color: #ff3232;
+}
+
 .heart:hover {
   transform: scale(1.3) rotate(-45deg);
 }
 
 .heart:before,
 .heart:after {
-  background-color: #ffa2a2;
+  background-color: inherit;
   border-radius: 50%;
   content: "";
   height: 26px;
