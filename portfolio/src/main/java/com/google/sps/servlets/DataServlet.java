@@ -49,15 +49,21 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp", SortDirection.DESCENDING));
-    int maxComments = Integer.parseInt(request.getParameter("max-comments"));
+    int maxComments;
+    try {
+      maxComments = Integer.parseInt(request.getParameter("max-comments"));
+    } catch (NumberFormatException e) {
+      maxComments = 0;
+    }
 
     List<List<String>> commentsList = new ArrayList<>();
     for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
       List<String> comment = new ArrayList<>();
-      comment.add((String) entity.getProperty("key"));
+      long timeInMillis = (long) entity.getProperty("timestamp");
+
+      comment.add(KeyFactory.keyToString(entity.getKey()));
       comment.add((String) entity.getProperty("author"));
       comment.add((String) entity.getProperty("message"));
-      long timeInMillis = (long) entity.getProperty("timestamp");
       comment.add(df.format(new Date(timeInMillis)));
       comment.add(Long.toString((Long) entity.getProperty("likes")));
       commentsList.add(comment);
@@ -75,7 +81,6 @@ public class DataServlet extends HttpServlet {
 
     if (!message.equals("")) {
       Entity comment = new Entity("Comment");
-      comment.setProperty("key", KeyFactory.createKeyString("Comment", timestamp));
       comment.setProperty("author", author);
       comment.setProperty("message", message);
       comment.setProperty("timestamp", timestamp);

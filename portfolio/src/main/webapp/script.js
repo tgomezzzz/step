@@ -227,11 +227,12 @@ function createComment(entry) {
   const likes = document.createElement('div');
   author.innerText = entry[1] + " (" + entry[3] + ")";
   author.className = "author";
-  message.innerText = entry[1];
+  message.innerText = entry[2];
   message.className = "message";
   heartButton.className = "heart";
   heartButton.id = entry[0];
-  heartButton.onclick = function() { likeComment(event) };
+  heartButton.onclick = function() { toggleLike(event) };
+  heartButton.dataset.liked = "false";
   likes.innerText = entry[4];
   likes.className = "likes";
   
@@ -255,8 +256,15 @@ function deleteComments() {
 }
 
 /**
- *
+ * Toggles a like for the specified comment.
  */
-function likeComment(event) {
-  console.log(event.target.id);
+function toggleLike(event) {
+  const commentId = event.target.id;
+  const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
+  fetch(request);
+  if (event.target.dataset.liked === 'false') {
+    event.target.dataset.liked = 'true';
+  } else {
+    event.target.dataset.liked = 'false';
+  }
 }
