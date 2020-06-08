@@ -23,6 +23,8 @@ All other images are my own.
 
 
 Coding Sources:
+* To create the tabs of my webpage, I referenced this source: 
+*   * https://www.w3schools.com/howto/howto_js_tabs.asp
 * I used this source as a guide to formatting date and time on the Comments tab: 
     * https://beginnersbook.com/2013/05/java-date-string-conversion/
 * These two sources helped with formatting the timestamp of each comment:
