@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Tommy's Portfolio</title>
+  <script src="script.js" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpn48ih3hm_0OUPcCah4RmzkkXFJ_MkT8"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="/images/bear-icon.png">
-  <script src="script.js"></script>
 </head>
 
-<body>
+<body onload="initMap();">
 
   <div id="header-content">
     <h1>Tommy's Portfolio</h1>
@@ -93,6 +94,7 @@
           <li>Learn how to blow a bubble with gum</li>
           <li>Get over my fear of boats</li>
         </ul>
+        <div id="map"></div>
       </div>
   
       <div id="Gallery" class="tab-info">
