@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
   <div id="header-content">
     <h1>Tommy's Portfolio</h1>
     <h2 style="font-size: 30px; color: #e4f5ff;">Welcome to my webpage! Click the tabs to learn more about me.</h2>
@@ -42,18 +41,18 @@
             much about them as I can. This made declaring a major difficult, as I was stuck in multiple rabbit holes and had to focus on
             one. I found that computer science was like the ultimate rabbit hole; it's a subject so versatile that it has applications
             in every field imaginable. To me, computer science is the culmination of my passions, because it gives me the limitless ability
-            to build, model, and analyze anything that interests me. There's nothing I'd rather do for the rest of my life.
-        </p>
+            to build, model, and analyze anything that interests me. There's nothing I'd rather do for the rest of my life.</p>
+        </div>
       </div>
       
       <div id="Interests" class="tab-info">
         <h3>My Interests</h3>
         <p>Click the photos on the timeline for more details!</p>
-      
+        
         <div id="timeline-container">
           <div id="timeline"></div>
-          <div id="static-dot" class="endpoint"><p>1999</p></div>
-          <div id="moving-dot" class="endpoint"><p>Present</p></div>
+          <div id="static-endpoint" class="endpoint"><p>1999</p></div>
+          <div id="moving-endpoint" class="endpoint"><p>Present</p></div>
       
           <div class="timeline-branch" id="astronomy" style="left: 11%;">
             <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo(event, 'astronomy-info')">
@@ -78,8 +77,8 @@
           <div class="timeline-branch" id="compsci" style="left: 81%;">
             <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo(event, 'compsci-info')">
           </div>
-  
         </div>
+
       </div>
       
       <div id="Bucket List" class="tab-info">
@@ -122,7 +121,6 @@
           <input type="submit" id="submit"/>
         </form>
       </div>
-      
     </div>
   
     <div id="more-info-content">
@@ -203,8 +201,8 @@
             computer science remains my strongest interest, and I'm overjoyed to be able to pursue the subject I'm most passionate about.
         </p>
       </div>
-  
     </div>
+  
   </div>
 </body>
 </html>
