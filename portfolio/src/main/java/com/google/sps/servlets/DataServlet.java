@@ -41,39 +41,27 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void init() {
-      df = new SimpleDateFormat("MMMMM d, yyyy h:mm a z");
-      df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-      datastore = DatastoreServiceFactory.getDatastoreService();
+    df = new SimpleDateFormat("MMMMM d, yyyy h:mm a z");
+    df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+    datastore = DatastoreServiceFactory.getDatastoreService();
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp", SortDirection.DESCENDING));
-    int maxComments;
+
+    // The max number of comments defaults to 5.
+    int maxComments = 5;
     try {
       maxComments = Integer.parseInt(request.getParameter("max-comments"));
     } catch (NumberFormatException e) {
       maxComments = 0;
     }
 
+    // Store each comment's data in a list of lists of strings.
     List<List<String>> commentsList = new LinkedList<>();
-    for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
-      List<String> comment = new LinkedList<>();
-      long timeInMillis = (long) entity.getProperty("timestamp");
-
-      comment.add(KeyFactory.keyToString(entity.getKey()));
-      comment.add((String) entity.getProperty("author"));
-      comment.add((String) entity.getProperty("message"));
-      comment.add(df.format(new Date(timeInMillis)));
-
-      List<String> likedByIpSet = (List<String>) entity.getProperty("likedBy");
-      if (likedByIpSet != null) {
-        comment.add(Integer.toString(likedByIpSet.size()));
-      } else {
-        comment.add("0");
-      }
-
-      commentsList.add(comment);
+    for (Entity comment : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
+      commentsList.add(getCommentDataAsList(comment));
     }
 
     response.setContentType("application/json;");
@@ -95,6 +83,32 @@ public class DataServlet extends HttpServlet {
     }
 
     response.sendRedirect("/");
+  }
+
+  /**
+  * Records a comment's data as a list of strings.
+  * The first element in the list is the comment's key.
+  * The second is the comment's author.
+  * The third is the comment's message.
+  * The fourth is the comment's date and time.
+  * The fifth is the number of likes the comment has.
+  */
+  private List<String> getCommentDataAsList(Entity comment) {
+    List<String> commentDataAsList = new LinkedList<>();
+    long timeInMillis = (long) comment.getProperty("timestamp");
+
+    commentDataAsList.add(KeyFactory.keyToString(comment.getKey()));
+    commentDataAsList.add((String) comment.getProperty("author"));
+    commentDataAsList.add((String) comment.getProperty("message"));
+    commentDataAsList.add(df.format(new Date(timeInMillis)));
+
+    List<String> likedByIpSet = (List<String>) comment.getProperty("likedBy");
+    if (likedByIpSet != null) {
+      commentDataAsList.add(Integer.toString(likedByIpSet.size()));
+    } else {
+      commentDataAsList.add("0");
+    }
+    return commentDataAsList;
   }
 
   private String getParameter(HttpServletRequest request, String paramName, String defaultValue) {

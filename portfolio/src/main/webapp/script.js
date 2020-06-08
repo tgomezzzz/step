@@ -233,6 +233,9 @@ function createComment(entry) {
   return comment;
 }
 
+/**
+ * Helper method that creates the author <div> for a comment.
+ */
 function createAuthor(authorName, commentDate) {
   const author = document.createElement('div');
   author.className = "author";
@@ -240,6 +243,9 @@ function createAuthor(authorName, commentDate) {
   return author;
 }
 
+/**
+ * Helper method that creates the message <div> for a comment.
+ */
 function createMessage(messageBody) {
   const message = document.createElement('div')
   message.className = "message";
@@ -247,6 +253,9 @@ function createMessage(messageBody) {
   return message;
 }
 
+/**
+ * Helper method that creates the like button <div> for a comment.
+ */
 function createLikeButton(commentId) {
   const likeButton = document.createElement('div');
   likeButton.className = "heart";
@@ -255,6 +264,9 @@ function createLikeButton(commentId) {
   return likeButton;
 }
 
+/**
+ * Helper method that creates the <div> that displays a comment's number of likes.
+ */
 function createLikesCounter(commentId) {
   const likesCounter = document.createElement('div');
   likesCounter.className = "likes";
@@ -279,6 +291,8 @@ function deleteComments() {
 function toggleLike(event) {
   const commentId = event.target.id.replace("-button", "");
   const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
+  // The useless parameter below seems to be necessary, because without it, updateCommentLikeData() runs before the then() calls finish.
+  // This causes bugs where the color of the like button and the number of likes are displayed incorrectly.
   fetch(request).then(response => response.text()).then(useless => updateCommentLikeData(commentId));
 }
 
