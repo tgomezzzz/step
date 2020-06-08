@@ -178,11 +178,11 @@ function resetEasterEgg() {
  */
 function fetchComments(maxComments) {
   fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
-  var commentsContainer = document.getElementById('comments-container');
-  commentsContainer.innerHTML = '';
-  for (var i = 0; i < entries.length; i++) {
-    commentsContainer.appendChild(createComment(entries[i]));
-  }
+    var commentsContainer = document.getElementById('comments-container');
+    commentsContainer.innerHTML = '';
+    for (var i = 0; i < entries.length; i++) {
+      commentsContainer.appendChild(createComment(entries[i]));
+    }
   });
 }
 
@@ -194,6 +194,7 @@ function createComment(entry) {
   const commentContent = document.createElement('div');
   const commentLikesContent = document.createElement('div');
   comment.className = "comment";
+  comment.id = entry[0];
   commentContent.id = "comment-content";
   commentLikesContent.id = "comment-likes-content";
 
@@ -206,11 +207,13 @@ function createComment(entry) {
   message.innerText = entry[2];
   message.className = "message";
   heartButton.className = "heart";
-  heartButton.id = entry[0];
+  heartButton.id = entry[0] + "-button";
   heartButton.onclick = function() { toggleLike(event) };
-  heartButton.dataset.liked = "false";
-  likes.innerText = entry[4];
+  //heartButton.dataset.liked = "false";
+  //likes.innerText = entry[4];
   likes.className = "likes";
+  likes.id = entry[0] + "-likes";
+  updateCommentLikeData(entry[0]);
   
   commentContent.appendChild(author);
   commentContent.appendChild(message);
@@ -235,14 +238,22 @@ function deleteComments() {
  * Toggles a like for the specified comment.
  */
 function toggleLike(event) {
-  const commentId = event.target.id;
+  const commentId = event.target.id.replace("-button", "");
   const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
-  fetch(request).then(
-    fetchComments(5)
-  );
-  if (event.target.dataset.liked === 'false') {
-    event.target.dataset.liked = 'true';
-  } else {
-    event.target.dataset.liked = 'false';
-  }
+  fetch(request).then(response => console.log(response)).then(data => updateCommentLikeData(commentId));
+}
+
+/**
+ * Updates a comment's appearance after its like button has been toggled.
+ */
+function updateCommentLikeData(commentId) {
+  const request = new Request("/toggle-like?key=" + commentId, {method: 'GET'});
+  fetch(request).then(response => response.json()).then(commentLikeData => {
+    console.log(commentLikeData);
+    console.log("get request has finished");
+    var commentLikeButton = document.getElementById(commentId + "-button");
+    var commentLikes = document.getElementById(commentId + "-likes");
+    commentLikeButton.dataset.liked = commentLikeData[0];
+    commentLikes.innerText = commentLikeData[1];
+  });
 }

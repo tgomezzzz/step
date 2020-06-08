@@ -56,9 +56,9 @@ public class DataServlet extends HttpServlet {
       maxComments = 0;
     }
 
-    List<List<String>> commentsList = new ArrayList<>();
+    List<List<String>> commentsList = new LinkedList<>();
     for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
-      List<String> comment = new ArrayList<>();
+      List<String> comment = new LinkedList<>();
       long timeInMillis = (long) entity.getProperty("timestamp");
 
       comment.add(KeyFactory.keyToString(entity.getKey()));
@@ -91,7 +91,6 @@ public class DataServlet extends HttpServlet {
       comment.setProperty("author", author);
       comment.setProperty("message", message);
       comment.setProperty("timestamp", timestamp);
-      comment.setProperty("likes", 0);
       datastore.put(comment);
     }
 
