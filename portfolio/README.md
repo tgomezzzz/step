@@ -20,3 +20,7 @@ Image Sources:
 * Bear Icon: https://lh3.googleusercontent.com/proxy/5vM4XEamw9xc3aV5kW9TXH6GKQGGUpJJmbnA7FS-nTb6HqET2xgvgYM6XlcVyx3P4JV51U72cTSZyYJmc9nBv-3fdfxJRJbBN7p_TzBqB5CiO1hUFi_X
 
 All other images are my own.
+
+
+Coding Sources:
+* I used this source as a guide to formatting date and time on the Comments tab: https://beginnersbook.com/2013/05/java-date-string-conversion/
