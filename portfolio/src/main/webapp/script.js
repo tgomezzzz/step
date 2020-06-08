@@ -39,6 +39,10 @@ function displayTab(event, tabName) {
   if (tabName == "Interests"){
     drawTimeline();
   }
+
+  if (tabName === "Comments") {
+    fetchComment();
+  }
 }
 
 /*
@@ -191,4 +195,13 @@ function easterEgg() {
 function resetEasterEgg() {
   var headshot = document.getElementById("headshot");
   headshot.src = "/images/beta-headshot.jpg";
+}
+
+/**
+ * Fetches a comment using DataServlet.java.
+ */
+function fetchComment() {
+  fetch('/data').then(response => response.text()).then((comment) => {
+    document.getElementById('comment-placeholder').innerText = comment;
+  });
 }
