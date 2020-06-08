@@ -39,15 +39,26 @@ public class LikeCommentServlet extends HttpServlet {
       return;
     }
 
+    // The first element in this list records whether or not the client has like this comment, and the second records the number of likes this comment has.
     List<String> commentLikeData = new LinkedList<>();
+
+    // If the comment has at least one like... 
     if (comment.hasProperty("likedBy")){
       HashSet<String> likedByIpSet = new HashSet<String>((List<String>) comment.getProperty("likedBy"));
+
+      // ...and the client has liked it, record that the client has liked it by adding "true".
       if (likedByIpSet.contains(request.getRemoteAddr())) {
         commentLikeData.add("true");
+
+      // ...and the client has not liked it, record that the client has not liked it by adding "false".
       } else {
         commentLikeData.add("false");
       }
+
+      // Then, record the number of likes that the comment has.
       commentLikeData.add(Integer.toString(likedByIpSet.size()));
+
+    // If the comment has no likes, record "false" since the client hasn't liked it and "0" since it has no likes.
     } else {
       commentLikeData.add("false");
       commentLikeData.add("0");
@@ -61,6 +72,8 @@ public class LikeCommentServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String commentKeyString = request.getParameter("key");
     Entity comment = null;
+
+    // If it exists, get the comment from the datastore by its key.
     try {
       comment = datastore.get(KeyFactory.stringToKey(commentKeyString));
     } catch (EntityNotFoundException e) {
@@ -78,6 +91,7 @@ public class LikeCommentServlet extends HttpServlet {
 
       // If the client's IP address is already in the set, then the comment is already liked, and needs to be unliked. 
       if (likedByIpSet.contains(clientIp)) {
+        // Unlike the comment.
         likedByIpSet.remove(clientIp);
 
         // If the comment now has no likes, remove the "likedBy" property.
@@ -90,13 +104,13 @@ public class LikeCommentServlet extends HttpServlet {
           comment.setProperty("likedBy", likedByIpSet);
         }
 
-      // Otherwise, like the comment.
+      // If the client's IP address is not in the set, like the comment, and update the "likedBy" property.
       } else {
         likedByIpSet.add(clientIp);
         comment.setProperty("likedBy", likedByIpSet);
       }
     
-    // If the comment has no likes, add this client's IP
+    // If the comment has no likes, add this client's IP, and add the "likedBy" property to the comment.
     } else {
       likedByIpSet = new HashSet<>();
       likedByIpSet.add(clientIp);
@@ -104,7 +118,6 @@ public class LikeCommentServlet extends HttpServlet {
     }
     datastore.put(comment);
 
-    response.sendRedirect("/");
   }
 
   private String convertToJsonUsingGson(List<String> commentLikeData) {
