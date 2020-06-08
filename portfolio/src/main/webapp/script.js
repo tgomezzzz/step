@@ -187,41 +187,56 @@ function fetchComments(maxComments) {
 }
 
 /**
- * Creates a <p> element with the given message.
+ * Creates a comment with the given message.
  */
 function createComment(entry) {
   const comment = document.createElement('div');
-  const commentContent = document.createElement('div');
-  const commentLikesContent = document.createElement('div');
   comment.className = "comment";
   comment.id = entry[0];
-  commentContent.id = "comment-content";
-  commentLikesContent.id = "comment-likes-content";
 
-  const author = document.createElement('div');
-  const message = document.createElement('div')
-  const heartButton = document.createElement('div');
-  const likes = document.createElement('div');
-  author.innerText = entry[1] + " (" + entry[3] + ")";
-  author.className = "author";
-  message.innerText = entry[2];
-  message.className = "message";
-  heartButton.className = "heart";
-  heartButton.id = entry[0] + "-button";
-  heartButton.onclick = function() { toggleLike(event) };
-  //heartButton.dataset.liked = "false";
-  //likes.innerText = entry[4];
-  likes.className = "likes";
-  likes.id = entry[0] + "-likes";
-  updateCommentLikeData(entry[0]);
-  
-  commentContent.appendChild(author);
-  commentContent.appendChild(message);
-  commentLikesContent.appendChild(heartButton);
-  commentLikesContent.appendChild(likes);
+  const commentContent = document.createElement('div');
+  commentContent.id = "comment-content";
+  commentContent.appendChild(createAuthor(entry[1], entry[3]));
+  commentContent.appendChild(createMessage(entry[2]));
+
+  const commentLikesContent = document.createElement('div');
+  commentLikesContent.id = "comment-likes-content";
+  commentLikesContent.appendChild(createLikeButton(entry[0]));
+  commentLikesContent.appendChild(createLikesCounter(entry[0])); 
+
   comment.appendChild(commentContent);
-  comment.append(commentLikesContent);
+  comment.appendChild(commentLikesContent);
   return comment;
+}
+
+function createAuthor(authorName, commentDate) {
+  const author = document.createElement('div');
+  author.className = "author";
+  author.innerText = authorName + " (" + commentDate + ")";
+  return author;
+}
+
+function createMessage(messageBody) {
+  const message = document.createElement('div')
+  message.className = "message";
+  message.innerText = messageBody;
+  return message;
+}
+
+function createLikeButton(commentId) {
+  const likeButton = document.createElement('div');
+  likeButton.className = "heart";
+  likeButton.id = commentId + "-button";
+  likeButton.onclick = function() { toggleLike(event) };
+  return likeButton;
+}
+
+function createLikesCounter(commentId) {
+  const likesCounter = document.createElement('div');
+  likesCounter.className = "likes";
+  likesCounter.id = commentId + "-likes";
+  updateCommentLikeData(commentId);
+  return likesCounter;
 }
 
 /**
@@ -240,7 +255,7 @@ function deleteComments() {
 function toggleLike(event) {
   const commentId = event.target.id.replace("-button", "");
   const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
-  fetch(request).then(response => console.log(response)).then(data => updateCommentLikeData(commentId));
+  fetch(request).then(response => response.text()).then(useless => updateCommentLikeData(commentId));
 }
 
 /**
@@ -249,8 +264,6 @@ function toggleLike(event) {
 function updateCommentLikeData(commentId) {
   const request = new Request("/toggle-like?key=" + commentId, {method: 'GET'});
   fetch(request).then(response => response.json()).then(commentLikeData => {
-    console.log(commentLikeData);
-    console.log("get request has finished");
     var commentLikeButton = document.getElementById(commentId + "-button");
     var commentLikes = document.getElementById(commentId + "-likes");
     commentLikeButton.dataset.liked = commentLikeData[0];
