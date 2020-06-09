@@ -200,12 +200,13 @@ function resetEasterEgg() {
 /**
  * Fetches a comment using DataServlet.java.
  */
-function fetchMessages() {
-    fetch('/data').then(response => response.json()).then((entries) => {
-        const commentTab = document.getElementById('Comments');
-        const numComments = commentTab.getElementsByClassName("comment").length;
-        for (var i = numComments; i < entries.length; i++) {
-            commentTab.appendChild(createComment(entries[i]));
+function fetchComments(maxComments) {
+    fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
+        var commentsContainer = document.getElementById('comments-container');
+        commentsContainer.innerHTML = '';
+        const numComments = commentsContainer.getElementsByClassName('comment').length;
+        for (var i = 0; i < entries.length; i++) {
+            commentsContainer.appendChild(createComment(entries[i]));
         }
     });
 }
