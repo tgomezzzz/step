@@ -6,7 +6,7 @@ body {
 
 #map {
   border: thick solid #64a7f5;
-  height: 500px;
+  height: 700px;
 }
 
 #header-content {
@@ -123,6 +123,7 @@ ul {
 .tab-info p {
   color: #054f7d;
   font-size: 23px;
+  margin: 10px 10px 10px 10px;
 }
 
 .tab-button {

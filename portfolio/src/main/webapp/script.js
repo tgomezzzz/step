@@ -11,13 +11,85 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+ 
+//Madison Sq Park: 
+//Yellowstone: 
+//Kerry Park, 
+//Vancouver, 
+//Miami Beach, 
+//Reykjavik, 
+//Honolulu, 
+//Mt. Fuji, 
 
 function initMap() {
-  const map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.8075, lng: -73.9626},
+    mapTypeId: 'hybrid',
+    tilt: 45,
     zoom: 8
   });
+
+  const icons = {
+    scenery: {icon: "/images/mountain-icon.png"},
+    city: {icon: "/images/city-icon.png"},
+    beach: {icon: "/images/beach-icon.png"} 
+  }
+
+  const places = [
+    {
+      pos: new google.maps.LatLng(45.728849, -121.565333),
+      name: 'Hood River',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(37.816269, -122.371954),
+      name: 'San Francisco',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(13.743670, 100.558230),
+      name: 'Bangkok',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(40.741907, -73.989114),
+      name: 'Manhattan',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(44.720848, -110.488581),
+      name: 'Yellowstone',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(47.629421, -122.360096),
+      name: 'Seattle',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(25.830927, -80.119499),
+      name: 'Miami Beach',
+      type: 'beach'
+    }, {
+      pos: new google.maps.LatLng(49.286606, -123.117854),
+      name: 'Vancouver',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(64.145680, -21.929202),
+      name: 'Iceland',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(21.289815, -157.851764),
+      name: 'Honolulu',
+      type: 'beach'
+    }, {
+      pos: new google.maps.LatLng(35.361579, 138.729609),
+      name: 'Mt. Fuji',
+      type: 'scenery'
+    }
+  ];
+
+  for (var i = 0; i < places.length; i++) {
+    var marker = new google.maps.Marker({
+      position: places[i].pos,
+      icon: icons[places[i].type].icon,
+      map: map 
+    });
+  };
 }
 
 /*

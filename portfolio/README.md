@@ -18,6 +18,9 @@ Image Sources:
 * Patrick being yeeted: Gracie Dement (Twitter)
 * Bear in hot tub: https://revelstokecurrent.com/hot-tub-poacher-in-revelstoke/
 * Bear Icon: https://lh3.googleusercontent.com/proxy/5vM4XEamw9xc3aV5kW9TXH6GKQGGUpJJmbnA7FS-nTb6HqET2xgvgYM6XlcVyx3P4JV51U72cTSZyYJmc9nBv-3fdfxJRJbBN7p_TzBqB5CiO1hUFi_X
+* Beach Icon: https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.iconarchive.com%2Fshow%2Fsummer-blue-icons-by-dapino%2FBeach-Towel-icon.html&psig=AOvVaw1gCOIFTPAWCyKC0inuYB6F&ust=1591817490292000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDlnri89ekCFQAAAAAdAAAAABAK
+* City Icon: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Fcity_185376&psig=AOvVaw0Ia4zTyf61wCMWstAtmjfA&ust=1591817580793000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDk0d289ekCFQAAAAAdAAAAABAD
+* Scenery Icon: https://img.icons8.com/cotton/2x/mountain.png
 
 All other images are my own.
 
