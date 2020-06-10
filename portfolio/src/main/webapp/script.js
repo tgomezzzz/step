@@ -218,11 +218,3 @@ function createParagraph(message) {
     return pElement;
 }
 
-/**
- * Creates a <p> element with the given message.
- */
-function createParagraph(message) {
-    const pElement = document.createElement('p');
-    pElement.innerText = message;
-    return pElement;
-}
