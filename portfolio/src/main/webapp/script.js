@@ -29,6 +29,10 @@ function initMap() {
     zoom: 8
   });
 
+  map.addListener('click', (event) => {
+    displayMoreInfo('create-marker');
+  });
+
   const icons = {
     scenery: {icon: "/images/mountain-icon.png"},
     city: {icon: "/images/city-icon.png"},
