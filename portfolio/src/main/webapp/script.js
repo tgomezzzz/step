@@ -37,11 +37,11 @@ function initMap() {
 
   const places = [
     {
-      pos: new google.maps.LatLng(45.728849, -121.565333),
+      pos: new google.maps.LatLng(45.704010, -121.544031),
       id: 'hood-river',
       type: 'scenery'
     }, {
-      pos: new google.maps.LatLng(37.816269, -122.371954),
+      pos: new google.maps.LatLng(37.795320, -122.403273),
       id: 'san-francisco',
       type: 'city'
     }, {
@@ -88,8 +88,7 @@ function initMap() {
       map: map 
     });
     marker.addListener('click', function () {
-      map.setCenter(currentMarker.pos);
-      map.setZoom(8);
+      map.panTo(currentMarker.pos);
       displayMoreInfo(currentMarker.id);
     });
   };
