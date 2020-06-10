@@ -11,15 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
- 
-//Madison Sq Park: 
-//Yellowstone: 
-//Kerry Park, 
-//Vancouver, 
-//Miami Beach, 
-//Reykjavik, 
-//Honolulu, 
-//Mt. Fuji, 
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
