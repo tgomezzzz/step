@@ -30,10 +30,10 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void init() {
-      messages = new ArrayList<>();
-      messages.add("Bears in my hair");
-      messages.add("I got tha");
-      messages.add("NYC -> HR, OR");
+    messages = new ArrayList<>();
+    messages.add("Bears in my hair");
+    messages.add("I got tha");
+    messages.add("NYC -> HR, OR");
   }
 
 
@@ -48,7 +48,6 @@ public class DataServlet extends HttpServlet {
   private String convertToJsonUsingGson(List<String> messages) {
     Gson gson = new Gson();
     String json = gson.toJson(messages);
-    System.out.println(json);
     return json;
   }
 }
