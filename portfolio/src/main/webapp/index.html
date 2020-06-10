@@ -57,27 +57,27 @@
           <div id="moving-dot" class="endpoint"><p>Present</p></div>
       
           <div class="timeline-branch" id="astronomy" style="left: 11%;">
-            <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo(event, 'astronomy-info')">
+            <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo('astronomy-info')">
           </div>
       
           <div class="timeline-branch" id="geography" style="left: 20%;">
-            <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo(event, 'geography-info')">
+            <img src="/images/geography.png" alt="Geography" style="bottom: 0;" onclick="displayMoreInfo('geography-info')">
           </div>
       
           <div class="timeline-branch" id="tornadoes" style="left: 41%;">
-            <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo(event, 'tornadoes-info')">
+            <img src="/images/tornado.jpg" alt="Tornadoes" onclick="displayMoreInfo('tornadoes-info')">
           </div>
       
           <div class="timeline-branch" id="architecture" style="left: 50%;">
-            <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo(event, 'architecture-info')">
+            <img src="/images/salesforce-tower.jpg" alt="Architecture" style="bottom: 0;" onclick="displayMoreInfo('architecture-info')">
           </div>
       
           <div class="timeline-branch" id="photography" style="left: 77%;">
-            <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo(event, 'photography-info')">
+            <img src="/images/nyc.jpg" alt="Photography" onclick="displayMoreInfo('photography-info')">
           </div>
       
           <div class="timeline-branch" id="compsci" style="left: 81%;">
-            <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo(event, 'compsci-info')">
+            <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo('compsci-info')">
           </div>
   
         </div>
@@ -207,6 +207,90 @@
             in what I was learning, and I didn't even mind the debugging at 4 am. In all of my prior academic career, there had never been a class or subject that I
             enjoyed putting so much effort into. As I took more computer science classes, my interest grew, and it became clear what my major was going to be. To this day,
             computer science remains my strongest interest, and I'm overjoyed to be able to pursue the subject I'm most passionate about.
+        </p>
+      </div>
+
+      <div id="hood-river" class="more-info">
+        <h2>Hood River, Oregon</h2>
+        <img src="/images/hood-river.jpg" alt="Hood River, Oregon" style="width: 85%">
+        <p>After my first year of college in one of the most vibrant cities in the world, I expected that Hood River would be lackluster, but in the summer of 2019,
+            I learned that this small Oregon town is far from drab. It sits in the middle of the scenic Columbia River Gorge, between the snow-capped peaks of Mount Hood
+            and Mount Adams. Hood River draws a substantial tourism industry because it's a center for many outdoor sports, including hiking, rock climbing, biking, 
+            and most notably, wind surfing. The time I spent exploring the surrounding wilderness and spending time in the quaint downtown made Hood River one of my favorite places.
+        </p>
+      </div>
+
+      <div id="san-francisco" class="more-info">
+        <h2>San Francisco, California</h2>
+        <img src="/images/ggb.jpg" alt="Golden Gate Bridge, San Francisco" style="width: 85%">
+        <p>Even though I grew up near San Francisco and visited it often, the views of the cityscape rolling over hills still stun me. In high school, I would make frequent day trips to San Francisco with my friends,
+            and the city always felt like home. Between its natural beauty and status as the center of the tech industry, I definitely plan to call San Francisco home someday (when I can afford it).
+        </p>
+      </div>
+
+      <div id="bangkok" class="more-info">
+        <h2>Bangkok, Thailand</h2>
+        <img src="/images/bangkok.jpg" alt="Bangkok, Thailand" style="width: 85%">
+        <p>I have never been to Bangkok, but this city is #1 on my travel bucket list for a few reasons. For starters, I cannot eat enough Thai food. If I could only eat one kind of food for the rest of my life, it would
+            be Thai food, without question (I won't even bother trying to choose one dish because I have too many favorites). Thailand is also well-known for its beaches, with white sand and turquoise water, which I will
+            swim in one day. 
+        </p>
+      </div>
+
+      <div id="manhattan" class="more-info">
+        <h2>Manhattan, New York</h2>
+        <img src="/images/nyc-wtc.jpg" alt="Manhattan, New York" style="width: 85%">
+        <p>I believe that New York is <i>the</i> place to be. It's truly the city that never sleeps, and I've never been anywhere with the same energy or excitement as New York. Even though I spend most of my time
+            in Manhattan, the city never gets old. I'm always happy to be in New York, and it's easily one of my favorite places in the world. 
+        </p>
+      </div>
+
+      <div id="yellowstone" class="more-info">
+        <h2>Yellowstone National Park</h2>
+        <img src="/images/yellowstone.jpg" alt="Yellowstone National Park" style="width: 85%">
+        <p>I went on a road trip to Yellowstone when I was nine years old, and I've never forgotten its remarkable wildlife, canyons, mountains, geysers, and hot springs. I've always enjoyed going to national 
+            parks, but Yellowstone stood out to me. I've never seen a park with so many interesting things to see, like Old Faithful's eruptions, the spectacular Yellowstone falls (pictured above), or the colorful (but 
+            stinky) hot springs. Plus, there are bears running around all over Yellowstone, which is always great. 
+        </p>
+      </div>
+
+      <div id="seattle" class="more-info">
+        <h2>Seattle, Washington</h2>
+        <img src="/images/seattle.jpg" alt="Seattle, Washington" style="width: 85%">
+        <p>Seattle has always been one of my favorite cities. Built on hills and around lakes, Seattle is one of the most beautiful cities in the world, especially with Mount Rainier in the background. Originally, my
+            STEP internship was supposed to be at Google's Seattle office, and even though I wasn't able to live there this summer, I have no doubt that I will some day.
+        </p>
+      </div>
+
+      <div id="vancouver" class="more-info">
+        <h2>Vancouver, British Columbia</h2>
+        <img src="/images/vancouver.jpg" alt="Vancouver, British Columbia" style="width: 85%">
+        <p>I've never been to Vancouver, but from what I've seen and heard about it, I need to go. Many of my friends have told me that it's the cleanest, friendliest, and most "chill" city in Canada. Just from the
+            above photo, with the skyline surrounded by bodies of water and mountains in the distance, I can tell that Vancouver is a beautiful city to visit. Photos like these have made it a top destination of mine.
+        </p>
+      </div>
+
+      <div id="iceland" class="more-info">
+        <h2>Reykjavik, Iceland</h2>
+        <img src="/images/reykjavik.jpg" alt="Reykjavik, Iceland" style="width: 85%">
+        <p>A friend of mine who visited Iceland told me that Reykjavik was one of the most unique cities he had ever seen. He told me that the city is filled with charm and color, and the surrounding wilderness is 
+          unlike any other. Plus, I've always wanted to see the Aurora Borealis, so Reykjavik is the ideal place to go for a cool city, incredible scenery, and the Northern Lights.
+        </p>
+      </div>
+
+      <div id="honolulu" class="more-info">
+        <h2>Honolulu, Hawaii</h2>
+        <img src="/images/honolulu.jpg" alt="Honolulu, Hawaii" style="width: 85%">
+        <p>I'm surprised that I've never been to Hawaii, because it has everything I love: warm beaches, incredible scenery, and active volcanoes. Honolulu also has an impressive skyline, especially when viewed with
+          the beaches in the foreground. When I finally make the trip, I'm not sure what I should do first: swim in the turquoise water, climb a volcano, or explore the city? 
+        </p>
+      </div>
+
+      <div id="fuji" class="more-info">
+        <h2>Mount Fuji, Japan</h2>
+        <img src="/images/fuji.jpg" alt="Mount Fuji, Japan" style="width: 85%">
+        <p>I've been told that Mount Fuji is the ultimate volcano, and for that reason alone, it's one of my top destinations. Additionally, nearby Tokyo is the largest city in the world, and everyone that has been
+          there has told me it's a must-see. A dream vacation of mine is to explore all that Tokyo has to offer, and then hike to the top of majestic Mount Fuji.
         </p>
       </div>
   

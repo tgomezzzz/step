@@ -38,56 +38,59 @@ function initMap() {
   const places = [
     {
       pos: new google.maps.LatLng(45.728849, -121.565333),
-      name: 'Hood River',
+      id: 'hood-river',
       type: 'scenery'
     }, {
       pos: new google.maps.LatLng(37.816269, -122.371954),
-      name: 'San Francisco',
+      id: 'san-francisco',
       type: 'city'
     }, {
       pos: new google.maps.LatLng(13.743670, 100.558230),
-      name: 'Bangkok',
+      id: 'bangkok',
       type: 'city'
     }, {
       pos: new google.maps.LatLng(40.741907, -73.989114),
-      name: 'Manhattan',
+      id: 'manhattan',
       type: 'city'
     }, {
       pos: new google.maps.LatLng(44.720848, -110.488581),
-      name: 'Yellowstone',
+      id: 'yellowstone',
       type: 'scenery'
     }, {
       pos: new google.maps.LatLng(47.629421, -122.360096),
-      name: 'Seattle',
+      id: 'seattle',
       type: 'city'
     }, {
-      pos: new google.maps.LatLng(25.830927, -80.119499),
-      name: 'Miami Beach',
-      type: 'beach'
-    }, {
       pos: new google.maps.LatLng(49.286606, -123.117854),
-      name: 'Vancouver',
+      id: 'vancouver',
       type: 'city'
     }, {
       pos: new google.maps.LatLng(64.145680, -21.929202),
-      name: 'Iceland',
+      id: 'iceland',
       type: 'scenery'
     }, {
       pos: new google.maps.LatLng(21.289815, -157.851764),
-      name: 'Honolulu',
+      id: 'honolulu',
       type: 'beach'
     }, {
       pos: new google.maps.LatLng(35.361579, 138.729609),
-      name: 'Mt. Fuji',
+      id: 'fuji',
       type: 'scenery'
     }
   ];
 
   for (var i = 0; i < places.length; i++) {
+    const currentMarker = places[i];
     var marker = new google.maps.Marker({
       position: places[i].pos,
+      id: places[i].id,
       icon: icons[places[i].type].icon,
       map: map 
+    });
+    marker.addListener('click', function () {
+      map.setCenter(currentMarker.pos);
+      map.setZoom(8);
+      displayMoreInfo(currentMarker.id);
     });
   };
 }
@@ -220,10 +223,10 @@ function hideBranches() {
 /*
  * Displays the specified interest in the More Info window.
  */
-function displayMoreInfo(event, interestName) {
+function displayMoreInfo(moreInfoName) {
     hideMoreInfo();
-    var interestToDisplay = document.getElementById(interestName);
-    interestToDisplay.style.display = "block";
+    var moreInfoToDisplay = document.getElementById(moreInfoName);
+    moreInfoToDisplay.style.display = "block";
 
 }
 
