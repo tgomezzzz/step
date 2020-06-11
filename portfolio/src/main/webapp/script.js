@@ -204,7 +204,6 @@ function fetchComments(maxComments) {
     fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
         var commentsContainer = document.getElementById('comments-container');
         commentsContainer.innerHTML = '';
-        const numComments = commentsContainer.getElementsByClassName('comment').length;
         for (var i = 0; i < entries.length; i++) {
             commentsContainer.appendChild(createComment(entries[i]));
         }
