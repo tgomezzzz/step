@@ -128,6 +128,10 @@ function displayTab(event, tabName) {
     if (tabName === "Comments") {
         fetchComments(document.getElementById("max-comments").value);
     }
+
+    if (tabName === "Favorite Places") {
+      fetchMapMarkers();
+    }
 }
 
 /*
@@ -237,6 +241,12 @@ function displayLocationEditor(event) {
   displayMoreInfo('create-marker');
 }
 
+function fetchMapMarkers() {
+  fetch('/location').then(response => response.json()).then(data => {
+    
+  });
+}
+
 /*
  * Displays the specified interest in the More Info window.
  */
@@ -244,7 +254,6 @@ function displayMoreInfo(moreInfoName) {
     hideMoreInfo();
     var moreInfoToDisplay = document.getElementById(moreInfoName);
     moreInfoToDisplay.style.display = "block";
-
 }
 
 /**
