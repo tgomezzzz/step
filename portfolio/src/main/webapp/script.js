@@ -271,7 +271,6 @@ function addMarker(markerData) {
 
   var userLocations = document.getElementById('user-locations');
   userLocations.appendChild(createMarkerHtmlInfo(markerData));
-  console.log(userLocations.children.length);
 }
 
 /**
