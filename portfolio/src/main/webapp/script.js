@@ -29,7 +29,9 @@ function initMap() {
 
   map.addListener('dragstart', () => {
     hideMoreInfo();
-    editMarker.setMap(null);
+    if (editMarker) {
+      editMarker.setMap(null);
+    }
   });
 
   const icons = {
@@ -90,11 +92,13 @@ function initMap() {
       icon: icons[places[i].type].icon,
       map: map 
     });
-    marker.addListener('click', function () {
+    marker.addListener('click', () => {
       map.panTo(currentMarker.pos);
       displayMoreInfo(currentMarker.id);
     });
   };
+
+  fetchMapMarkers();
 }
 
 /*
@@ -241,10 +245,56 @@ function displayLocationEditor(event) {
   displayMoreInfo('create-marker');
 }
 
+/**
+  * Fetches user-created markers from the Datastore, and adds them to the map.
+ */
 function fetchMapMarkers() {
+  document.getElementById('user-locations').innerHTML = '';
   fetch('/location').then(response => response.json()).then(data => {
-    
+    for (var i = 0; i < data.length; i++) {
+      addMarker(data[i]);
+    }
   });
+}
+
+/**
+ * Helper method that creates a new marker.
+ */
+function addMarker(markerData) {
+  var marker = new google.maps.Marker({
+    position: {lat: parseFloat(markerData[1]), lng: parseFloat(markerData[2])},
+    map: map
+  });
+  marker.addListener('click', () => {
+    displayMoreInfo(markerData[0]);
+  });
+
+  var userLocations = document.getElementById('user-locations');
+  userLocations.appendChild(createMarkerHtmlInfo(markerData));
+  console.log(userLocations.children.length);
+}
+
+/**
+ * Helper method that returns a returns the HTML elements that make up a marker's more info tab.
+ */
+function createMarkerHtmlInfo(markerData) {
+  var container = document.createElement('div');
+  container.className = "more-info";
+  container.id = markerData[0];
+
+  var title = document.createElement('h2');
+  title.innerText = markerData[4];
+
+  var creator = document.createElement('h3');
+  creator.innerText = "Added by " + markerData[3];
+
+  var description = document.createElement('p');
+  description.innerText = markerData[5];
+
+  container.appendChild(title);
+  container.appendChild(creator);
+  container.appendChild(description);
+  return container;
 }
 
 /*
