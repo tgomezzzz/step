@@ -200,8 +200,32 @@ function resetEasterEgg() {
 /**
  * Fetches a comment using DataServlet.java.
  */
-function fetchComment() {
-  fetch('/data').then(response => response.text()).then((comment) => {
-    document.getElementById('comment-placeholder').innerText = comment;
-  });
+function fetchMessages() {
+    fetch('/data').then(response => response.json()).then((entries) => {
+        const commentTab = document.getElementById('Comments');
+        const numComments = commentTab.getElementsByClassName("comment").length;
+        for (var i = numComments; i < entries.length; i++) {
+            commentTab.appendChild(createComment(entries[i]));
+        }
+    });
+}
+
+/**
+ * Creates a <p> element with the given message.
+ */
+function createComment(entry) {
+    const commentDiv = document.createElement('div');
+    const author = document.createElement('p');
+    const message = document.createElement('p')
+
+    author.innerText = entry[0] + " (" + entry[2] + ")";
+    author.id = "author";
+
+    message.innerText = entry[1];
+    message.id = "message";
+    
+    commentDiv.appendChild(author);
+    commentDiv.appendChild(message);
+    commentDiv.className = "comment";
+    return commentDiv;
 }
