@@ -14,6 +14,13 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -28,35 +35,49 @@ import java.text.SimpleDateFormat;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<List<String>> comments;
-  DateFormat df;
+  private DateFormat df;
+  private DatastoreService datastore;
 
   @Override
   public void init() {
-      comments = new ArrayList<>();
-      df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+      df = new SimpleDateFormat("MMMMM d, yyyy h:mm a z");
+      df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+      datastore = DatastoreServiceFactory.getDatastoreService();
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJsonUsingGson(comments);
+    PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp", SortDirection.DESCENDING));
+    int maxComments = Integer.parseInt(request.getParameter("max-comments"));
+
+    List<List<String>> commentsList = new ArrayList<>();
+    for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
+      List<String> comment = new ArrayList<>();
+      comment.add((String) entity.getProperty("author"));
+      comment.add((String) entity.getProperty("message"));
+      long timeInMillis = (long) entity.getProperty("timestamp");
+      comment.add(df.format(new Date(timeInMillis)));
+      commentsList.add(comment);
+    }
 
     response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.getWriter().println(convertToJsonUsingGson(commentsList));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    List<String> entry = new ArrayList<>();
+    String author = getParameter(request, "author", "Anonymous");
+    String message = request.getParameter("message");
+    long timestamp = System.currentTimeMillis();
 
-    String name = getParameter(request, "name", "Anonymous");
-    String comment = getParameter(request, "comment", "[Empty Message]");
-    Date entryDate = new Date();
-    entry.add(name);
-    entry.add(comment);
-    entry.add(df.format(entryDate));
+    if (!message.equals("")) {
+      Entity comment = new Entity("Comment");
+      comment.setProperty("author", author);
+      comment.setProperty("message", message);
+      comment.setProperty("timestamp", timestamp);
+      datastore.put(comment);
+    }
 
-    comments.add(entry);
     response.sendRedirect("/index.html");
   }
 

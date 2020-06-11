@@ -23,4 +23,8 @@ All other images are my own.
 
 
 Coding Sources:
-* I used this source as a guide to formatting date and time on the Comments tab: https://beginnersbook.com/2013/05/java-date-string-conversion/
+* I used this source as a guide to formatting date and time on the Comments tab: 
+    * https://beginnersbook.com/2013/05/java-date-string-conversion/
+* These two sources helped with formatting the timestamp of each comment:
+    * https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+    * https://dzone.com/articles/java-simpledateformat-guide
