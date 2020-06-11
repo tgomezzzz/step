@@ -11,18 +11,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
- 
-//Madison Sq Park: 
-//Yellowstone: 
-//Kerry Park, 
-//Vancouver, 
-//Miami Beach, 
-//Reykjavik, 
-//Honolulu, 
-//Mt. Fuji, 
+
+let editMarker;
+let map;
 
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.8075, lng: -73.9626},
     mapTypeId: 'hybrid',
     tilt: 45,
@@ -30,7 +24,12 @@ function initMap() {
   });
 
   map.addListener('click', (event) => {
-    displayMoreInfo('create-marker');
+    displayLocationEditor(event);
+  });
+
+  map.addListener('dragstart', () => {
+    hideMoreInfo();
+    editMarker.setMap(null);
   });
 
   const icons = {
@@ -221,6 +220,21 @@ function hideBranches() {
         branches[i].style.top = "50%";
         branches[i].style.bottom = "50%";
     }
+}
+
+/** 
+ * Displays the editor to add a new location to the map.
+ */
+function displayLocationEditor(event) {
+  if (editMarker) {
+    editMarker.setMap(null);
+  }
+  editMarker = new google.maps.Marker({position: event.latLng});
+  editMarker.setMap(map)
+
+  document.getElementById("lat").value = editMarker.getPosition().lat();
+  document.getElementById("lng").value = editMarker.getPosition().lng();
+  displayMoreInfo('create-marker');
 }
 
 /*

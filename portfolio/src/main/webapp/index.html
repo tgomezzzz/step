@@ -296,8 +296,10 @@
 
       <div id="create-marker" class="more-info">
         <h2>Add a New Location</h2>
-        <form action="/data" method="POST">
-          <label for="creator-namee">Your name:</label></br>
+        <form action="/location" method="POST">
+          <input type="hidden" id="lat" name="lat">
+          <input type="hidden" id="lng" name="lng">
+          <label for="creator-name">Your name:</label></br>
           <input type="text" id="creator-name" name="creator-name"></br></br>
           <label for="location-name">Location name:</label></br>
           <input type="text" id="location-name" name="location-name"></br></br>
@@ -306,6 +308,8 @@
           <input type="submit" id="submit"/></br></br>
         </form>
       </div>
+
+      <div id="user-locations"></div>
     </div>
   </div>
 </body>
