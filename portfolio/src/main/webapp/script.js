@@ -15,6 +15,11 @@
 let editMarker;
 let map;
 
+function init() {
+  fetchBlobstoreUrl();
+  initMap();
+}
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.8075, lng: -73.9626},
