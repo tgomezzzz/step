@@ -306,16 +306,18 @@
 
       <div id="create-marker" class="more-info">
         <h2>Add a New Location</h2>
-        <form action="/location" method="POST">
+        <form id="edit-location" method="POST" enctype="multipart/form-data">
           <input type="hidden" id="lat" name="lat">
           <input type="hidden" id="lng" name="lng">
           <label for="creator-name">Your name:</label></br>
           <input type="text" id="creator-name" name="creator-name"></br></br>
           <label for="location-name">Location name:</label></br>
           <input type="text" id="location-name" name="location-name"></br></br>
+          <label for="location-image">Upload an optional image of this place</label></br>
+          <input type="file" name="image"></br></br>
           <label for="location-info">Tell us about this place:</label></br>
           <input type="text" id="location-info" name="location-info"></br></br>
-          <input type="submit" id="submit"/></br></br>
+          <input type="submit" id="submit-img"/></br></br>
         </form>
       </div>
 

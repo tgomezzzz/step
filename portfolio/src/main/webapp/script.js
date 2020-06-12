@@ -15,11 +15,29 @@
 let editMarker;
 let map;
 
+/**
+ * Runs the methods necessary to initialize the page.
+ */
 function init() {
+  console.log("init is running");
   fetchBlobstoreUrl();
   initMap();
 }
 
+/**
+ * Gets the Blobstore upload URL.
+ */
+function fetchBlobstoreUrl() {
+  console.log("Why arent u running");
+  fetch('/blobstore-upload-url').then(response => response.text()).then(blobstoreUploadUrl => {
+    const editLocationForm = document.getElementById('edit-location');
+    editLocationForm.action = blobstoreUploadUrl;
+  });
+}
+
+/**
+ * Initializes the map in the "Favorite Places" tab.
+ */
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.8075, lng: -73.9626},
@@ -293,10 +311,18 @@ function createMarkerHtmlInfo(markerData) {
   creator.innerText = "Added by " + markerData[3];
 
   var description = document.createElement('p');
-  description.innerText = markerData[5];
+  description.innerText = markerData[6];
 
   container.appendChild(title);
   container.appendChild(creator);
+
+  if (markerData[5]) {
+    console.log(markerData[5]);
+    var image = document.createElement('img');
+    image.src = markerData[5];
+    container.appendChild(image);
+  }
+
   container.appendChild(description);
   return container;
 }

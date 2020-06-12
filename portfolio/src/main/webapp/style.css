@@ -289,6 +289,7 @@ input:hover {
 }
 
 #submit,
+#submit-img,
 #delete-comments {
   background-color: #054f7d;
   border-color: #64a7f5;
@@ -301,7 +302,8 @@ input:hover {
   width: 100px;
 }
 
-#submit:hover {
+#submit:hover,
+#submit-img:hover {
   background-color: #64a7f5;
 }
 
