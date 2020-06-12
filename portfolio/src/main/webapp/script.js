@@ -41,7 +41,7 @@ function displayTab(event, tabName) {
   }
 
   if (tabName === "Comments") {
-    fetchComment();
+    fetchComments(document.getElementById("max-comments").value);
   }
 }
 
