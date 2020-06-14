@@ -19,7 +19,6 @@ let map;
  * Runs the methods necessary to initialize the page.
  */
 function init() {
-  console.log("init is running");
   fetchBlobstoreUrl();
   initMap();
 }
@@ -28,7 +27,6 @@ function init() {
  * Gets the Blobstore upload URL.
  */
 function fetchBlobstoreUrl() {
-  console.log("Why arent u running");
   fetch('/blobstore-upload-url').then(response => response.text()).then(blobstoreUploadUrl => {
     const editLocationForm = document.getElementById('edit-location');
     editLocationForm.action = blobstoreUploadUrl;
@@ -260,8 +258,13 @@ function displayLocationEditor(event) {
   if (editMarker) {
     editMarker.setMap(null);
   }
-  editMarker = new google.maps.Marker({position: event.latLng});
+  editMarker = new google.maps.Marker({
+    position: event.latLng,
+    icon: "/images/pencil-icon.png"
+  });
   editMarker.setMap(map)
+  map.panTo(editMarker.position);
+
 
   document.getElementById("lat").value = editMarker.getPosition().lat();
   document.getElementById("lng").value = editMarker.getPosition().lng();
@@ -290,6 +293,7 @@ function addMarker(markerData) {
   });
   marker.addListener('click', () => {
     displayMoreInfo(markerData[0]);
+    map.panTo(marker.position);
   });
 
   var userLocations = document.getElementById('user-locations');
@@ -317,7 +321,6 @@ function createMarkerHtmlInfo(markerData) {
   container.appendChild(creator);
 
   if (markerData[5]) {
-    console.log(markerData[5]);
     var image = document.createElement('img');
     image.src = markerData[5];
     container.appendChild(image);

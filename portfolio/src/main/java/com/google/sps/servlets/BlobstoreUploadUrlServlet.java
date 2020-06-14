@@ -34,10 +34,7 @@ public class BlobstoreUploadUrlServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("[BLOBSTORE] Getting upload URL...");
     String uploadUrl = blobstoreService.createUploadUrl("/location");
-    System.out.println("[BLOBSTORE] Upload URL: " + uploadUrl);
-
     response.setContentType("text/html");
     response.getWriter().println(uploadUrl);
   }

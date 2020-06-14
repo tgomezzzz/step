@@ -70,7 +70,6 @@ public class LocationServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String imageUrl = getUploadedFileUrl(request, "image");
-    System.out.println("[LOCATION / doPost] Received image as " + imageUrl);
     double lat = Double.parseDouble(request.getParameter("lat"));
     double lng = Double.parseDouble(request.getParameter("lng"));
     String creator = getParameter(request, "creator-name", "Anonymous");
