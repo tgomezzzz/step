@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/toggle-like")
+@WebServlet("/togglelike")
 public class ToggleLikeServlet extends HttpServlet {
 
   private DatastoreService datastore;
