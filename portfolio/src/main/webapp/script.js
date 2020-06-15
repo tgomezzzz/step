@@ -148,13 +148,9 @@ function displayTab(event, tabName) {
 
     if (tabName === "Interests") {
         drawTimeline();
-    }
-
-    if (tabName === "Comments") {
+    } else if (tabName === "Comments") {
         fetchComments(document.getElementById("max-comments").value);
-    }
-
-    if (tabName === "Favorite Places") {
+    } else if (tabName === "Favorite Places") {
       fetchMapMarkers();
     }
 }
@@ -265,7 +261,6 @@ function displayLocationEditor(event) {
   editMarker.setMap(map)
   map.panTo(editMarker.position);
 
-
   document.getElementById("lat").value = editMarker.getPosition().lat();
   document.getElementById("lng").value = editMarker.getPosition().lng();
   displayMoreInfo('create-marker');
@@ -304,6 +299,7 @@ function addMarker(markerData) {
  * Helper method that returns a returns the HTML elements that make up a marker's more info tab.
  */
 function createMarkerHtmlInfo(markerData) {
+  console.log(markerData);
   var container = document.createElement('div');
   container.className = "more-info";
   container.id = markerData[0];
@@ -317,12 +313,12 @@ function createMarkerHtmlInfo(markerData) {
   var description = document.createElement('p');
   description.innerText = markerData[6];
 
-  const commentLikesContent = document.createElement('div');
-  commentLikesContent.className = "likes-content";
-  commentLikesContent.appendChild(createLikeButton(markerData[0]));
-  commentLikesContent.appendChild(createLikesCounter(markerData[0]));
+  const likesContent = document.createElement('div');
+  likesContent.className = "likes-content";
+  likesContent.appendChild(createLikeButton(markerData[0]));
+  likesContent.appendChild(createLikesCounter(markerData[0]));
 
-  container.appendChild(commentLikesContent);
+  container.appendChild(likesContent);
   container.appendChild(title);
   container.appendChild(creator);
 
