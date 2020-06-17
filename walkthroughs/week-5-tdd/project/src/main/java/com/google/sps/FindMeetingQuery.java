@@ -40,6 +40,7 @@ public final class FindMeetingQuery {
 
   private void removeEventTimeRange(Event event, Collection<TimeRange> availableTimeRanges) {
     TimeRange eventTimeRange = event.getWhen();
+    Collection<TimeRange> newTimeRanges = new LinkedList<>();
     for (TimeRange availableTimeRange : availableTimeRanges) {
 
       if (eventTimeRange.overlaps(availableTimeRange)) {
@@ -48,18 +49,23 @@ public final class FindMeetingQuery {
         //   |--ATR--|      -->
         // |-----E------|        |-----E------|
         if (eventTimeRange.contains(availableTimeRange)) {
-          availableTimeRange.remove(availableTimeRange);
+          availableTimeRanges.remove(availableTimeRange);
         
         // Case 2: the available time range contains the entire event, which splits the available time range into two smaller ranges.
         // |------ATR------|   -->  |--1--|     |--2--|
         //     |--E--|                    |--E--|
         } else if (availableTimeRange.contains(eventTimeRange)) {
+          TimeRange preEventTimeRange = TimeRange.fromStartEnd(availableTimeRange.start(), eventTimeRange.start(), false);
+          TimeRange postEventTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.end(), true);
+          newTimeRanges.add(preEventTimeRange);
+          newTimeRanges.add(postEventTimeRange);
+          availableTimeRanges.remove(availableTimeRange);
 
         // Case 3: The event partially overlaps the available time range, trimming it.
         // |----ATR----|     -->   |--ATR--|
         //         |---E---|               |---E---|
         } else {
-          
+
         }
       }
     }
