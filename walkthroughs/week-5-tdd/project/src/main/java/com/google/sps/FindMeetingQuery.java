@@ -30,6 +30,15 @@ public final class FindMeetingQuery {
     Collection<TimeRange> availableTimeRanges = new LinkedList<>();
     availableTimeRanges.add(wholeDay);
 
+    for (Event event : events) {
+      removeEventTimeRange(event, availableTimeRanges);
+    }
+
+    availableTimeRanges.removeIf(availableTimeRange -> (availableTimeRange.duration() < duration));
     return availableTimeRanges;
+  }
+
+  private void removeEventTimeRange(Event event, Collection<TimeRange> availableTimeRanges) {
+
   }
 }
