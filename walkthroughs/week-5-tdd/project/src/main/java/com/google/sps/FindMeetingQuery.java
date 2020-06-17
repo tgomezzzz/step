@@ -15,9 +15,21 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    long duration = request.getDuration();
+    TimeRange wholeDay = TimeRange.WHOLE_DAY;
+
+    if (duration > wholeDay.duration()) {
+      return Arrays.asList();
+    }
+
+    Collection<TimeRange> availableTimeRanges = new LinkedList<>();
+    availableTimeRanges.add(wholeDay);
+
+    return availableTimeRanges;
   }
 }
