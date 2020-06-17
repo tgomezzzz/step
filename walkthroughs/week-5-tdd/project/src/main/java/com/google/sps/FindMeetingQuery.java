@@ -39,6 +39,30 @@ public final class FindMeetingQuery {
   }
 
   private void removeEventTimeRange(Event event, Collection<TimeRange> availableTimeRanges) {
+    TimeRange eventTimeRange = event.getWhen();
+    for (TimeRange availableTimeRange : availableTimeRanges) {
 
+      if (eventTimeRange.overlaps(availableTimeRange)) {
+
+        // Case 1: the event (E) contains the entire available time range (ATR), so it is no longer available.
+        //   |--ATR--|      -->
+        // |-----E------|        |-----E------|
+        if (eventTimeRange.contains(availableTimeRange)) {
+          availableTimeRange.remove(availableTimeRange);
+        
+        // Case 2: the available time range contains the entire event, which splits the available time range into two smaller ranges.
+        // |------ATR------|   -->  |--1--|     |--2--|
+        //     |--E--|                    |--E--|
+        } else if (availableTimeRange.contains(eventTimeRange)) {
+
+        // Case 3: The event partially overlaps the available time range, trimming it.
+        // |----ATR----|     -->   |--ATR--|
+        //         |---E---|               |---E---|
+        } else {
+          
+        }
+      }
+    }
   }
+
 }
