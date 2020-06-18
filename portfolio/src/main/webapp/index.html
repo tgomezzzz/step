@@ -11,7 +11,6 @@
 </head>
 
 <body onload="initMap();">
-
   <div id="header-content">
     <h1>Tommy's Portfolio</h1>
     <h2 style="font-size: 30px; color: #e4f5ff;">Welcome to my webpage! Click the tabs to learn more about me.</h2>
@@ -50,11 +49,11 @@
       <div id="Interests" class="tab-info">
         <h3>My Interests</h3>
         <p>Click the photos on the timeline for more details!</p>
-      
+        
         <div id="timeline-container">
           <div id="timeline"></div>
-          <div id="static-dot" class="endpoint"><p>1999</p></div>
-          <div id="moving-dot" class="endpoint"><p>Present</p></div>
+          <div id="static-endpoint" class="endpoint"><p>1999</p></div>
+          <div id="moving-endpoint" class="endpoint"><p>Present</p></div>
       
           <div class="timeline-branch" id="astronomy" style="left: 11%;">
             <img src="/images/jupiter.png" alt="Astronomy" style="border-radius: 50%;" onclick="displayMoreInfo('astronomy-info')">
@@ -79,8 +78,8 @@
           <div class="timeline-branch" id="compsci" style="left: 81%;">
             <img src="/images/comp-sci.jpg" alt="Computer Science" style="bottom: 0;" onclick="displayMoreInfo('compsci-info')">
           </div>
-  
         </div>
+
       </div>
       
       <div id="Favorite Places" class="tab-info">
@@ -128,7 +127,6 @@
         </div>
         <div id="comments-container"></div>
       </div>
-      
     </div>
   
     <div id="more-info-content">
@@ -307,6 +305,7 @@
         </form>
       </div>
     </div>
+  
   </div>
 </body>
 </html>

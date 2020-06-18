@@ -37,14 +37,14 @@ body {
 
 body {
   background-image: url(/images/nyc_night.jpg);
-  background-size: 100%;
+background-size: 100%;
 }
 
 h1 {
   color: #64a7f5;
   font-size: 60px;
   padding-bottom: 0; 
-  margin-bottom: 0;
+margin-bottom: 0;
 }
 
 ul {  
