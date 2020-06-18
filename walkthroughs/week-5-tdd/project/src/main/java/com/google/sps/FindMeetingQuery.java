@@ -72,7 +72,7 @@ public final class FindMeetingQuery {
           if (availableTimeRange.contains(eventTimeRange.start())) {
             trimmedTimeRange = TimeRange.fromStartEnd(availableTimeRange.start(), eventTimeRange.end(), false);
           } else if (eventTimeRange.contains(availableTimeRange.start())) {
-            trimmedTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.start(), false);
+            trimmedTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.end(), false);
           }
           newTimeRanges.add(trimmedTimeRange);
           availableTimeRanges.remove(availableTimeRange);
