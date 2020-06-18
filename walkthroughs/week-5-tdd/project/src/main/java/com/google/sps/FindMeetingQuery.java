@@ -27,11 +27,14 @@ public final class FindMeetingQuery {
       return Arrays.asList();
     }
 
+    Collection<String> meetingAttendees = request.getAttendees();
     Collection<TimeRange> availableTimeRanges = new LinkedList<>();
     availableTimeRanges.add(wholeDay);
 
     for (Event event : events) {
-      removeEventTimeRange(event, availableTimeRanges);
+      if (event.hasAnyAttendee(meetingAttendees)) {
+        removeEventTimeRange(event, availableTimeRanges);
+      }
     }
 
     availableTimeRanges.removeIf(availableTimeRange -> (availableTimeRange.duration() < duration));
@@ -56,19 +59,27 @@ public final class FindMeetingQuery {
         //     |--E--|                    |--E--|
         } else if (availableTimeRange.contains(eventTimeRange)) {
           TimeRange preEventTimeRange = TimeRange.fromStartEnd(availableTimeRange.start(), eventTimeRange.start(), false);
-          TimeRange postEventTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.end(), true);
+          TimeRange postEventTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.end(), false);
           newTimeRanges.add(preEventTimeRange);
           newTimeRanges.add(postEventTimeRange);
           availableTimeRanges.remove(availableTimeRange);
 
         // Case 3: The event partially overlaps the available time range, trimming it.
-        // |----ATR----|     -->   |--ATR--|
-        //         |---E---|               |---E---|
+        // |----ATR----|     -->   |--ATR--|           or     |----ATR----|   -->          |--ATR--| 
+        //         |---E---|               |---E---|       |---E---|               |---E---|
         } else {
-
+          TimeRange trimmedTimeRange = null;
+          if (availableTimeRange.contains(eventTimeRange.start())) {
+            trimmedTimeRange = TimeRange.fromStartEnd(availableTimeRange.start(), eventTimeRange.end(), false);
+          } else if (eventTimeRange.contains(availableTimeRange.start())) {
+            trimmedTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.start(), false);
+          }
+          newTimeRanges.add(trimmedTimeRange);
+          availableTimeRanges.remove(availableTimeRange);
         }
       }
     }
+    availableTimeRanges.addAll(newTimeRanges);
   }
 
 }
