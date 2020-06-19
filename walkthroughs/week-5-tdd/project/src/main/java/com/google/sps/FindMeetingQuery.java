@@ -27,20 +27,34 @@ public final class FindMeetingQuery {
       return Arrays.asList();
     }
 
-    Collection<String> meetingAttendees = request.getAttendees();
-    Collection<TimeRange> availableTimeRanges = new LinkedList<>();
-    availableTimeRanges.add(wholeDay);
+    Collection<String> requiredAttendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
 
+    Collection<TimeRange> requiredAttendeeAvailability = getAvailableTimeRanges(events, requiredAttendees, new LinkedList(Arrays.asList(wholeDay)), duration);
+    Collection<TimeRange> optionalAttendeeAvailability = getAvailableTimeRanges(events, optionalAttendees, requiredAttendeeAvailability, duration);
+
+    if (optionalAttendeeAvailability.size() > 0) {
+      return optionalAttendeeAvailability;
+    }
+    return requiredAttendeeAvailability;
+  }
+
+  /**
+   * Determines all possible meeting times given a set of events to schedule around, meeting participants, and available meeting times.
+   */
+  public Collection<TimeRange> getAvailableTimeRanges(Collection<Event> events, Collection<String> attendeeSet, Collection<TimeRange> availableTimeRanges, long duration) {
     for (Event event : events) {
-      if (event.hasAnyAttendee(meetingAttendees)) {
+      if (event.hasAnyAttendee(attendeeSet)) {
         removeEventTimeRange(event, availableTimeRanges);
       }
     }
-
     availableTimeRanges.removeIf(availableTimeRange -> (availableTimeRange.duration() < duration));
     return availableTimeRanges;
   }
 
+  /**
+   * Removes the time that {@code event} takes from the set of potential meeting times in {@code availableTimeRanges}.
+   */
   private void removeEventTimeRange(Event event, Collection<TimeRange> availableTimeRanges) {
     TimeRange eventTimeRange = event.getWhen();
     Collection<TimeRange> newTimeRanges = new LinkedList<>();
