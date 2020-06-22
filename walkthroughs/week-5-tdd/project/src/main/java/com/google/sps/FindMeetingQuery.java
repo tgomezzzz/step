@@ -114,6 +114,7 @@ public final class FindMeetingQuery {
     int maxAvailableAttendeeCount = -1;
     for (TimeRange timeRange : availableAttendeesByTimeRange.keySet()) {
       Collection<String> availableAttendees = availableAttendeesByTimeRange.get(timeRange);
+      System.out.println(timeRange + ": " + availableAttendees);
       if (availableAttendees.size() > maxAvailableAttendeeCount) {
         optimalTimeRanges.clear();
         maxAvailableAttendeeCount = availableAttendees.size();
