@@ -22,10 +22,12 @@ import java.util.List;
 import java.util.HashMap;
 
 public final class FindMeetingQuery {
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     long duration = request.getDuration();
     TimeRange wholeDay = TimeRange.WHOLE_DAY;
 
+    // If the meeting duration exceeds the whole day, return no free times.
     if (duration > wholeDay.duration()) {
       return Arrays.asList();
     }
@@ -33,6 +35,7 @@ public final class FindMeetingQuery {
     Collection<String> requiredAttendees = request.getAttendees();
     Collection<String> optionalAttendees = request.getOptionalAttendees();
 
+    // If there are no required attendees but some optional attendees, treat optional attendees like required attendees.
     if (requiredAttendees.size() < 1 && optionalAttendees.size() > 0) {
       return getAvailableTimeRanges(events, optionalAttendees, new LinkedList(Arrays.asList(wholeDay)), duration);
     }
@@ -40,6 +43,8 @@ public final class FindMeetingQuery {
     Collection<TimeRange> requiredAttendeeAvailability = getAvailableTimeRanges(events, requiredAttendees, new LinkedList(Arrays.asList(wholeDay)), duration);
     Collection<TimeRange> optionalAttendeeAvailability = getOptimalTimeRanges(events, optionalAttendees, requiredAttendeeAvailability, duration);
 
+    // If there are time ranges that accommodates all required attendees and some optional attendees, return them.
+    // Otherwise, return the time ranges that accommodate all required attendees.
     if (optionalAttendeeAvailability.size() > 0) {
       return optionalAttendeeAvailability;
     }
@@ -89,8 +94,10 @@ public final class FindMeetingQuery {
         //         |---E---|               |---E---|       |---E---|               |---E---|
         } else {
           TimeRange trimmedTimeRange = null;
+          // Subcase 1: The event trims the end of the ATR.
           if (availableTimeRange.contains(eventTimeRange.start())) {
             trimmedTimeRange = TimeRange.fromStartEnd(availableTimeRange.start(), eventTimeRange.start(), false);
+          // Subcase 2: The event trims the start of the ATR.
           } else if (eventTimeRange.contains(availableTimeRange.start())) {
             trimmedTimeRange = TimeRange.fromStartEnd(eventTimeRange.end(), availableTimeRange.end(), false);
           }
@@ -100,34 +107,33 @@ public final class FindMeetingQuery {
       }
     }
     availableTimeRanges.addAll(newTimeRanges);
+    // Removes any time ranges with a duration less than the requested duration.
     availableTimeRanges.removeIf(availableTimeRange -> (availableTimeRange.duration() < duration));
     return availableTimeRanges;
   }
 
+  /**
+   * Returns the time range(s) that allow the most number of {@code attendees} to attend.
+   */
   private Collection<TimeRange> getOptimalTimeRanges(Collection<Event> events, Collection<String> attendees, Collection<TimeRange> availableTimeRanges, long duration) {
+    // Maps a TimeRange to the attendeeds that are available during that time.
     HashMap<TimeRange, Collection<String>> availableAttendeesByTimeRange = new HashMap<>();
+
+    // Gets the available attendees for each time range as a Collection of Strings.
     for (TimeRange availableTimeRange : availableTimeRanges) {
-      availableAttendeesByTimeRange.put(availableTimeRange, getAvailableAttendees(availableTimeRange, events, attendees, duration));
+      availableAttendeesByTimeRange.put(availableTimeRange, getAvailableAttendees(events, attendees, availableTimeRange, duration));
     }
 
-    LinkedList<TimeRange> optimalTimeRanges = new LinkedList<>();
-    int maxAvailableAttendeeCount = -1;
-    for (TimeRange timeRange : availableAttendeesByTimeRange.keySet()) {
-      Collection<String> availableAttendees = availableAttendeesByTimeRange.get(timeRange);
-      System.out.println(timeRange + ": " + availableAttendees);
-      if (availableAttendees.size() > maxAvailableAttendeeCount) {
-        optimalTimeRanges.clear();
-        maxAvailableAttendeeCount = availableAttendees.size();
-        optimalTimeRanges.add(timeRange);
-      } else if (availableAttendees.size() == maxAvailableAttendeeCount) {
-        optimalTimeRanges.add(timeRange);
-      }
-    }
+    // Determines which TimeRange(s) have the most available attendees.
+    LinkedList<TimeRange> optimalTimeRanges = mostAttendeesAvailable(availableAttendeesByTimeRange);
     Collections.sort(optimalTimeRanges, TimeRange.ORDER_BY_START);
     return optimalTimeRanges;
   }
 
-  private Collection<String> getAvailableAttendees(TimeRange timeRange, Collection<Event> events, Collection<String> attendees, long duration) {
+  /**
+   * Determines which attendees are available for the given {@code timeRange}.
+   */
+  private Collection<String> getAvailableAttendees(Collection<Event> events, Collection<String> attendees, TimeRange timeRange, long duration) {
     Collection<String> availableAttendees = new LinkedList<>();
     for (Event event : events) {
       if (event.hasAnyAttendee(attendees)) {
@@ -138,5 +144,21 @@ public final class FindMeetingQuery {
       }
     }
     return availableAttendees;
+  }
+
+  private LinkedList<TimeRange> mostAttendeesAvailable(HashMap<TimeRange, Collection<String>> availableAttendeesByTimeRange) {
+    LinkedList<TimeRange> optimalTimeRanges = new LinkedList<>();
+    int maxAvailableAttendeeCount = -1;
+    for (TimeRange timeRange : availableAttendeesByTimeRange.keySet()) {
+      Collection<String> availableAttendees = availableAttendeesByTimeRange.get(timeRange);
+      if (availableAttendees.size() > maxAvailableAttendeeCount) {
+        optimalTimeRanges.clear();
+        maxAvailableAttendeeCount = availableAttendees.size();
+        optimalTimeRanges.add(timeRange);
+      } else if (availableAttendees.size() == maxAvailableAttendeeCount) {
+        optimalTimeRanges.add(timeRange);
+      }
+    }
+    return optimalTimeRanges;
   }
 }
