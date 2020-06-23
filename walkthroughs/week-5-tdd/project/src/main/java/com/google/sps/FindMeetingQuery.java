@@ -146,6 +146,9 @@ public final class FindMeetingQuery {
     return availableAttendees;
   }
 
+  /**
+   * Determines which TimeRange has the most attendees available.
+   */
   private LinkedList<TimeRange> mostAttendeesAvailable(HashMap<TimeRange, Collection<String>> availableAttendeesByTimeRange) {
     LinkedList<TimeRange> optimalTimeRanges = new LinkedList<>();
     int maxAvailableAttendeeCount = -1;
