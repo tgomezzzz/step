@@ -118,7 +118,6 @@ function initMap() {
       displayMoreInfo(currentMarker.id);
     });
   };
-
   fetchMapMarkers();
 }
 
@@ -128,7 +127,7 @@ function initMap() {
 function displayTab(event, tabName) {
   hideMoreInfo();
   resetEasterEgg();
-  
+
   var buttonContainer = document.getElementsByClassName("tabs")[0];
   buttonContainer.style.borderBottomLeftRadius = "0";
   buttonContainer.style.borderBottomRightRadius = "0";
@@ -491,6 +490,7 @@ function toggleLike(event) {
 }
 
 /**
+
  * Updates a comment's appearance after its like button has been toggled.
  */
 function updateCommentLikeData(commentId) {
