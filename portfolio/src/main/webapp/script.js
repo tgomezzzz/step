@@ -12,13 +12,122 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+let editMarker;
+let map;
+
+/**
+ * Runs the methods necessary to initialize the page.
+ */
+function init() {
+  fetchBlobstoreUrl();
+  initMap();
+}
+
+/**
+ * Gets the Blobstore upload URL.
+ */
+function fetchBlobstoreUrl() {
+  fetch('/blobstore-upload-url').then(response => response.text()).then(blobstoreUploadUrl => {
+    const editLocationForm = document.getElementById('edit-location');
+    editLocationForm.action = blobstoreUploadUrl;
+  });
+}
+
+/**
+ * Initializes the map in the "Favorite Places" tab.
+ */
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 40.8075, lng: -73.9626},
+    mapTypeId: 'hybrid',
+    tilt: 45,
+    zoom: 8
+  });
+
+  map.addListener('click', (event) => {
+    displayLocationEditor(event);
+  });
+
+  map.addListener('dragstart', () => {
+    hideMoreInfo();
+    if (editMarker) {
+      editMarker.setMap(null);
+    }
+  });
+
+  const icons = {
+    scenery: {icon: "/images/mountain-icon.png"},
+    city: {icon: "/images/city-icon.png"},
+    beach: {icon: "/images/beach-icon.png"} 
+  }
+
+  const places = [
+    {
+      pos: new google.maps.LatLng(45.704010, -121.544031),
+      id: 'hood-river',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(37.795320, -122.403273),
+      id: 'san-francisco',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(13.743670, 100.558230),
+      id: 'bangkok',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(40.741907, -73.989114),
+      id: 'manhattan',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(44.720848, -110.488581),
+      id: 'yellowstone',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(47.629421, -122.360096),
+      id: 'seattle',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(49.286606, -123.117854),
+      id: 'vancouver',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(64.145680, -21.929202),
+      id: 'iceland',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(21.289815, -157.851764),
+      id: 'honolulu',
+      type: 'beach'
+    }, {
+      pos: new google.maps.LatLng(35.361579, 138.729609),
+      id: 'fuji',
+      type: 'scenery'
+    }
+  ];
+
+  for (var i = 0; i < places.length; i++) {
+    const currentMarker = places[i];
+    var marker = new google.maps.Marker({
+      position: places[i].pos,
+      id: places[i].id,
+      icon: icons[places[i].type].icon,
+      map: map 
+    });
+    marker.addListener('click', () => {
+      map.panTo(currentMarker.pos);
+      displayMoreInfo(currentMarker.id);
+    });
+  };
+  fetchMapMarkers();
+}
+
 /*
  * Displays the selected tab on the homepage.
  */
 function displayTab(event, tabName) {
   hideMoreInfo();
   resetEasterEgg();
-  
+
   var buttonContainer = document.getElementsByClassName("tabs")[0];
   buttonContainer.style.borderBottomLeftRadius = "0";
   buttonContainer.style.borderBottomRightRadius = "0";
@@ -36,12 +145,12 @@ function displayTab(event, tabName) {
   document.getElementById(tabName).style.display = "block";
   event.currentTarget.className += " active";
 
-  if (tabName == "Interests"){
+  if (tabName === "Interests") {
     drawTimeline();
-  }
-
-  if (tabName === "Comments") {
-    fetchComment();
+  } else if (tabName === "Comments") {
+    fetchComments(document.getElementById("max-comments").value);
+  } else if (tabName === "Favorite Places") {
+    fetchMapMarkers();
   }
 }
 
@@ -161,14 +270,98 @@ function hideBranches() {
   }
 }
 
+/** 
+ * Displays the editor to add a new location to the map.
+ */
+function displayLocationEditor(event) {
+  if (editMarker) {
+    editMarker.setMap(null);
+  }
+  editMarker = new google.maps.Marker({
+    position: event.latLng,
+    icon: "/images/pencil-icon.png"
+  });
+  editMarker.setMap(map)
+  map.panTo(editMarker.position);
+
+  document.getElementById("lat").value = editMarker.getPosition().lat();
+  document.getElementById("lng").value = editMarker.getPosition().lng();
+  displayMoreInfo('create-marker');
+}
+
+/**
+  * Fetches user-created markers from the Datastore, and adds them to the map.
+ */
+function fetchMapMarkers() {
+  document.getElementById('user-locations').innerHTML = '';
+  fetch('/location').then(response => response.json()).then(data => {
+    for (var i = 0; i < data.length; i++) {
+      addMarker(data[i]);
+    }
+  });
+}
+
+/**
+ * Helper method that creates a new marker.
+ */
+function addMarker(markerData) {
+  var marker = new google.maps.Marker({
+    position: {lat: parseFloat(markerData[1]), lng: parseFloat(markerData[2])},
+    map: map
+  });
+  marker.addListener('click', () => {
+    displayMoreInfo(markerData[0]);
+    map.panTo(marker.position);
+  });
+
+  var userLocations = document.getElementById('user-locations');
+  userLocations.appendChild(createMarkerHtmlInfo(markerData));
+}
+
+/**
+ * Helper method that returns a returns the HTML elements that make up a marker's more info tab.
+ */
+function createMarkerHtmlInfo(markerData) {
+  console.log(markerData);
+  var container = document.createElement('div');
+  container.className = "more-info";
+  container.id = markerData[0];
+
+  var title = document.createElement('h2');
+  title.innerText = markerData[4];
+
+  var creator = document.createElement('h3');
+  creator.innerText = "Added by " + markerData[3];
+
+  var description = document.createElement('p');
+  description.innerText = markerData[6];
+
+  const likesContent = document.createElement('div');
+  likesContent.className = "likes-content";
+  likesContent.appendChild(createLikeButton(markerData[0]));
+  likesContent.appendChild(createLikesCounter(markerData[0]));
+
+  container.appendChild(likesContent);
+  container.appendChild(title);
+  container.appendChild(creator);
+
+  if (markerData[5]) {
+    var image = document.createElement('img');
+    image.src = markerData[5];
+    container.appendChild(image);
+  }
+
+  container.appendChild(description);
+  return container;
+}
+
 /*
  * Displays the specified interest in the More Info window.
  */
-function displayMoreInfo(interestName) {
+function displayMoreInfo(moreInfoName) {
   hideMoreInfo();
-  var interestToDisplay = document.getElementById(interestName);
-  interestToDisplay.style.display = "block";
-
+  var moreInfoToDisplay = document.getElementById(moreInfoName);
+  moreInfoToDisplay.style.display = "block";
 }
 
 /**
@@ -219,12 +412,12 @@ function createComment(entry) {
   comment.id = entry[0];
 
   const commentContent = document.createElement('div');
-  commentContent.id = "comment-content";
+  commentContent.className = "comment-content";
   commentContent.appendChild(createAuthor(entry[1], entry[3]));
   commentContent.appendChild(createMessage(entry[2]));
 
   const commentLikesContent = document.createElement('div');
-  commentLikesContent.id = "comment-likes-content";
+  commentLikesContent.className = "likes-content";
   commentLikesContent.appendChild(createLikeButton(entry[0]));
   commentLikesContent.appendChild(createLikesCounter(entry[0])); 
 

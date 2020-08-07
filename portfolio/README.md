@@ -18,6 +18,18 @@ Image Sources:
 * Patrick being yeeted: Gracie Dement (Twitter)
 * Bear in hot tub: https://revelstokecurrent.com/hot-tub-poacher-in-revelstoke/
 * Bear Icon: https://lh3.googleusercontent.com/proxy/5vM4XEamw9xc3aV5kW9TXH6GKQGGUpJJmbnA7FS-nTb6HqET2xgvgYM6XlcVyx3P4JV51U72cTSZyYJmc9nBv-3fdfxJRJbBN7p_TzBqB5CiO1hUFi_X
+* Beach Icon: https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.iconarchive.com%2Fshow%2Fsummer-blue-icons-by-dapino%2FBeach-Towel-icon.html&psig=AOvVaw1gCOIFTPAWCyKC0inuYB6F&ust=1591817490292000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDlnri89ekCFQAAAAAdAAAAABAK
+* City Icon: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Fcity_185376&psig=AOvVaw0Ia4zTyf61wCMWstAtmjfA&ust=1591817580793000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDk0d289ekCFQAAAAAdAAAAABAD
+* Pencil Icon: https://webstockreview.net/images/clipart-pen-vertical-18.png
+* Scenery Icon: https://img.icons8.com/cotton/2x/mountain.png
+* Hood River: https://visithoodriver.com/wp-content/uploads/2018/03/meet.jpg
+* Bangkok: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.andyhinesight.com%2Ftag%2Fbangkok%2F&psig=AOvVaw3v2kN-BMQukL_SK0SLHkvy&ust=1591830271666000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNjs4oTs9ekCFQAAAAAdAAAAABAa
+* Yellowstone: https://www.alanmajchrowicz.com/wp-content/uploads/2019/09/yellowstone_falls_sunrise_71015m1.jpg
+* Seattle: https://upload.wikimedia.org/wikipedia/commons/e/e3/Seattle_Kerry_Park_Skyline.jpg
+* Vancouver: https://res.cloudinary.com/simpleview/image/upload/v1486505969/clients/vancouverbc/Aerial_Sunset_Vancouver_d3_copy_1bb86ed0-1edc-4cda-841d-0b033ca0bb72.jpg
+* Reykjavik: https://thumbs-prod.si-cdn.com/O6nJGeUolNK74bLHIH-7qsKqyo0=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/41/00/4100b798-6fe2-4602-9db4-8fcd21bc11f1/42-68235492.jpg
+* Honolulu: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.britannica.com%2Fplace%2FHonolulu&psig=AOvVaw2JiWglzvZ833C70xVtufwh&ust=1591835914799000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPC4hIWB9ukCFQAAAAAdAAAAABAD
+* Mt. Fuji: https://d20aeo683mqd6t.cloudfront.net/articles/title_images/000/038/943/original/pixta_43064884_S.jpg?2019&d=750x400
 
 All other images are my own.
 

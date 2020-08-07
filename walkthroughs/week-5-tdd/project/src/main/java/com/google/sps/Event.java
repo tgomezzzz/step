@@ -76,6 +76,18 @@ public final class Event {
     return Collections.unmodifiableSet(attendees);
   }
 
+  /**
+   * Returns true if this event has any one of the attendees in {@code attendeesToCheck}.
+   */
+  public boolean hasAnyAttendee(Collection<String> attendeesToCheck) {
+    for (String attendee : attendeesToCheck) {
+      if (attendees.contains(attendee)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @Override
   public int hashCode() {
     // For the hash code, just use the title. Most events "should" have different names and will
