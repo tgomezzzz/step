@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Tommy's Portfolio</title>
+  <script src="script.js" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpn48ih3hm_0OUPcCah4RmzkkXFJ_MkT8"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="/images/bear-icon.png">
-  <script src="script.js"></script>
 </head>
 
-<body>
+<body onload="initMap();">
   <div id="header-content">
     <h1>Tommy's Portfolio</h1>
     <h2 style="font-size: 30px; color: #e4f5ff;">Welcome to my webpage! Click the tabs to learn more about me.</h2>
@@ -20,7 +21,7 @@
       <div class="tabs">
         <button class="tab-button" onclick="displayTab(event, 'About Me')">About Me</button>
         <button class="tab-button" onclick="displayTab(event, 'Interests')">My Interests</button>
-        <button class="tab-button" onclick="displayTab(event, 'Bucket List')">My Bucket List</button>
+        <button class="tab-button" onclick="displayTab(event, 'Favorite Places')">My Favorite Places</button>
         <button class="tab-button" onclick="displayTab(event, 'Gallery')">Gallery</button>
         <button class="tab-button" onclick="displayTab(event, 'Comments')">Comments</button>
       </div>
@@ -81,17 +82,12 @@
 
       </div>
       
-      <div id="Bucket List" class="tab-info">
-        <h3>My Bucket List</h3>
-        <p>One day, I will...</p>
-        <ul>
-          <li>See the northern lights</li>
-          <li>Travel across Europe</li>
-          <li>Live in San Francisco</li>
-          <li>See a tornado with my own eyes</li>
-          <li>Learn how to blow a bubble with gum</li>
-          <li>Get over my fear of boats</li>
-        </ul>
+      <div id="Favorite Places" class="tab-info">
+        <h3>My Favorite Places</h3>
+        <p>If I could teleport, these are the places where I'd spend all my time (I haven't actually been to all of them, but I've had dreams
+            about visiting each of these places, so that's good enough).</p>
+        <p>Add your own favorite places by clicking on the map!</p>
+        <div id="map"></div>
       </div>
   
       <div id="Gallery" class="tab-info">
@@ -113,14 +109,22 @@
       <div id="Comments" class="tab-info">
         <h3>Comments</h3>
         <p>Submit your own comment below!</p>
-        <form action="/data" method="POST">
-          <label for="author">Name:</label><br> 
-          <input type="text" id="author" name="author"><br></br>
-          <label for="message">Message:</label><br>
-          <input type="text" id="message" name="message"></br></br>
-          <input type="submit" id="submit"/>
-        </form>
-        <input type="number" id="max-comments" name="max-comments" min="0" value="5" onchange="fetchComments(value)"></br></br>
+        <div id="input-container">
+          <div id="comment-input">
+            <form action="/data" method="POST">
+              <label for="author-input">Name:</label></br>
+              <input type="text" id="author-input" name="author-input"></br></br>
+              <label for="message-input">Message:</label></br>
+              <input type="text" id="message-input" name="message-input"></br></br>
+              <input type="submit" id="submit"/></br></br>
+            </form>
+          </div>
+          <div id="comment-options">
+            <label for="max-comments">Number of comments displayed:</label></br>
+            <input type="number" id="max-comments" name="max-comments" min="0" value="5" onchange="fetchComments(value)"></br></br>
+            <button id="delete-comments" onclick="deleteComments()">Delete All Comments</button>
+          </div>
+        </div>
         <div id="comments-container"></div>
       </div>
     </div>
@@ -202,6 +206,103 @@
             enjoyed putting so much effort into. As I took more computer science classes, my interest grew, and it became clear what my major was going to be. To this day,
             computer science remains my strongest interest, and I'm overjoyed to be able to pursue the subject I'm most passionate about.
         </p>
+      </div>
+
+      <div id="hood-river" class="more-info">
+        <h2>Hood River, Oregon</h2>
+        <img src="/images/hood-river.jpg" alt="Hood River, Oregon" style="width: 85%">
+        <p>After my first year of college in one of the most vibrant cities in the world, I expected that Hood River would be lackluster, but in the summer of 2019,
+            I learned that this small Oregon town is far from drab. It sits in the middle of the scenic Columbia River Gorge, between the snow-capped peaks of Mount Hood
+            and Mount Adams. Hood River draws a substantial tourism industry because it's a center for many outdoor sports, including hiking, rock climbing, biking, 
+            and most notably, wind surfing. The time I spent exploring the surrounding wilderness and spending time in the quaint downtown made Hood River one of my favorite places.
+        </p>
+      </div>
+
+      <div id="san-francisco" class="more-info">
+        <h2>San Francisco, California</h2>
+        <img src="/images/ggb.jpg" alt="Golden Gate Bridge, San Francisco" style="width: 85%">
+        <p>Even though I grew up near San Francisco and visited it often, the views of the cityscape rolling over hills still stun me. In high school, I would make frequent day trips to San Francisco with my friends,
+            and the city always felt like home. Between its natural beauty and status as the center of the tech industry, I definitely plan to call San Francisco home someday (when I can afford it).
+        </p>
+      </div>
+
+      <div id="bangkok" class="more-info">
+        <h2>Bangkok, Thailand</h2>
+        <img src="/images/bangkok.jpg" alt="Bangkok, Thailand" style="width: 85%">
+        <p>I have never been to Bangkok, but this city is #1 on my travel bucket list for a few reasons. For starters, I cannot eat enough Thai food. If I could only eat one kind of food for the rest of my life, it would
+            be Thai food, without question (I won't even bother trying to choose one dish because I have too many favorites). Thailand is also well-known for its beaches, with white sand and turquoise water, which I will
+            swim in one day. 
+        </p>
+      </div>
+
+      <div id="manhattan" class="more-info">
+        <h2>Manhattan, New York</h2>
+        <img src="/images/nyc-wtc.jpg" alt="Manhattan, New York" style="width: 85%">
+        <p>I believe that New York is <i>the</i> place to be. It's truly the city that never sleeps, and I've never been anywhere with the same energy or excitement as New York. Even though I spend most of my time
+            in Manhattan, the city never gets old. I'm always happy to be in New York, and it's easily one of my favorite places in the world. 
+        </p>
+      </div>
+
+      <div id="yellowstone" class="more-info">
+        <h2>Yellowstone National Park</h2>
+        <img src="/images/yellowstone.jpg" alt="Yellowstone National Park" style="width: 85%">
+        <p>I went on a road trip to Yellowstone when I was nine years old, and I've never forgotten its remarkable wildlife, canyons, mountains, geysers, and hot springs. I've always enjoyed going to national 
+            parks, but Yellowstone stood out to me. I've never seen a park with so many interesting things to see, like Old Faithful's eruptions, the spectacular Yellowstone falls (pictured above), or the colorful (but 
+            stinky) hot springs. Plus, there are bears running around all over Yellowstone, which is always great. 
+        </p>
+      </div>
+
+      <div id="seattle" class="more-info">
+        <h2>Seattle, Washington</h2>
+        <img src="/images/seattle.jpg" alt="Seattle, Washington" style="width: 85%">
+        <p>Seattle has always been one of my favorite cities. Built on hills and around lakes, Seattle is one of the most beautiful cities in the world, especially with Mount Rainier in the background. Originally, my
+            STEP internship was supposed to be at Google's Seattle office, and even though I wasn't able to live there this summer, I have no doubt that I will some day.
+        </p>
+      </div>
+
+      <div id="vancouver" class="more-info">
+        <h2>Vancouver, British Columbia</h2>
+        <img src="/images/vancouver.jpg" alt="Vancouver, British Columbia" style="width: 85%">
+        <p>I've never been to Vancouver, but from what I've seen and heard about it, I need to go. Many of my friends have told me that it's the cleanest, friendliest, and most "chill" city in Canada. Just from the
+            above photo, with the skyline surrounded by bodies of water and mountains in the distance, I can tell that Vancouver is a beautiful city to visit. Photos like these have made it a top destination of mine.
+        </p>
+      </div>
+
+      <div id="iceland" class="more-info">
+        <h2>Reykjavik, Iceland</h2>
+        <img src="/images/reykjavik.jpg" alt="Reykjavik, Iceland" style="width: 85%">
+        <p>A friend of mine who visited Iceland told me that Reykjavik was one of the most unique cities he had ever seen. He told me that the city is filled with charm and color, and the surrounding wilderness is 
+          unlike any other. Plus, I've always wanted to see the Aurora Borealis, so Reykjavik is the ideal place to go for a cool city, incredible scenery, and the Northern Lights.
+        </p>
+      </div>
+
+      <div id="honolulu" class="more-info">
+        <h2>Honolulu, Hawaii</h2>
+        <img src="/images/honolulu.jpg" alt="Honolulu, Hawaii" style="width: 85%">
+        <p>I'm surprised that I've never been to Hawaii, because it has everything I love: warm beaches, incredible scenery, and active volcanoes. Honolulu also has an impressive skyline, especially when viewed with
+          the beaches in the foreground. When I finally make the trip, I'm not sure what I should do first: swim in the turquoise water, climb a volcano, or explore the city? 
+        </p>
+      </div>
+
+      <div id="fuji" class="more-info">
+        <h2>Mount Fuji, Japan</h2>
+        <img src="/images/fuji.jpg" alt="Mount Fuji, Japan" style="width: 85%">
+        <p>I've been told that Mount Fuji is the ultimate volcano, and for that reason alone, it's one of my top destinations. Additionally, nearby Tokyo is the largest city in the world, and everyone that has been
+          there has told me it's a must-see. A dream vacation of mine is to explore all that Tokyo has to offer, and then hike to the top of majestic Mount Fuji.
+        </p>
+      </div>
+
+      <div id="create-marker" class="more-info">
+        <h2>Add a New Location</h2>
+        <form action="/data" method="POST">
+          <label for="creator-namee">Your name:</label></br>
+          <input type="text" id="creator-name" name="creator-name"></br></br>
+          <label for="location-name">Location name:</label></br>
+          <input type="text" id="location-name" name="location-name"></br></br>
+          <label for="location-info">Tell us about this place:</label></br>
+          <input type="text" id="location-info" name="location-info"></br></br>
+          <input type="submit" id="submit"/></br></br>
+        </form>
       </div>
     </div>
   

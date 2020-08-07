@@ -12,6 +12,83 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 40.8075, lng: -73.9626},
+    mapTypeId: 'hybrid',
+    tilt: 45,
+    zoom: 8
+  });
+
+  map.addListener('click', (event) => {
+    displayMoreInfo('create-marker');
+  });
+
+  const icons = {
+    scenery: {icon: "/images/mountain-icon.png"},
+    city: {icon: "/images/city-icon.png"},
+    beach: {icon: "/images/beach-icon.png"} 
+  }
+
+  const places = [
+    {
+      pos: new google.maps.LatLng(45.704010, -121.544031),
+      id: 'hood-river',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(37.795320, -122.403273),
+      id: 'san-francisco',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(13.743670, 100.558230),
+      id: 'bangkok',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(40.741907, -73.989114),
+      id: 'manhattan',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(44.720848, -110.488581),
+      id: 'yellowstone',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(47.629421, -122.360096),
+      id: 'seattle',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(49.286606, -123.117854),
+      id: 'vancouver',
+      type: 'city'
+    }, {
+      pos: new google.maps.LatLng(64.145680, -21.929202),
+      id: 'iceland',
+      type: 'scenery'
+    }, {
+      pos: new google.maps.LatLng(21.289815, -157.851764),
+      id: 'honolulu',
+      type: 'beach'
+    }, {
+      pos: new google.maps.LatLng(35.361579, 138.729609),
+      id: 'fuji',
+      type: 'scenery'
+    }
+  ];
+
+  for (var i = 0; i < places.length; i++) {
+    const currentMarker = places[i];
+    var marker = new google.maps.Marker({
+      position: places[i].pos,
+      id: places[i].id,
+      icon: icons[places[i].type].icon,
+      map: map 
+    });
+    marker.addListener('click', function () {
+      map.panTo(currentMarker.pos);
+      displayMoreInfo(currentMarker.id);
+    });
+  };
+}
+
 /*
  * Displays the selected tab on the homepage.
  */
@@ -164,11 +241,10 @@ function hideBranches() {
 /*
  * Displays the specified interest in the More Info window.
  */
-function displayMoreInfo(interestName) {
-  hideMoreInfo();
-  var interestToDisplay = document.getElementById(interestName);
-  interestToDisplay.style.display = "block";
-
+function displayMoreInfo(moreInfoName) {
+    hideMoreInfo();
+    var moreInfoToDisplay = document.getElementById(moreInfoName);
+    moreInfoToDisplay.style.display = "block";
 }
 
 /**
@@ -201,31 +277,110 @@ function resetEasterEgg() {
  * Fetches a comment using DataServlet.java.
  */
 function fetchComments(maxComments) {
-    fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
-        var commentsContainer = document.getElementById('comments-container');
-        commentsContainer.innerHTML = '';
-        for (var i = 0; i < entries.length; i++) {
-            commentsContainer.appendChild(createComment(entries[i]));
-        }
-    });
+  fetch('/data?max-comments=' + maxComments).then(response => response.json()).then((entries) => {
+    var commentsContainer = document.getElementById('comments-container');
+    commentsContainer.innerHTML = '';
+    for (var i = 0; i < entries.length; i++) {
+      commentsContainer.appendChild(createComment(entries[i]));
+    }
+  });
 }
 
 /**
- * Creates a <p> element with the given message.
+ * Creates a comment with the given message.
  */
 function createComment(entry) {
-    const commentDiv = document.createElement('div');
-    const author = document.createElement('p');
-    const message = document.createElement('p')
+  const comment = document.createElement('div');
+  comment.className = "comment";
+  comment.id = entry[0];
 
-    author.innerText = entry[0] + " (" + entry[2] + ")";
-    author.id = "author";
+  const commentContent = document.createElement('div');
+  commentContent.id = "comment-content";
+  commentContent.appendChild(createAuthor(entry[1], entry[3]));
+  commentContent.appendChild(createMessage(entry[2]));
 
-    message.innerText = entry[1];
-    message.id = "message";
-    
-    commentDiv.appendChild(author);
-    commentDiv.appendChild(message);
-    commentDiv.className = "comment";
-    return commentDiv;
+  const commentLikesContent = document.createElement('div');
+  commentLikesContent.id = "comment-likes-content";
+  commentLikesContent.appendChild(createLikeButton(entry[0]));
+  commentLikesContent.appendChild(createLikesCounter(entry[0])); 
+
+  comment.appendChild(commentContent);
+  comment.appendChild(commentLikesContent);
+  return comment;
+}
+
+/**
+ * Helper method that creates the author <div> for a comment.
+ */
+function createAuthor(authorName, commentDate) {
+  const author = document.createElement('div');
+  author.className = "author";
+  author.innerText = authorName + " (" + commentDate + ")";
+  return author;
+}
+
+/**
+ * Helper method that creates the message <div> for a comment.
+ */
+function createMessage(messageBody) {
+  const message = document.createElement('div')
+  message.className = "message";
+  message.innerText = messageBody;
+  return message;
+}
+
+/**
+ * Helper method that creates the like button <div> for a comment.
+ */
+function createLikeButton(commentId) {
+  const likeButton = document.createElement('div');
+  likeButton.className = "heart";
+  likeButton.id = commentId + "-button";
+  likeButton.onclick = function() { toggleLike(event) };
+  return likeButton;
+}
+
+/**
+ * Helper method that creates the <div> that displays a comment's number of likes.
+ */
+function createLikesCounter(commentId) {
+  const likesCounter = document.createElement('div');
+  likesCounter.className = "likes";
+  likesCounter.id = commentId + "-likes";
+  updateCommentLikeData(commentId);
+  return likesCounter;
+}
+
+/**
+ * Deletes all the comments from the Datastore.
+ */
+function deleteComments() {
+  const request = new Request("/delete-data", {method: 'POST'});
+  fetch(request).then(
+    fetchComments(0)
+  );
+}
+
+/**
+ * Toggles a like for the specified comment.
+ */
+function toggleLike(event) {
+  const commentId = event.target.id.replace("-button", "");
+  const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
+  // The useless parameter below seems to be necessary, because without it, updateCommentLikeData() runs before the then() calls finish.
+  // This causes bugs where the color of the like button and the number of likes are displayed incorrectly.
+  fetch(request).then(response => response.text()).then(useless => updateCommentLikeData(commentId));
+}
+
+/**
+ * Updates a comment's appearance after its like button has been toggled.
+ */
+function updateCommentLikeData(commentId) {
+  const request = new Request("/toggle-like?key=" + commentId, {method: 'GET'});
+  fetch(request).then(response => response.json()).then(commentLikeData => {
+    var commentLikeButton = document.getElementById(commentId + "-button");
+    var commentLikes = document.getElementById(commentId + "-likes");
+    commentLikeButton.dataset.liked = commentLikeData[0];
+    commentLikes.innerText = commentLikeData[1];
+  });
 }

@@ -21,6 +21,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -31,7 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -40,24 +41,27 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void init() {
-      df = new SimpleDateFormat("MMMMM d, yyyy h:mm a z");
-      df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-      datastore = DatastoreServiceFactory.getDatastoreService();
+    df = new SimpleDateFormat("MMMMM d, yyyy h:mm a z");
+    df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+    datastore = DatastoreServiceFactory.getDatastoreService();
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     PreparedQuery comments = datastore.prepare(new Query("Comment").addSort("timestamp", SortDirection.DESCENDING));
-    int maxComments = Integer.parseInt(request.getParameter("max-comments"));
 
-    List<List<String>> commentsList = new ArrayList<>();
-    for (Entity entity : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
-      List<String> comment = new ArrayList<>();
-      comment.add((String) entity.getProperty("author"));
-      comment.add((String) entity.getProperty("message"));
-      long timeInMillis = (long) entity.getProperty("timestamp");
-      comment.add(df.format(new Date(timeInMillis)));
-      commentsList.add(comment);
+    // The max number of comments defaults to 5.
+    int maxComments = 5;
+    try {
+      maxComments = Integer.parseInt(request.getParameter("max-comments"));
+    } catch (NumberFormatException e) {
+      maxComments = 0;
+    }
+
+    // Store each comment's data in a list of lists of strings.
+    List<List<String>> commentsList = new LinkedList<>();
+    for (Entity comment : comments.asIterable(FetchOptions.Builder.withLimit(maxComments))) {
+      commentsList.add(getCommentDataAsList(comment));
     }
 
     response.setContentType("application/json;");
@@ -66,8 +70,8 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String author = getParameter(request, "author", "Anonymous");
-    String message = request.getParameter("message");
+    String author = getParameter(request, "author-input", "Anonymous");
+    String message = request.getParameter("message-input");
     long timestamp = System.currentTimeMillis();
 
     if (!message.equals("")) {
@@ -78,7 +82,33 @@ public class DataServlet extends HttpServlet {
       datastore.put(comment);
     }
 
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/");
+  }
+
+  /**
+  * Records a comment's data as a list of strings.
+  * The first element in the list is the comment's key.
+  * The second is the comment's author.
+  * The third is the comment's message.
+  * The fourth is the comment's date and time.
+  * The fifth is the number of likes the comment has.
+  */
+  private List<String> getCommentDataAsList(Entity comment) {
+    List<String> commentDataAsList = new LinkedList<>();
+    long timeInMillis = (long) comment.getProperty("timestamp");
+
+    commentDataAsList.add(KeyFactory.keyToString(comment.getKey()));
+    commentDataAsList.add((String) comment.getProperty("author"));
+    commentDataAsList.add((String) comment.getProperty("message"));
+    commentDataAsList.add(df.format(new Date(timeInMillis)));
+
+    List<String> likedByIpSet = (List<String>) comment.getProperty("likedBy");
+    if (likedByIpSet != null) {
+      commentDataAsList.add(Integer.toString(likedByIpSet.size()));
+    } else {
+      commentDataAsList.add("0");
+    }
+    return commentDataAsList;
   }
 
   private String getParameter(HttpServletRequest request, String paramName, String defaultValue) {
