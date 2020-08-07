@@ -12,8 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+let editMarker;
+let map;
+
+/**
+ * Runs the methods necessary to initialize the page.
+ */
+function init() {
+  fetchBlobstoreUrl();
+  initMap();
+}
+
+/**
+ * Gets the Blobstore upload URL.
+ */
+function fetchBlobstoreUrl() {
+  fetch('/blobstore-upload-url').then(response => response.text()).then(blobstoreUploadUrl => {
+    const editLocationForm = document.getElementById('edit-location');
+    editLocationForm.action = blobstoreUploadUrl;
+  });
+}
+
+/**
+ * Initializes the map in the "Favorite Places" tab.
+ */
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.8075, lng: -73.9626},
     mapTypeId: 'hybrid',
     tilt: 45,
@@ -21,7 +45,14 @@ function initMap() {
   });
 
   map.addListener('click', (event) => {
-    displayMoreInfo('create-marker');
+    displayLocationEditor(event);
+  });
+
+  map.addListener('dragstart', () => {
+    hideMoreInfo();
+    if (editMarker) {
+      editMarker.setMap(null);
+    }
   });
 
   const icons = {
@@ -82,11 +113,12 @@ function initMap() {
       icon: icons[places[i].type].icon,
       map: map 
     });
-    marker.addListener('click', function () {
+    marker.addListener('click', () => {
       map.panTo(currentMarker.pos);
       displayMoreInfo(currentMarker.id);
     });
   };
+  fetchMapMarkers();
 }
 
 /*
@@ -118,7 +150,11 @@ function displayTab(event, tabName) {
   }
 
   if (tabName === "Comments") {
-    fetchComment();
+      fetchComments(document.getElementById("max-comments").value);
+  }
+
+  if (tabName === "Favorite Places") {
+    fetchMapMarkers();
   }
 }
 
@@ -236,6 +272,85 @@ function hideBranches() {
     branches[i].style.top = "50%";
     branches[i].style.bottom = "50%";
   }
+}
+
+/** 
+ * Displays the editor to add a new location to the map.
+ */
+function displayLocationEditor(event) {
+  if (editMarker) {
+    editMarker.setMap(null);
+  }
+  editMarker = new google.maps.Marker({
+    position: event.latLng,
+    icon: "/images/pencil-icon.png"
+  });
+  editMarker.setMap(map)
+  map.panTo(editMarker.position);
+
+
+  document.getElementById("lat").value = editMarker.getPosition().lat();
+  document.getElementById("lng").value = editMarker.getPosition().lng();
+  displayMoreInfo('create-marker');
+}
+
+/**
+  * Fetches user-created markers from the Datastore, and adds them to the map.
+ */
+function fetchMapMarkers() {
+  document.getElementById('user-locations').innerHTML = '';
+  fetch('/location').then(response => response.json()).then(data => {
+    for (var i = 0; i < data.length; i++) {
+      addMarker(data[i]);
+    }
+  });
+}
+
+/**
+ * Helper method that creates a new marker.
+ */
+function addMarker(markerData) {
+  var marker = new google.maps.Marker({
+    position: {lat: parseFloat(markerData[1]), lng: parseFloat(markerData[2])},
+    map: map
+  });
+  marker.addListener('click', () => {
+    displayMoreInfo(markerData[0]);
+    map.panTo(marker.position);
+  });
+
+  var userLocations = document.getElementById('user-locations');
+  userLocations.appendChild(createMarkerHtmlInfo(markerData));
+}
+
+/**
+ * Helper method that returns a returns the HTML elements that make up a marker's more info tab.
+ */
+function createMarkerHtmlInfo(markerData) {
+  var container = document.createElement('div');
+  container.className = "more-info";
+  container.id = markerData[0];
+
+  var title = document.createElement('h2');
+  title.innerText = markerData[4];
+
+  var creator = document.createElement('h3');
+  creator.innerText = "Added by " + markerData[3];
+
+  var description = document.createElement('p');
+  description.innerText = markerData[6];
+
+  container.appendChild(title);
+  container.appendChild(creator);
+
+  if (markerData[5]) {
+    var image = document.createElement('img');
+    image.src = markerData[5];
+    container.appendChild(image);
+  }
+
+  container.appendChild(description);
+  return container;
 }
 
 /*
@@ -373,6 +488,7 @@ function toggleLike(event) {
 }
 
 /**
+
  * Updates a comment's appearance after its like button has been toggled.
  */
 function updateCommentLikeData(commentId) {

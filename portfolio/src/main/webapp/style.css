@@ -152,11 +152,17 @@ ul {
 .more-info img {
   border: thick solid #64a7f5;
   margin: 20px 0 10px 0;
+  width: 80%;
 }
 
 .more-info p {
   font-size: 22px;
   padding: 5px 10px;
+}
+
+#create-marker textarea,
+#create-marker input {
+  width: 90%;
 }
 
 #timeline-container {
@@ -265,22 +271,23 @@ ul {
 
 label {
   color: #054f7d;
-  margin: 0px 0px 4px 10px;
+  margin: 0px 0px 4px 15px;
   font-size: 20px;
 }
 
-input {
+input,
+textarea {
   background-color: #fff;
   border: 2px solid #054f7d;
   border-radius: 5px;
   color: #64a7f5;
   font-family: 'Oxygen';
   font-size: 20px;
-  margin-left: 10px;
-  width: 30%;
+  margin: 0 15px 0 15px;
+  width: auto;
 }
 
-input:hover {
+textarea:hover {
   border-color: #64a7f5;
 }
 
@@ -289,6 +296,7 @@ input:hover {
 }
 
 #submit,
+#submit-img,
 #delete-comments {
   background-color: #054f7d;
   border-color: #64a7f5;
@@ -301,7 +309,8 @@ input:hover {
   width: 100px;
 }
 
-#submit:hover {
+#submit:hover,
+#submit-img:hover {
   background-color: #64a7f5;
 }
 
