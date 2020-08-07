@@ -118,7 +118,6 @@ function initMap() {
       displayMoreInfo(currentMarker.id);
     });
   };
-
   fetchMapMarkers();
 }
 
@@ -424,6 +423,7 @@ function createComment(entry) {
   comment.appendChild(commentLikesContent);
   return comment;
 }
+
 /**
  * Helper method that creates the author <div> for a comment.
  */
@@ -488,6 +488,7 @@ function toggleLike(event) {
 }
 
 /**
+
  * Updates a comment's appearance after its like button has been toggled.
  */
 function updateCommentLikeData(commentId) {
