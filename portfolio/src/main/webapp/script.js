@@ -483,18 +483,17 @@ function deleteComments() {
  */
 function toggleLike(event) {
   const commentId = event.target.id.replace("-button", "");
-  const request = new Request("/togglelike?key=" + commentId, {method: 'POST'});
+  const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
   // The useless parameter below seems to be necessary, because without it, updateCommentLikeData() runs before the then() calls finish.
   // This causes bugs where the color of the like button and the number of likes are displayed incorrectly.
   fetch(request).then(response => response.text()).then(useless => updateCommentLikeData(commentId));
 }
 
 /**
-
  * Updates a comment's appearance after its like button has been toggled.
  */
 function updateCommentLikeData(commentId) {
-  const request = new Request("/togglelike?key=" + commentId, {method: 'GET'});
+  const request = new Request("/toggle-like?key=" + commentId, {method: 'GET'});
   fetch(request).then(response => response.json()).then(commentLikeData => {
     var commentLikeButton = document.getElementById(commentId + "-button");
     var commentLikes = document.getElementById(commentId + "-likes");
