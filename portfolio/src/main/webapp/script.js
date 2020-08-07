@@ -118,7 +118,6 @@ function initMap() {
       displayMoreInfo(currentMarker.id);
     });
   };
-
   fetchMapMarkers();
 }
 
@@ -491,6 +490,7 @@ function toggleLike(event) {
 }
 
 /**
+
  * Updates a comment's appearance after its like button has been toggled.
  */
 function updateCommentLikeData(commentId) {
