@@ -39,7 +39,7 @@ public class LikeCommentServlet extends HttpServlet {
       return;
     }
 
-    // The first element in this list records whether or not the client has like this comment, and the second records the number of likes this comment has.
+    // The first element in this list records whether or not the client has liked this comment, and the second records the number of likes this comment has.
     List<String> commentLikeData = new LinkedList<>();
 
     // If the comment has at least one like... 
