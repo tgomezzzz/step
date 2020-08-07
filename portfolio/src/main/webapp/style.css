@@ -143,6 +143,7 @@ ul {
 }
 
 .more-info h2 {
+  clear: both;
   color: #054f7d;
   font-size: 40px;
   margin-bottom: 0;
@@ -322,18 +323,24 @@ textarea:hover {
   margin: 15px 0 15px 0;
 }
 
-#comment-content {
+.comment-content {
   float: left;
   width: 93%;
 }
 
-#comment-likes-content {
+.likes-content {
   align-items: center;
   display: flex;
   float: right;
   flex-direction: column;
   margin: auto;
   width: 7%;
+}
+
+.more-info .likes-content {
+  position: absolute;
+  top: 1%;
+  right: 3%;
 }
 
 .author {

@@ -72,7 +72,7 @@ public class LocationServlet extends HttpServlet {
     String imageUrl = getUploadedFileUrl(request, "image");
     double lat = Double.parseDouble(request.getParameter("lat"));
     double lng = Double.parseDouble(request.getParameter("lng"));
-    String creator = getParameter(request, "creator-name", "Anonymous");
+    String creator = request.getParameter("creator-name");
     String locationName = request.getParameter("location-name");
     String locationInfo = request.getParameter("location-info");
 
@@ -148,14 +148,6 @@ public class LocationServlet extends HttpServlet {
     locationDataAsList.add((String) location.getProperty("info"));
 
     return locationDataAsList;
-  }
-
-  private String getParameter(HttpServletRequest request, String paramName, String defaultValue) {
-    String value = request.getParameter(paramName);
-    if (value.equals("")) {
-      return defaultValue;
-    }
-    return value;
   }
 
   private String convertToJsonUsingGson(List<List<String>> data) {

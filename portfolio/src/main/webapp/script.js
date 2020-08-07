@@ -127,7 +127,7 @@ function initMap() {
 function displayTab(event, tabName) {
   hideMoreInfo();
   resetEasterEgg();
-  
+    
   var buttonContainer = document.getElementsByClassName("tabs")[0];
   buttonContainer.style.borderBottomLeftRadius = "0";
   buttonContainer.style.borderBottomRightRadius = "0";
@@ -145,15 +145,11 @@ function displayTab(event, tabName) {
   document.getElementById(tabName).style.display = "block";
   event.currentTarget.className += " active";
 
-  if (tabName == "Interests"){
+  if (tabName === "Interests") {
     drawTimeline();
-  }
-
-  if (tabName === "Comments") {
-      fetchComments(document.getElementById("max-comments").value);
-  }
-
-  if (tabName === "Favorite Places") {
+  } else if (tabName === "Comments") {
+    fetchComments(document.getElementById("max-comments").value);
+  } else if (tabName === "Favorite Places") {
     fetchMapMarkers();
   }
 }
@@ -288,7 +284,6 @@ function displayLocationEditor(event) {
   editMarker.setMap(map)
   map.panTo(editMarker.position);
 
-
   document.getElementById("lat").value = editMarker.getPosition().lat();
   document.getElementById("lng").value = editMarker.getPosition().lng();
   displayMoreInfo('create-marker');
@@ -327,6 +322,7 @@ function addMarker(markerData) {
  * Helper method that returns a returns the HTML elements that make up a marker's more info tab.
  */
 function createMarkerHtmlInfo(markerData) {
+  console.log(markerData);
   var container = document.createElement('div');
   container.className = "more-info";
   container.id = markerData[0];
@@ -340,6 +336,12 @@ function createMarkerHtmlInfo(markerData) {
   var description = document.createElement('p');
   description.innerText = markerData[6];
 
+  const likesContent = document.createElement('div');
+  likesContent.className = "likes-content";
+  likesContent.appendChild(createLikeButton(markerData[0]));
+  likesContent.appendChild(createLikesCounter(markerData[0]));
+
+  container.appendChild(likesContent);
   container.appendChild(title);
   container.appendChild(creator);
 
@@ -357,9 +359,9 @@ function createMarkerHtmlInfo(markerData) {
  * Displays the specified interest in the More Info window.
  */
 function displayMoreInfo(moreInfoName) {
-    hideMoreInfo();
-    var moreInfoToDisplay = document.getElementById(moreInfoName);
-    moreInfoToDisplay.style.display = "block";
+  hideMoreInfo();
+  var moreInfoToDisplay = document.getElementById(moreInfoName);
+  moreInfoToDisplay.style.display = "block";
 }
 
 /**
@@ -410,12 +412,12 @@ function createComment(entry) {
   comment.id = entry[0];
 
   const commentContent = document.createElement('div');
-  commentContent.id = "comment-content";
+  commentContent.className = "comment-content";
   commentContent.appendChild(createAuthor(entry[1], entry[3]));
   commentContent.appendChild(createMessage(entry[2]));
 
   const commentLikesContent = document.createElement('div');
-  commentLikesContent.id = "comment-likes-content";
+  commentLikesContent.className = "likes-content";
   commentLikesContent.appendChild(createLikeButton(entry[0]));
   commentLikesContent.appendChild(createLikesCounter(entry[0])); 
 
@@ -481,7 +483,7 @@ function deleteComments() {
  */
 function toggleLike(event) {
   const commentId = event.target.id.replace("-button", "");
-  const request = new Request("/toggle-like?key=" + commentId, {method: 'POST'});
+  const request = new Request("/togglelike?key=" + commentId, {method: 'POST'});
   // The useless parameter below seems to be necessary, because without it, updateCommentLikeData() runs before the then() calls finish.
   // This causes bugs where the color of the like button and the number of likes are displayed incorrectly.
   fetch(request).then(response => response.text()).then(useless => updateCommentLikeData(commentId));
@@ -492,7 +494,7 @@ function toggleLike(event) {
  * Updates a comment's appearance after its like button has been toggled.
  */
 function updateCommentLikeData(commentId) {
-  const request = new Request("/toggle-like?key=" + commentId, {method: 'GET'});
+  const request = new Request("/togglelike?key=" + commentId, {method: 'GET'});
   fetch(request).then(response => response.json()).then(commentLikeData => {
     var commentLikeButton = document.getElementById(commentId + "-button");
     var commentLikes = document.getElementById(commentId + "-likes");
