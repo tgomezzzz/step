@@ -127,7 +127,7 @@ function initMap() {
 function displayTab(event, tabName) {
   hideMoreInfo();
   resetEasterEgg();
-    
+
   var buttonContainer = document.getElementsByClassName("tabs")[0];
   buttonContainer.style.borderBottomLeftRadius = "0";
   buttonContainer.style.borderBottomRightRadius = "0";
