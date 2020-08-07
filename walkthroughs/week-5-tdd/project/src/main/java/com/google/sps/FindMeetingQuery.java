@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 
 public final class FindMeetingQuery {
@@ -43,7 +44,7 @@ public final class FindMeetingQuery {
     Collection<TimeRange> requiredAttendeeAvailability = getAvailableTimeRanges(events, requiredAttendees, new LinkedList(Arrays.asList(wholeDay)), duration);
     Collection<TimeRange> optionalAttendeeAvailability = getOptimalTimeRanges(events, optionalAttendees, requiredAttendeeAvailability, duration);
 
-    // If there are time ranges that accommodates all required attendees and some optional attendees, return them.
+    // If there are time ranges that accommodate all required attendees and some optional attendees, return them.
     // Otherwise, return the time ranges that accommodate all required attendees.
     if (optionalAttendeeAvailability.size() > 0) {
       return optionalAttendeeAvailability;
@@ -152,8 +153,9 @@ public final class FindMeetingQuery {
   private LinkedList<TimeRange> mostAttendeesAvailable(HashMap<TimeRange, Collection<String>> availableAttendeesByTimeRange) {
     LinkedList<TimeRange> optimalTimeRanges = new LinkedList<>();
     int maxAvailableAttendeeCount = -1;
-    for (TimeRange timeRange : availableAttendeesByTimeRange.keySet()) {
-      Collection<String> availableAttendees = availableAttendeesByTimeRange.get(timeRange);
+    for (Map.Entry<TimeRange, Collection<String>> entry : availableAttendeesByTimeRange.entrySet()) {
+      TimeRange timeRange = entry.getKey();
+      Collection<String> availableAttendees = entry.getValue();
       if (availableAttendees.size() > maxAvailableAttendeeCount) {
         optimalTimeRanges.clear();
         maxAvailableAttendeeCount = availableAttendees.size();
